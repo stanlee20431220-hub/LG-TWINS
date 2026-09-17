@@ -177,22 +177,136 @@ def parse_option_stock(raw_option_data):
     if not isinstance(data, dict):
         return None, f"예상치 못한 최상위 타입({type(data).__name__}): {str(data)[:200]}"
 
+    # 재고 수량 필드명이 스킨/옵션 구성에 따라 다를 수 있어 후보를 순서대로 시도
+    STOCK_KEY_CANDIDATES = [
+        "stock_number", "stock_cnt", "stock_qty", "stockQty",
+        "quantity", "stock", "inventory", "safe_inventory",
+    ]
+
+    def to_int(v):
+        try:
+            return int(str(v).replace(",", "").strip())
+        except Exception:
+            return None
+
     result = {}
     unparsed_entries = []
+    unknown_key_entries = []
     for key, v in data.items():
         if not isinstance(v, dict):
             unparsed_entries.append(f"{key}={str(v)[:60]}")
             continue
-        stock = v.get("stock_number")
+
+        stock_raw = None
+        matched_key = None
+        for cand in STOCK_KEY_CANDIDATES:
+            if cand in v and v.get(cand) is not None:
+                stock_raw = v.get(cand)
+                matched_key = cand
+                break
+
         label = v.get("option_value") or v.get("option_text") or str(key)
-        result[label] = stock if stock is not None else 0
+
+        if matched_key is None:
+            # 알려진 필드명 중 어느 것도 없음 -> 0으로 두되, 실제 키 목록을 진단정보에 남김
+            unknown_key_entries.append(f"{label}: keys={list(v.keys())[:10]}")
+            result[label] = 0
+            continue
+
+        stock_int = to_int(stock_raw)
+        result[label] = stock_int if stock_int is not None else 0
+
+    diagnostic = None
+    if unknown_key_entries:
+        diagnostic = "재고 필드명을 못 찾아 0으로 처리(실제 키 확인 필요): " + " | ".join(unknown_key_entries[:3])
 
     if result:
-        return result, None
+        return result, diagnostic
     if unparsed_entries:
         return {"재고": 0}, f"항목 형식이 달라 재고 0으로 처리함: {unparsed_entries[:5]}"
 
     return None, "option_stock_data는 있었지만 파싱 가능한 항목이 없음"
+
+def extract_product_no(url):
+    """상품 URL에서 숫자 상품번호를 추출. 예: .../361/ -> "361" """
+    m = re.search(r"/(\d+)/?$", url.rstrip("/"))
+    return m.group(1) if m else None
+
+def get_option_stock_via_calculator(page, product_no):
+    """옵션(사이즈 등)이 있는 상품의 실제 재고를 CalculatorProduct API로 조회.
+    각 옵션에 수량 9999를 넣어 요청했을 때 재고 부족 응답으로 실제 수량을 역산하는 방식.
+    반환: ({옵션라벨: 재고수}, 진단정보) — 실패 시 (None, 진단정보)
+    """
+    js = """
+    async (productNo) => {
+        try {
+            const html = await fetch(`https://twinscorestore.co.kr/product/detail.html?product_no=${productNo}`)
+                .then(r => r.text());
+
+            const match = html.match(/option_stock_data\\s*=\\s*'((?:[^'\\\\]|\\\\.)*)'/s);
+            if (!match) {
+                return { error: "option_stock_data 매치 실패" };
+            }
+
+            const clean = match[1]
+                .replace(/\\\\\\\\/g, "\\x00").replace(/\\\\"/g, '"')
+                .replace(/\\\\'/g, "'").replace(/\\x00/g, "\\\\");
+
+            let items;
+            try {
+                items = JSON.parse(clean);
+            } catch (e) {
+                return { error: "JSON 파싱 실패: " + e.message };
+            }
+
+            const result = {};
+            for (const [itemCode, val] of Object.entries(items)) {
+                const optName = val.option_value ?? itemCode;
+                const isSelling = val.is_selling === true || String(val.is_selling).toUpperCase() === "T";
+                if (!isSelling) {
+                    result[optName] = 0;
+                    continue;
+                }
+
+                const url = `https://twinscorestore.co.kr/exec/front/shop/CalculatorProduct?product_no=${productNo}&is_subscription=F&product[${itemCode}]=9999`;
+                try {
+                    const data = await fetch(url).then(r => r.json());
+                    if (data.Result === false && "stock_number" in data) {
+                        result[optName] = parseInt(data.stock_number, 10);
+                    } else {
+                        // 9999개 주문도 통과함 = 재고가 9999개 이상 충분함
+                        result[optName] = 9999;
+                    }
+                } catch (e) {
+                    result[optName] = -1; // 조회 실패(알 수 없음)
+                }
+            }
+            return { data: result };
+        } catch (e) {
+            return { error: e.message };
+        }
+    }
+    """
+    try:
+        outcome = page.evaluate(js, product_no)
+    except Exception as e:
+        return None, f"CalculatorProduct 평가 실패({type(e).__name__}): {e}"
+
+    if not outcome:
+        return None, "CalculatorProduct 평가 결과 없음"
+    if outcome.get("error"):
+        return None, f"CalculatorProduct 방식 실패: {outcome['error']}"
+
+    data = outcome.get("data") or {}
+    if not data:
+        return None, "CalculatorProduct 방식: 옵션 항목 없음"
+
+    unknown_entries = [k for k, v in data.items() if v == -1]
+    diagnostic = None
+    if unknown_entries:
+        diagnostic = f"일부 옵션 재고 조회 실패(알 수 없음으로 표시): {unknown_entries[:5]}"
+
+    return data, diagnostic
 
 def get_stock_for_product(page, url):
     page.goto(url, wait_until="domcontentloaded", timeout=60000)
@@ -232,9 +346,22 @@ def get_stock_for_product(page, url):
     diagnostic = None
 
     if option_data:
+        product_no = extract_product_no(url)
+        api_result, api_diagnostic = (None, None)
+        if product_no:
+            api_result, api_diagnostic = get_option_stock_via_calculator(page, product_no)
+
+        if api_result:
+            return api_result, name, price, api_diagnostic
+
+        # API 방식 실패 시에만 기존 파싱 방식으로 폴백 (참고용, 정확하지 않을 수 있음)
         result, diagnostic = parse_option_stock(option_data)
         if result is not None:
-            return result, name, price, diagnostic
+            fallback_note = "옵션 API 조회 실패 → 기존 방식으로 대체(부정확할 수 있음)"
+            if api_diagnostic:
+                fallback_note += f" | API 실패사유: {api_diagnostic}"
+            combined_diag = f"{diagnostic} | {fallback_note}" if diagnostic else fallback_note
+            return result, name, price, combined_diag
 
     if single_data:
         data = single_data
@@ -289,6 +416,28 @@ def load_previous():
 def fmt_won(v):
     return f"{v:,}원"
 
+def stock_status(qty):
+    """재고 수량을 (기호, 표시문구) 튜플로 변환.
+    9999는 'CalculatorProduct API가 9999개 주문도 통과시킴' = 충분한 재고를 뜻하는 상한 센티널,
+    -1은 옵션 재고 조회 자체가 실패했음(확인불가)을 뜻함."""
+    if qty == -1:
+        return "❓", "확인불가"
+    if qty == 0:
+        return "🔴", "품절"
+    if qty < LOW_STOCK_THRESHOLD:
+        return "🟡", f"{qty}개 (50개 미만)"
+    if qty >= 9999:
+        return "🟢", "재고 있음(9999개 이상)"
+    return "🟢", f"{qty}개"
+
+def is_fully_sold_out(stock):
+    """모든 옵션이 확인된 품절(0)인 경우에만 True. 확인불가(-1)가 섞여 있으면
+    전체품절 여부를 단정할 수 없으므로 False로 취급."""
+    values = list(stock.values())
+    if not values:
+        return False
+    return all(v == 0 for v in values)
+
 def main():
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID")
@@ -299,8 +448,10 @@ def main():
     change_blocks = []
     full_stock_blocks = []
     low_stock_blocks = []
+    sold_out_blocks = []
     price_change_lines = []
     error_lines = []
+    diagnostic_lines = []
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -326,6 +477,9 @@ def main():
 
             current_products[url] = {"name": name, "price": price, "stock": stock}
 
+            if diagnostic:
+                diagnostic_lines.append(f"{link}: {diagnostic}")
+
             prev_entry = prev_products.get(url, {})
             prev_stock = prev_entry.get("stock", {})
             prev_price = prev_entry.get("price")
@@ -338,22 +492,35 @@ def main():
             has_low_stock = False
 
             for size, qty in stock.items():
-                diff = qty - prev_stock.get(size, qty)
+                symbol, status_label = stock_status(qty)
+                display = f"{symbol} {status_label}"
+
+                # -1(조회 실패)은 증감 비교나 저재고 판정 대상에서 제외
+                if qty == -1:
+                    full_option_lines.append(f"  - {size}: {display}")
+                    continue
+
+                prev_qty = prev_stock.get(size, qty)
+                diff = qty - prev_qty if prev_qty != -1 else 0
                 diff_str = ""
                 if diff != 0:
                     sign = "+" if diff > 0 else ""
                     diff_str = f" ({sign}{diff})"
-                    changed_option_lines.append(f"  - {size}: {qty}개{diff_str}")
+                    changed_option_lines.append(f"  - {size}: {display}{diff_str}")
 
-                full_option_lines.append(f"  - {size}: {qty}개{diff_str}")
+                full_option_lines.append(f"  - {size}: {display}{diff_str}")
 
-                if qty > 0 and qty < LOW_STOCK_THRESHOLD:
+                if 0 < qty < LOW_STOCK_THRESHOLD:
                     has_low_stock = True
 
-            block_text = f"■ {link}{price_str}\n" + "\n".join(full_option_lines)
+            fully_sold_out = is_fully_sold_out(stock)
+            header_prefix = "⛔ [전체품절] " if fully_sold_out else "■ "
+            block_text = f"{header_prefix}{link}{price_str}\n" + "\n".join(full_option_lines)
             full_stock_blocks.append(block_text)
 
-            if has_low_stock:
+            if fully_sold_out:
+                sold_out_blocks.append(block_text)
+            elif has_low_stock:
                 low_stock_blocks.append(block_text)
 
             if changed_option_lines:
@@ -371,18 +538,26 @@ def main():
     kst = timezone(timedelta(hours=9))
     now = datetime.now(kst).strftime("%Y-%m-%d %H:%M KST")
 
-    SCRIPT_VERSION = "v5-fullstock"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
+    SCRIPT_VERSION = "v8-status-icons"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
 
     header = (
         f"[전상품 재고 확인] {now} ({SCRIPT_VERSION})\n"
         f"확인된 상품: {len(current_products)}개"
     )
 
-    # 메시지 순서: 헤더 -> 50개 미만 재고(상단) -> 재고 변동 -> 가격 변동 -> 전체 재고 -> 오류
+    # 메시지 순서: 헤더 -> 진단(필드명 문제) -> 전체품절 -> 50개 미만 재고 -> 재고 변동 -> 가격 변동 -> 전체 재고 -> 오류
     messages = [header]
+    if diagnostic_lines:
+        messages.append(
+            "[진단: 재고 필드명 확인 필요]\n"
+            + "\n".join(diagnostic_lines[:20])
+            + (f"\n...외 {len(diagnostic_lines) - 20}건" if len(diagnostic_lines) > 20 else "")
+        )
+    if sold_out_blocks:
+        messages.append("[⛔ 전체품절]\n\n" + "\n\n".join(sold_out_blocks))
     if low_stock_blocks:
         messages.append(
-            f"[{LOW_STOCK_THRESHOLD}개 미만 재고]\n\n" + "\n\n".join(low_stock_blocks)
+            f"[🟡 {LOW_STOCK_THRESHOLD}개 미만 재고]\n\n" + "\n\n".join(low_stock_blocks)
         )
     if change_blocks:
         messages.append("[재고 변동]\n\n" + "\n\n".join(change_blocks))
