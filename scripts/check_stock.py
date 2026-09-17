@@ -10,8 +10,11 @@ from datetime import datetime, timezone, timedelta
 
 from playwright.sync_api import sync_playwright
 
-# twinscorestore.co.kr 카테고리: 유니폼(42) / 의류(43) / 용품·잡화(60) / 트윈스 X 호빵맨 기획전(104)
+# === twinscorestore.co.kr (LG트윈스 콜랩샵) ===
+# 유니폼(42) / 의류(43) / 용품·잡화(60) / 트윈스 X 호빵맨 기획전(104)
 # 법인구매(75)는 재고 모니터링 대상이 아니라 제외
+# === nolmdshop.com (NOL MD shop - LG트윈스 공식 상품 판매처, 별도 사이트) ===
+# LG트윈스 전체(31)
 # 각 항목: (카테고리 URL, EXCLUDE_KEYWORDS 적용 여부)
 # 104(호빵맨 콜라보 기획전)는 "마킹키트"가 들어간 상품명도 모니터링 대상이라 키워드 제외를 적용하지 않음
 CATEGORY_URLS = [
@@ -19,9 +22,8 @@ CATEGORY_URLS = [
     ("https://twinscorestore.co.kr/category/%EC%9D%98%EB%A5%98/43/", True),
     ("https://twinscorestore.co.kr/category/%EC%9A%A9%ED%92%88-%C2%B7-%EC%9E%A1%ED%99%94/60/", True),
     ("https://twinscorestore.co.kr/category/%ED%8A%B8%EC%9C%88%EC%8A%A4-x-%ED%98%B8%EB%B9%B5%EB%A7%A8/104/", False),
+    ("https://nolmdshop.com/category/LG%ED%8A%B8%EC%9C%88%EC%8A%A4/31/", True),
 ]
-
-PRODUCT_DOMAIN = "https://twinscorestore.co.kr"
 
 HISTORY_FILE = "data/stock_history.json"
 LOW_STOCK_THRESHOLD = 50
@@ -38,6 +40,19 @@ REMOVE_OVERLAYS_JS = """
     });
 }
 """
+
+def canonicalize_product_url(href):
+    """상품 링크를 정규화. 쿼리스트링을 제거하고 /product/{slug}/{번호}/ 형태로 통일하되,
+    href 자신의 도메인(스킴+호스트)을 그대로 유지한다 (여러 사이트를 동시에 모니터링하기 위함)."""
+    href = href.split("?")[0]
+    m = PRODUCT_URL_RE.search(href)
+    if not m:
+        return None
+    parsed = urllib.parse.urlparse(href)
+    if not parsed.scheme or not parsed.netloc:
+        return None
+    domain = f"{parsed.scheme}://{parsed.netloc}"
+    return f"{domain}/product/{m.group(1)}/"
 
 def is_excluded(url, apply_keywords=True):
     if not apply_keywords:
@@ -62,11 +77,9 @@ def scrape_links_on_current_page(page, links, apply_keywords=True):
             'a[href*="/product/"]', "els => els.map(e => e.href)"
         )
         for h in hrefs:
-            h = h.split("?")[0]
-            m = PRODUCT_URL_RE.search(h)
-            if not m:
+            canonical = canonicalize_product_url(h)
+            if not canonical:
                 continue
-            canonical = f"{PRODUCT_DOMAIN}/product/{m.group(1)}/"
             if is_excluded(canonical, apply_keywords):
                 continue
             links.add(canonical)
@@ -232,15 +245,17 @@ def extract_product_no(url):
     m = re.search(r"/(\d+)/?$", url.rstrip("/"))
     return m.group(1) if m else None
 
-def get_option_stock_via_calculator(page, product_no):
+def get_option_stock_via_calculator(page, domain, product_no):
     """옵션(사이즈 등)이 있는 상품의 실제 재고를 CalculatorProduct API로 조회.
     각 옵션에 수량 9999를 넣어 요청했을 때 재고 부족 응답으로 실제 수량을 역산하는 방식.
+    domain은 상품 URL에서 추출한 "https://호스트" 형태(사이트별로 다름).
     반환: ({옵션라벨: 재고수}, 진단정보) — 실패 시 (None, 진단정보)
     """
     js = """
-    async (productNo) => {
+    async (args) => {
+        const { domain, productNo } = args;
         try {
-            const html = await fetch(`https://twinscorestore.co.kr/product/detail.html?product_no=${productNo}`)
+            const html = await fetch(`${domain}/product/detail.html?product_no=${productNo}`)
                 .then(r => r.text());
 
             const match = html.match(/option_stock_data\\s*=\\s*'((?:[^'\\\\]|\\\\.)*)'/s);
@@ -268,7 +283,7 @@ def get_option_stock_via_calculator(page, product_no):
                     continue;
                 }
 
-                const url = `https://twinscorestore.co.kr/exec/front/shop/CalculatorProduct?product_no=${productNo}&is_subscription=F&product[${itemCode}]=9999`;
+                const url = `${domain}/exec/front/shop/CalculatorProduct?product_no=${productNo}&is_subscription=F&product[${itemCode}]=9999`;
                 try {
                     const data = await fetch(url).then(r => r.json());
                     if (data.Result === false && "stock_number" in data) {
@@ -288,7 +303,7 @@ def get_option_stock_via_calculator(page, product_no):
     }
     """
     try:
-        outcome = page.evaluate(js, product_no)
+        outcome = page.evaluate(js, {"domain": domain, "productNo": product_no})
     except Exception as e:
         return None, f"CalculatorProduct 평가 실패({type(e).__name__}): {e}"
 
@@ -347,9 +362,14 @@ def get_stock_for_product(page, url):
 
     if option_data:
         product_no = extract_product_no(url)
+        parsed = urllib.parse.urlparse(url)
+        domain = f"{parsed.scheme}://{parsed.netloc}" if parsed.scheme and parsed.netloc else None
+
         api_result, api_diagnostic = (None, None)
-        if product_no:
-            api_result, api_diagnostic = get_option_stock_via_calculator(page, product_no)
+        if product_no and domain:
+            api_result, api_diagnostic = get_option_stock_via_calculator(page, domain, product_no)
+        elif not domain:
+            api_diagnostic = "상품 URL에서 도메인을 추출하지 못함"
 
         if api_result:
             return api_result, name, price, api_diagnostic
