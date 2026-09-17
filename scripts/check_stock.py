@@ -245,19 +245,27 @@ def extract_product_no(url):
     m = re.search(r"/(\d+)/?$", url.rstrip("/"))
     return m.group(1) if m else None
 
-def get_option_stock_via_calculator(page, domain, product_no):
-    """옵션(사이즈 등)이 있는 상품의 실제 재고를 CalculatorProduct API로 조회.
+def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
+    """옵션(사이즈 등)이 있는 상품의 실제 재고를 조회.
 
-    주의: 이 API가 재고 부족 시 돌려주는 stock_number 필드는 실제 재고와 무관한
-    고정/부정확한 값으로 확인됨(예: 실제 재고가 100~199 사이인데 항상 3으로 응답).
-    따라서 그 값을 믿지 않고, 주문 성공/실패 여부만으로 실제 주문 가능한 최대 수량을
-    이분탐색(2배씩 늘리다 실패하면 그 구간을 좁혀가는 방식)으로 직접 찾아낸다.
+    두 가지 신뢰도 문제가 확인됨:
+    1) CalculatorProduct API가 재고 부족 시 돌려주는 stock_number 필드는 실제 재고와
+       무관한 고정/부정확한 값(예: 항상 3). -> 이 값은 절대 쓰지 않고, 성공/실패
+       경계를 이분탐색으로 직접 찾는다.
+    2) 이분탐색만으로는 충분치 않음: 실제로는 품절(재고 0)인 옵션에도 이 API가
+       수량 1 주문은 통과시켜버리는 경우가 확인됨(품절 상품이 "1개"로 잘못 표시).
+       -> 그래서 화면에 실제로 보이는 옵션 드롭다운의 "[품절]" 표시를 최우선
+       신뢰 소스로 삼고, 거기서 품절로 확인된 옵션은 API 결과와 무관하게 0으로 확정.
+
+    option_data_json은 이미 로드된 페이지에서 읽어온 option_stock_data 값(JSON 문자열)을
+    그대로 넘겨받는다 — 다시 detail.html을 fetch할 필요 없음(현재 페이지가 이미 그 상품
+    페이지이므로, DOM의 [품절] 표시도 같은 페이지에서 함께 확인 가능).
     domain은 상품 URL에서 추출한 "https://호스트" 형태(사이트별로 다름).
     반환: ({옵션라벨: 재고수}, 진단정보) — 실패 시 (None, 진단정보)
     """
     js = """
     async (args) => {
-        const { domain, productNo } = args;
+        const { domain, productNo, optionDataJson } = args;
 
         async function tryQty(itemCode, qty) {
             const url = `${domain}/exec/front/shop/CalculatorProduct?product_no=${productNo}&is_subscription=F&product[${itemCode}]=${qty}`;
@@ -301,34 +309,36 @@ def get_option_stock_via_calculator(page, domain, product_no):
                 if (ok === null) { hi = mid; continue; }
                 if (ok) { lo = mid; } else { hi = mid; }
             }
-            return lo; // 마지막으로 성공이 확인된 수량 = 실제 주문 가능한(=재고) 수량
+            return lo; // 마지막으로 성공이 확인된 수량(단, DOM [품절] 표시가 없을 때만 신뢰)
         }
 
         try {
-            const html = await fetch(`${domain}/product/detail.html?product_no=${productNo}`)
-                .then(r => r.text());
-
-            const match = html.match(/option_stock_data\\s*=\\s*'((?:[^'\\\\]|\\\\.)*)'/s);
-            if (!match) {
-                return { error: "option_stock_data 매치 실패" };
-            }
-
-            const clean = match[1]
-                .replace(/\\\\\\\\/g, "\\x00").replace(/\\\\"/g, '"')
-                .replace(/\\\\'/g, "'").replace(/\\x00/g, "\\\\");
-
             let items;
             try {
-                items = JSON.parse(clean);
+                items = JSON.parse(optionDataJson);
             } catch (e) {
-                return { error: "JSON 파싱 실패: " + e.message };
+                return { error: "옵션 JSON 파싱 실패: " + e.message };
             }
+
+            // 현재 로드된 페이지의 옵션 드롭다운에서 "[품절]" 표시가 붙은 옵션들을 수집.
+            // 이게 사용자가 실제로 보는 화면과 정확히 일치하는 최우선 판단 기준.
+            const soldOutLabels = new Set();
+            document.querySelectorAll('select[id*="option"], select[name*="option"]').forEach(sel => {
+                Array.from(sel.options).forEach(o => {
+                    const text = (o.textContent || '').trim();
+                    if (text.includes('[품절]')) {
+                        soldOutLabels.add(o.value);
+                        soldOutLabels.add(text.replace(/\\s*\\[품절\\]\\s*$/, '').trim());
+                    }
+                });
+            });
 
             const result = {};
             for (const [itemCode, val] of Object.entries(items)) {
                 const optName = val.option_value ?? itemCode;
                 const isSelling = val.is_selling === true || String(val.is_selling).toUpperCase() === "T";
-                if (!isSelling) {
+
+                if (!isSelling || soldOutLabels.has(optName) || soldOutLabels.has(itemCode)) {
                     result[optName] = 0;
                     continue;
                 }
@@ -341,7 +351,10 @@ def get_option_stock_via_calculator(page, domain, product_no):
     }
     """
     try:
-        outcome = page.evaluate(js, {"domain": domain, "productNo": product_no})
+        outcome = page.evaluate(
+            js,
+            {"domain": domain, "productNo": product_no, "optionDataJson": option_data_json},
+        )
     except Exception as e:
         return None, f"CalculatorProduct 평가 실패({type(e).__name__}): {e}"
 
@@ -405,7 +418,7 @@ def get_stock_for_product(page, url):
 
         api_result, api_diagnostic = (None, None)
         if product_no and domain:
-            api_result, api_diagnostic = get_option_stock_via_calculator(page, domain, product_no)
+            api_result, api_diagnostic = get_option_stock_via_calculator(page, domain, product_no, option_data)
         elif not domain:
             api_diagnostic = "상품 URL에서 도메인을 추출하지 못함"
 
@@ -596,7 +609,7 @@ def main():
     kst = timezone(timedelta(hours=9))
     now = datetime.now(kst).strftime("%Y-%m-%d %H:%M KST")
 
-    SCRIPT_VERSION = "v9-binary-search-stock"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
+    SCRIPT_VERSION = "v10-soldout-dom-check"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
 
     header = (
         f"[전상품 재고 확인] {now} ({SCRIPT_VERSION})\n"
