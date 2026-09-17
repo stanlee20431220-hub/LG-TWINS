@@ -10,12 +10,15 @@ from datetime import datetime, timezone, timedelta
 
 from playwright.sync_api import sync_playwright
 
-# twinscorestore.co.kr 카테고리: 유니폼(42) / 의류(43) / 용품·잡화(60)
+# twinscorestore.co.kr 카테고리: 유니폼(42) / 의류(43) / 용품·잡화(60) / 트윈스 X 호빵맨 기획전(104)
 # 법인구매(75)는 재고 모니터링 대상이 아니라 제외
+# 각 항목: (카테고리 URL, EXCLUDE_KEYWORDS 적용 여부)
+# 104(호빵맨 콜라보 기획전)는 "마킹키트"가 들어간 상품명도 모니터링 대상이라 키워드 제외를 적용하지 않음
 CATEGORY_URLS = [
-    "https://twinscorestore.co.kr/category/%EC%9C%A0%EB%8B%88%ED%8F%BC/42/",
-    "https://twinscorestore.co.kr/category/%EC%9D%98%EB%A5%98/43/",
-    "https://twinscorestore.co.kr/category/%EC%9A%A9%ED%92%88-%C2%B7-%EC%9E%A1%ED%99%94/60/",
+    ("https://twinscorestore.co.kr/category/%EC%9C%A0%EB%8B%88%ED%8F%BC/42/", True),
+    ("https://twinscorestore.co.kr/category/%EC%9D%98%EB%A5%98/43/", True),
+    ("https://twinscorestore.co.kr/category/%EC%9A%A9%ED%92%88-%C2%B7-%EC%9E%A1%ED%99%94/60/", True),
+    ("https://twinscorestore.co.kr/category/%ED%8A%B8%EC%9C%88%EC%8A%A4-x-%ED%98%B8%EB%B9%B5%EB%A7%A8/104/", False),
 ]
 
 PRODUCT_DOMAIN = "https://twinscorestore.co.kr"
@@ -36,7 +39,9 @@ REMOVE_OVERLAYS_JS = """
 }
 """
 
-def is_excluded(url):
+def is_excluded(url, apply_keywords=True):
+    if not apply_keywords:
+        return False
     decoded = urllib.parse.unquote(url)
     return any(kw in decoded for kw in EXCLUDE_KEYWORDS)
 
@@ -48,7 +53,7 @@ def dismiss_overlays(page):
 
 MAX_PAGES_PER_CATEGORY = 30  # 안전장치 (무한루프 방지)
 
-def scrape_links_on_current_page(page, links):
+def scrape_links_on_current_page(page, links, apply_keywords=True):
     """현재 로드된 페이지에서 상품 링크를 수집 + 스크롤로 지연로딩 요소도 추가 수집."""
     last_count = -1
     rounds_without_growth = 0
@@ -62,7 +67,7 @@ def scrape_links_on_current_page(page, links):
             if not m:
                 continue
             canonical = f"{PRODUCT_DOMAIN}/product/{m.group(1)}/"
-            if is_excluded(canonical):
+            if is_excluded(canonical, apply_keywords):
                 continue
             links.add(canonical)
 
@@ -130,7 +135,7 @@ def find_next_page_url(page):
 def collect_product_links(page):
     links = set()
     page.mouse.move(700, 450)
-    for base_url in CATEGORY_URLS:
+    for base_url, apply_keywords in CATEGORY_URLS:
         current_url = base_url
         visited = set()
 
@@ -144,7 +149,7 @@ def collect_product_links(page):
             dismiss_overlays(page)
 
             before_count = len(links)
-            scrape_links_on_current_page(page, links)
+            scrape_links_on_current_page(page, links, apply_keywords)
             after_count = len(links)
 
             print(f"  - {current_url}: 누적 {after_count}개")
