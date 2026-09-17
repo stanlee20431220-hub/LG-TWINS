@@ -320,8 +320,14 @@ def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
                 return { error: "옵션 JSON 파싱 실패: " + e.message };
             }
 
-            // 현재 로드된 페이지의 옵션 드롭다운에서 "[품절]" 표시가 붙은 옵션들을 수집.
-            // 이게 사용자가 실제로 보는 화면과 정확히 일치하는 최우선 판단 기준.
+            // 신호 1(최우선): 페이지 전체에 "SOLD OUT" 표시가 있으면 상품 전체 품절.
+            // 이런 경우 옵션별 API 결과(버그로 1개 통과 등)와 무관하게 전부 0으로 확정.
+            let pageSoldOut = false;
+            document.querySelectorAll('span, button, div, a').forEach(el => {
+                if ((el.textContent || '').trim() === 'SOLD OUT') pageSoldOut = true;
+            });
+
+            // 신호 2: 옵션 드롭다운에 "[품절]" 표시가 붙은 옵션들 수집.
             const soldOutLabels = new Set();
             document.querySelectorAll('select[id*="option"], select[name*="option"]').forEach(sel => {
                 Array.from(sel.options).forEach(o => {
@@ -337,6 +343,20 @@ def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
             for (const [itemCode, val] of Object.entries(items)) {
                 const optName = val.option_value ?? itemCode;
                 const isSelling = val.is_selling === true || String(val.is_selling).toUpperCase() === "T";
+
+                if (pageSoldOut) {
+                    result[optName] = 0;
+                    continue;
+                }
+
+                // 신호 3: option_stock_data 자체에 stock_number가 박혀있으면(주로 자동품절 확정 시에만
+                // 나타남) 그 값을 그대로 신뢰. CalculatorProduct 에러 응답의 stock_number(항상
+                // 고정된 부정확한 값)와는 다른, 페이지 렌더링 시점의 값이라 신뢰할 수 있음.
+                if (typeof val.stock_number !== "undefined" && val.stock_number !== null) {
+                    const n = parseInt(val.stock_number, 10);
+                    result[optName] = Number.isFinite(n) ? n : 0;
+                    continue;
+                }
 
                 if (!isSelling || soldOutLabels.has(optName) || soldOutLabels.has(itemCode)) {
                     result[optName] = 0;
@@ -609,7 +629,7 @@ def main():
     kst = timezone(timedelta(hours=9))
     now = datetime.now(kst).strftime("%Y-%m-%d %H:%M KST")
 
-    SCRIPT_VERSION = "v10-soldout-dom-check"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
+    SCRIPT_VERSION = "v11-soldout-signals"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
 
     header = (
         f"[전상품 재고 확인] {now} ({SCRIPT_VERSION})\n"
