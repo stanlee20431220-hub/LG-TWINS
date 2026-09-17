@@ -247,13 +247,63 @@ def extract_product_no(url):
 
 def get_option_stock_via_calculator(page, domain, product_no):
     """옵션(사이즈 등)이 있는 상품의 실제 재고를 CalculatorProduct API로 조회.
-    각 옵션에 수량 9999를 넣어 요청했을 때 재고 부족 응답으로 실제 수량을 역산하는 방식.
+
+    주의: 이 API가 재고 부족 시 돌려주는 stock_number 필드는 실제 재고와 무관한
+    고정/부정확한 값으로 확인됨(예: 실제 재고가 100~199 사이인데 항상 3으로 응답).
+    따라서 그 값을 믿지 않고, 주문 성공/실패 여부만으로 실제 주문 가능한 최대 수량을
+    이분탐색(2배씩 늘리다 실패하면 그 구간을 좁혀가는 방식)으로 직접 찾아낸다.
     domain은 상품 URL에서 추출한 "https://호스트" 형태(사이트별로 다름).
     반환: ({옵션라벨: 재고수}, 진단정보) — 실패 시 (None, 진단정보)
     """
     js = """
     async (args) => {
         const { domain, productNo } = args;
+
+        async function tryQty(itemCode, qty) {
+            const url = `${domain}/exec/front/shop/CalculatorProduct?product_no=${productNo}&is_subscription=F&product[${itemCode}]=${qty}`;
+            try {
+                const data = await fetch(url).then(r => r.json());
+                // Result가 명시적으로 false면 그 수량은 주문 불가(재고초과 등)
+                return data.Result !== false;
+            } catch (e) {
+                return null; // 조회 자체 실패(네트워크 등) - 알 수 없음
+            }
+        }
+
+        // stock_number 값은 신뢰할 수 없으므로 절대 사용하지 않고,
+        // 성공/실패 경계를 직접 찾아 실제 주문 가능한 최대 수량을 구한다.
+        async function findMaxOrderable(itemCode) {
+            const CAP = 9999;
+
+            const bigOk = await tryQty(itemCode, CAP);
+            if (bigOk === null) return -1;
+            if (bigOk) return CAP; // 9999개도 통과 = 재고 충분
+
+            const oneOk = await tryQty(itemCode, 1);
+            if (oneOk === null) return -1;
+            if (!oneOk) return 0; // 1개도 안 됨 = 품절
+
+            // 2배씩 늘려가며 실패 지점을 대략 찾음 (지수 탐색)
+            let lo = 1, hi = 2;
+            while (hi < CAP) {
+                const ok = await tryQty(itemCode, hi);
+                if (ok === null) break; // 알 수 없음 -> 지금까지의 lo/hi로 이분탐색 진행
+                if (!ok) break;
+                lo = hi;
+                hi = hi * 2;
+            }
+            if (hi > CAP) hi = CAP;
+
+            // lo(성공)와 hi(실패) 사이를 이분탐색으로 좁혀 정확한 경계를 찾음
+            while (hi - lo > 1) {
+                const mid = Math.floor((lo + hi) / 2);
+                const ok = await tryQty(itemCode, mid);
+                if (ok === null) { hi = mid; continue; }
+                if (ok) { lo = mid; } else { hi = mid; }
+            }
+            return lo; // 마지막으로 성공이 확인된 수량 = 실제 주문 가능한(=재고) 수량
+        }
+
         try {
             const html = await fetch(`${domain}/product/detail.html?product_no=${productNo}`)
                 .then(r => r.text());
@@ -282,19 +332,7 @@ def get_option_stock_via_calculator(page, domain, product_no):
                     result[optName] = 0;
                     continue;
                 }
-
-                const url = `${domain}/exec/front/shop/CalculatorProduct?product_no=${productNo}&is_subscription=F&product[${itemCode}]=9999`;
-                try {
-                    const data = await fetch(url).then(r => r.json());
-                    if (data.Result === false && "stock_number" in data) {
-                        result[optName] = parseInt(data.stock_number, 10);
-                    } else {
-                        // 9999개 주문도 통과함 = 재고가 9999개 이상 충분함
-                        result[optName] = 9999;
-                    }
-                } catch (e) {
-                    result[optName] = -1; // 조회 실패(알 수 없음)
-                }
+                result[optName] = await findMaxOrderable(itemCode);
             }
             return { data: result };
         } catch (e) {
@@ -558,7 +596,7 @@ def main():
     kst = timezone(timedelta(hours=9))
     now = datetime.now(kst).strftime("%Y-%m-%d %H:%M KST")
 
-    SCRIPT_VERSION = "v8-status-icons"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
+    SCRIPT_VERSION = "v9-binary-search-stock"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
 
     header = (
         f"[전상품 재고 확인] {now} ({SCRIPT_VERSION})\n"
