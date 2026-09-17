@@ -292,8 +292,9 @@ def main():
     current_products = {}
 
     change_blocks = []
+    full_stock_blocks = []
+    low_stock_blocks = []
     price_change_lines = []
-    warning_lines = []
     error_lines = []
 
     with sync_playwright() as p:
@@ -324,19 +325,34 @@ def main():
             prev_stock = prev_entry.get("stock", {})
             prev_price = prev_entry.get("price")
 
-            option_lines = []
+            price_str = f" ({fmt_won(price)})" if price is not None else ""
+
+            # 전체 재고 표시용: 모든 옵션을 항상 출력, 변동이 있으면 증감도 같이 표시
+            full_option_lines = []
+            changed_option_lines = []
+            has_low_stock = False
+
             for size, qty in stock.items():
                 diff = qty - prev_stock.get(size, qty)
+                diff_str = ""
                 if diff != 0:
                     sign = "+" if diff > 0 else ""
-                    option_lines.append(f"  - {size}: {qty}개 ({sign}{diff})")
+                    diff_str = f" ({sign}{diff})"
+                    changed_option_lines.append(f"  - {size}: {qty}개{diff_str}")
+
+                full_option_lines.append(f"  - {size}: {qty}개{diff_str}")
 
                 if qty > 0 and qty < LOW_STOCK_THRESHOLD:
-                    warning_lines.append(f"⚠️ {link} - {size}: {qty}개")
+                    has_low_stock = True
 
-            if option_lines:
-                price_str = f" ({fmt_won(price)})" if price is not None else ""
-                change_blocks.append(f"■ {link}{price_str}\n" + "\n".join(option_lines))
+            block_text = f"■ {link}{price_str}\n" + "\n".join(full_option_lines)
+            full_stock_blocks.append(block_text)
+
+            if has_low_stock:
+                low_stock_blocks.append(block_text)
+
+            if changed_option_lines:
+                change_blocks.append(f"■ {link}{price_str}\n" + "\n".join(changed_option_lines))
 
             if price is not None and prev_price is not None and price != prev_price:
                 price_change_lines.append(
@@ -350,20 +366,25 @@ def main():
     kst = timezone(timedelta(hours=9))
     now = datetime.now(kst).strftime("%Y-%m-%d %H:%M KST")
 
-    SCRIPT_VERSION = "v4-namefix"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
+    SCRIPT_VERSION = "v5-fullstock"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
 
     header = (
         f"[전상품 재고 확인] {now} ({SCRIPT_VERSION})\n"
         f"확인된 상품: {len(current_products)}개"
     )
 
+    # 메시지 순서: 헤더 -> 50개 미만 재고(상단) -> 재고 변동 -> 가격 변동 -> 전체 재고 -> 오류
     messages = [header]
+    if low_stock_blocks:
+        messages.append(
+            f"[{LOW_STOCK_THRESHOLD}개 미만 재고]\n\n" + "\n\n".join(low_stock_blocks)
+        )
     if change_blocks:
         messages.append("[재고 변동]\n\n" + "\n\n".join(change_blocks))
     if price_change_lines:
         messages.append("[가격 변동]\n" + "\n".join(price_change_lines))
-    if warning_lines:
-        messages.append(f"[{LOW_STOCK_THRESHOLD}개 미만 재고 경고]\n" + "\n".join(warning_lines))
+    if full_stock_blocks:
+        messages.append("[전체 재고]\n\n" + "\n\n".join(full_stock_blocks))
     if error_lines:
         messages.append("[오류]\n" + "\n".join(error_lines))
 
