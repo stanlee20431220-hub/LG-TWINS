@@ -1,5 +1,5 @@
 {
-  "last_checked": "2026-09-23 13:08 KST",
+  "last_checked": "2026-09-23 20:11 KST",
   "products": {
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0%EB%B8%94%EB%9E%99/1782/": {
       "name": "[LG트윈스] 네로 에디션 반팔티셔츠(블랙)",
@@ -98,7 +98,7 @@
       "name": "[LG트윈스] 옐로우 무적타월",
       "price": 8000,
       "stock": {
-        "재고": 632
+        "재고": 628
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%AA%A8%EC%9E%90/436/": {
@@ -116,28 +116,28 @@
       "name": "[LG트윈스] 응원배트",
       "price": 10000,
       "stock": {
-        "재고": 197
+        "재고": 196
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EB%84%A4%EB%A1%9C-%ED%82%A4%EB%A7%81/2555/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 네로 키링",
       "price": 29000,
       "stock": {
-        "재고": 205
+        "재고": 202
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EB%93%9C%EB%A1%9C%EC%9A%B0%EC%83%89-stripe/2558/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 드로우색 STRIPE",
       "price": 59000,
       "stock": {
-        "재고": 10
+        "재고": 9
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC%EB%B8%8C%EB%A0%88%EC%9D%B4%ED%81%AC-black/2556/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 슈퍼브레이크 BLACK",
       "price": 79000,
       "stock": {
-        "재고": 153
+        "재고": 151
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC%EB%B8%8C%EB%A0%88%EC%9D%B4%ED%81%AC-stripe/2557/": {
@@ -152,13 +152,6 @@
       "price": 29000,
       "stock": {
         "재고": 419
-      }
-    },
-    "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%ED%95%98%ED%94%84%ED%8C%8C%EC%9D%B8%ED%8A%B8-black/2559/": {
-      "name": "[LG트윈스] 잔스포츠 X LG TWINS 하프파인트 BLACK",
-      "price": 59000,
-      "stock": {
-        "재고": 1
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0/2291/": {
