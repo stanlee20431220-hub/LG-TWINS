@@ -1,12 +1,12 @@
 {
-  "last_checked": "2026-09-28 13:41 KST",
+  "last_checked": "2026-09-28 21:41 KST",
   "products": {
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0%EB%B8%94%EB%9E%99/1782/": {
       "name": "[LG트윈스] 네로 에디션 반팔티셔츠(블랙)",
       "price": 39000,
       "stock": {
         "M": 0,
-        "L": 0,
+        "L": -1,
         "XL": 0,
         "XXL": 0
       }
@@ -26,16 +26,16 @@
       "price": 39000,
       "stock": {
         "M": 0,
-        "L": 0,
-        "XL": 0,
-        "XXL": 0
+        "L": -1,
+        "XL": -1,
+        "XXL": -1
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EC%9C%A0%EB%8B%88%ED%8F%BC/1785/": {
       "name": "[LG트윈스] 네로 에디션 유니폼",
       "price": 89000,
       "stock": {
-        "85": 0,
+        "85": -1,
         "90": 0,
         "95": 0,
         "100": 0,
@@ -48,8 +48,8 @@
       "name": "[LG트윈스] 네로 에디션 키즈 유니폼",
       "price": 89000,
       "stock": {
-        "키즈 110": 0,
-        "키즈 130": 0,
+        "키즈 110": -1,
+        "키즈 130": -1,
         "키즈 150": 0
       }
     },
@@ -57,7 +57,7 @@
       "name": "[LG트윈스] 로고볼 (소)",
       "price": 6000,
       "stock": {
-        "재고": 1297
+        "재고": 1280
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%A6%AC%EC%9C%A0%EC%A0%80%EB%B8%94%EB%B0%B1-%EB%8C%80/2449/": {
@@ -67,45 +67,11 @@
         "재고": 378
       }
     },
-    "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%88%EC%95%BD%ED%8C%90%EB%A7%A411%EC%9B%94%EC%B4%88%EB%B0%B0%EC%86%A1-%EC%98%A4%EC%A7%80%ED%99%98-2000%EA%B2%BD%EA%B8%B0-%EC%B6%9C%EC%9E%A5-%EA%B8%B0%EB%85%90%EA%B5%AC/2762/": {
-      "name": "[LG트윈스] (예약판매/11월초배송) 오지환 2000경기 출장 기념구",
-      "price": 30000,
-      "stock": {
-        "재고": 0
-      }
-    },
-    "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%88%EC%95%BD%ED%8C%90%EB%A7%A411%EC%9B%94%EC%B4%88%EB%B0%B0%EC%86%A1-%EC%98%A4%EC%A7%80%ED%99%98-2000%EA%B2%BD%EA%B8%B0-%EC%B6%9C%EC%9E%A5-%EA%B8%B0%EB%85%90-%EB%B1%83%EC%A7%80/2763/": {
-      "name": "[LG트윈스] (예약판매/11월초배송) 오지환 2000경기 출장 기념 뱃지",
-      "price": 12000,
-      "stock": {
-        "재고": 0
-      }
-    },
-    "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%88%EC%95%BD%ED%8C%90%EB%A7%A411%EC%9B%94%EC%B4%88%EB%B0%B0%EC%86%A1-%EC%98%A4%EC%A7%80%ED%99%98-2000%EA%B2%BD%EA%B8%B0-%EC%B6%9C%EC%9E%A5-%EA%B8%B0%EB%85%90-%EC%9C%A0%EB%8B%88%ED%8F%BC/2760/": {
-      "name": "[LG트윈스] (예약판매/11월초배송) 오지환 2000경기 출장 기념 유니폼",
-      "price": 120000,
-      "stock": {
-        "85": 0,
-        "90": 0,
-        "95": 0,
-        "100": 0,
-        "105": 0,
-        "110": 0,
-        "120": 0
-      }
-    },
-    "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%88%EC%95%BD%ED%8C%90%EB%A7%A411%EC%9B%94%EC%B4%88%EB%B0%B0%EC%86%A1-%EC%98%A4%EC%A7%80%ED%99%98-2000%EA%B2%BD%EA%B8%B0-%EC%B6%9C%EC%9E%A5-%EA%B8%B0%EB%85%90-%EC%9D%91%EC%9B%90%ED%83%80%EC%9B%94/2761/": {
-      "name": "[LG트윈스] (예약판매/11월초배송) 오지환 2000경기 출장 기념 응원타월",
-      "price": 15000,
-      "stock": {
-        "재고": 0
-      }
-    },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%90%EB%A1%9C%EC%9A%B0-%EB%AC%B4%EC%A0%81%ED%83%80%EC%9B%94/2476/": {
       "name": "[LG트윈스] 옐로우 무적타월",
       "price": 8000,
       "stock": {
-        "재고": 567
+        "재고": 564
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%AA%A8%EC%9E%90/436/": {
@@ -116,28 +82,21 @@
         "XS(54)": 0,
         "S(56)": 0,
         "M(58)": 0,
-        "L(60)": 0
+        "L(60)": -1
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9D%91%EC%9B%90%EB%B0%B0%ED%8A%B8/570/": {
       "name": "[LG트윈스] 응원배트",
       "price": 10000,
       "stock": {
-        "재고": 181
+        "재고": 180
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EB%84%A4%EB%A1%9C-%ED%82%A4%EB%A7%81/2555/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 네로 키링",
       "price": 29000,
       "stock": {
-        "재고": 185
-      }
-    },
-    "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EB%93%9C%EB%A1%9C%EC%9A%B0%EC%83%89-stripe/2558/": {
-      "name": "[LG트윈스] 잔스포츠 X LG TWINS 드로우색 STRIPE",
-      "price": 59000,
-      "stock": {
-        "재고": 2
+        "재고": 184
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC%EB%B8%8C%EB%A0%88%EC%9D%B4%ED%81%AC-black/2556/": {
@@ -165,10 +124,10 @@
       "name": "[LG트윈스] 픽셀네로 반팔티셔츠",
       "price": 39000,
       "stock": {
-        "S": 0,
-        "M": 0,
-        "L": 0,
-        "XL": 0
+        "S": -1,
+        "M": -1,
+        "L": -1,
+        "XL": -1
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EC%9C%A0%EB%8B%88%ED%8F%BC%ED%8B%B0%EC%85%94%EC%B8%A0%ED%98%95/2307/": {
@@ -178,9 +137,9 @@
         "85": 0,
         "90": 0,
         "95": 0,
-        "100": 0,
-        "105": 0,
-        "110": 0,
+        "100": -1,
+        "105": -1,
+        "110": -1,
         "120": 0
       }
     },
@@ -188,8 +147,8 @@
       "name": "[LG트윈스] 픽셀네로 키즈 유니폼(오픈형)",
       "price": 92000,
       "stock": {
-        "키즈 110": 0,
-        "키즈 130": 0,
+        "키즈 110": -1,
+        "키즈 130": -1,
         "키즈 150": 0
       }
     },
@@ -197,19 +156,30 @@
       "name": "[LG트윈스] 픽셀네로 키즈 유니폼(티셔츠형)",
       "price": 92000,
       "stock": {
-        "키즈 110": 0,
-        "키즈 130": 0,
-        "키즈 150": 0
+        "키즈 110": -1,
+        "키즈 130": -1,
+        "키즈 150": -1
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%ED%9B%84%EB%93%9C%ED%8B%B0%EC%85%94%EC%B8%A0/2290/": {
       "name": "[LG트윈스] 픽셀네로 후드티셔츠",
       "price": 69000,
       "stock": {
-        "S": 0,
-        "M": 0,
-        "L": 0,
-        "XL": 0
+        "S": -1,
+        "M": -1,
+        "L": -1,
+        "XL": -1
+      }
+    },
+    "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2025-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%A0%88%ED%8A%B8%EB%A1%9C-%EB%AA%A8%EC%9E%90/444/": {
+      "name": "[LG트윈스] 2025 오리지널 레트로 모자",
+      "price": 29000,
+      "stock": {
+        "KIDS(52)": 0,
+        "XS(54)": -1,
+        "S(56)": 0,
+        "M(58)": -1,
+        "L(60)": 0
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EB%9E%9C%EB%8D%A4-%EC%95%84%ED%81%AC%EB%A6%B4-%ED%82%A4%EB%A7%81multi/170/": {
@@ -237,7 +207,7 @@
       "name": "마루는강쥐 콜라보 리모콘마루 마그네틱 스마트톡(MULTI)",
       "price": 12000,
       "stock": {
-        "재고": 15
+        "재고": 14
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A7%88%EB%A3%A8-%ED%8E%98%EC%9D%B4%EC%8A%A4-%EB%B1%83%EC%A7%80multi/164/": {
@@ -341,8 +311,8 @@
       "name": "마루는강쥐 콜라보 키즈  유니폼(YELLOW)",
       "price": 99000,
       "stock": {
-        "A5": 0,
-        "A7": 0,
+        "A5": 1,
+        "A7": 5,
         "A9": 0
       }
     },
@@ -350,7 +320,7 @@
       "name": "마루는강쥐 콜라보 패턴 반다나(YELLOW)",
       "price": 8000,
       "stock": {
-        "재고": 277
+        "재고": 276
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-3%EB%8B%A8-%EC%9A%B0%EC%82%B0yellow/167/": {
@@ -386,24 +356,24 @@
       "price": 12000,
       "stock": {
         "치이카와": 0,
-        "가르마": 0,
-        "토끼": 0
+        "가르마": 9,
+        "토끼": 13
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%91%EC%9B%90%EB%B0%B0%ED%8A%B8-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98-3%EC%A2%85/250/": {
       "name": "먼작귀 콜라보 응원배트 열접착패치 (3종)",
       "price": 8000,
       "stock": {
-        "치이카와": 0,
-        "가르마": 0,
-        "토끼": 0
+        "치이카와": 55,
+        "가르마": 54,
+        "토끼": 56
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%8B%A4%EA%BE%B8-%EC%8A%A4%ED%8B%B0%EC%BB%A4multi/238/": {
       "name": "먼작귀 콜라보 캐릭터 다꾸 스티커(MULTI)",
       "price": 4000,
       "stock": {
-        "재고": 132
+        "재고": 129
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%A9%94%EA%B0%80-%EC%9D%91%EC%9B%90%EB%B0%B0%ED%8A%B8white/245/": {
@@ -425,7 +395,7 @@
       "price": 12000,
       "stock": {
         "치이카와": 0,
-        "가르마": 0,
+        "가르마": 62,
         "토끼": 0
       }
     },
@@ -480,7 +450,7 @@
         "100(L)": 0,
         "105(XL)": 0,
         "110(2XL)": 0,
-        "120(4XL)": 0
+        "120(4XL)": 1
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%ED%82%A4%EB%A7%81-3%EC%A2%85/248/": {
@@ -488,8 +458,8 @@
       "price": 12000,
       "stock": {
         "치이카와": 0,
-        "가르마": 0,
-        "토끼": 0
+        "가르마": 31,
+        "토끼": 10
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%EB%9E%9C%EB%8D%A4-%ED%82%A4%EB%A7%81%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80/224/": {
@@ -510,18 +480,18 @@
       "name": "위시캣 콜라보 그래픽 반팔 티셔츠(BLACK)",
       "price": 36000,
       "stock": {
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0
+        "90(S)": 18,
+        "95(M)": 29,
+        "100(L)": 13
       }
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EA%B7%B8%EB%9E%98%ED%94%BD-%EB%B0%98%ED%8C%94-%ED%8B%B0%EC%85%94%EC%B8%A0white/260/": {
       "name": "위시캣 콜라보 그래픽 반팔 티셔츠(WHITE)",
       "price": 36000,
       "stock": {
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0
+        "90(S)": 5,
+        "95(M)": 15,
+        "100(L)": 7
       }
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%8F%99%EC%A0%84-%ED%8C%8C%EC%9A%B0%EC%B9%98white/272/": {
@@ -591,13 +561,13 @@
       "name": "위시캣 콜라보 유니폼(CHARCOAL)",
       "price": 105000,
       "stock": {
-        "85(XS)": 0,
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0,
-        "105(XL)": 0,
-        "110(2XL)": 0,
-        "120(4XL)": 0
+        "85(XS)": 3,
+        "90(S)": 46,
+        "95(M)": 183,
+        "100(L)": 32,
+        "105(XL)": 24,
+        "110(2XL)": 2,
+        "120(4XL)": 3
       }
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81white/273/": {
@@ -627,7 +597,7 @@
       "stock": {
         "A5": 0,
         "A7": 0,
-        "A9": 0
+        "A9": 5
       }
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%83%80%ED%8F%AC%EB%A6%B0-%EB%B0%B1multi/269/": {
@@ -649,9 +619,9 @@
       "price": 33000,
       "stock": {
         "90(S)": 0,
-        "95(M)": 0,
-        "105(XL)": 0,
-        "110(2XL)": 0
+        "95(M)": 62,
+        "105(XL)": 44,
+        "110(2XL)": 75
       }
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%B6%80%EC%A0%81%EC%98%B7%ED%99%88%EB%9F%B0/63/": {
@@ -700,11 +670,11 @@
       "name": "최고심 콜라보 캐릭터 유니폼(GREEN)",
       "price": 99000,
       "stock": {
-        "85(XS)": 0,
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0,
-        "105(XL)": 0,
+        "85(XS)": 250,
+        "90(S)": 319,
+        "95(M)": 579,
+        "100(L)": 160,
+        "105(XL)": 2,
         "110(2XL)": 0,
         "120(4XL)": 0
       }
@@ -713,13 +683,13 @@
       "name": "최고심 콜라보 캐릭터 유니폼(PINK)",
       "price": 99000,
       "stock": {
-        "85(XS)": 0,
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0,
-        "105(XL)": 0,
-        "110(2XL)": 0,
-        "120(4XL)": 0
+        "85(XS)": 28,
+        "90(S)": 177,
+        "95(M)": 619,
+        "100(L)": 319,
+        "105(XL)": 29,
+        "110(2XL)": 47,
+        "120(4XL)": 6
       }
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%82%A4%EC%A6%88-%EB%B3%BC%EC%BA%A1green/40/": {
@@ -741,7 +711,7 @@
       "price": 99000,
       "stock": {
         "A5": 0,
-        "A7": 0,
+        "A7": 2,
         "A9": 0
       }
     },
@@ -756,16 +726,16 @@
       "name": "최고심 콜라보 플레이어 키링",
       "price": 8000,
       "stock": {
-        "임찬규": 0,
-        "문보경": 0,
-        "신민재": 0,
-        "문성주": 0,
-        "오지환": 0,
-        "박해민": 0,
-        "오스틴": 0,
-        "박동원": 0,
-        "손주영": 0,
-        "홍창기": 0
+        "임찬규": 161,
+        "문보경": 222,
+        "신민재": 211,
+        "문성주": 28,
+        "오지환": 191,
+        "박해민": 72,
+        "오스틴": 182,
+        "박동원": 12,
+        "손주영": 224,
+        "홍창기": 176
       }
     },
     "https://twinscorestore.co.kr/product/%ED%81%AC%EC%95%84-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%A1%B0%EA%B0%81-%EC%8A%A4%ED%8B%B0%EC%BB%A4%ED%8C%A9multi/190/": {
@@ -786,9 +756,9 @@
       "name": "크아 콜라보 캐릭터 유니폼(SKY BLUE)",
       "price": 99000,
       "stock": {
-        "A5": 0,
-        "A7": 0,
-        "A9": 0,
+        "A5": 2,
+        "A7": 5,
+        "A9": 4,
         "85(XS)": 0,
         "90(S)": 0,
         "95(M)": 0,
@@ -802,9 +772,9 @@
       "name": "태닝 헬로키티 빈티지 패치 티셔츠(BROWN)",
       "price": 59000,
       "stock": {
-        "95(M)": 0,
-        "100(L)": 0,
-        "105(XL)": 0
+        "95(M)": 9,
+        "100(L)": 29,
+        "105(XL)": 3
       }
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EA%B7%B8%EB%9E%98%ED%94%BD-%ED%8B%B0%EC%85%94%EC%B8%A0white/347/": {
@@ -813,7 +783,7 @@
       "stock": {
         "95(M)": 0,
         "100(L)": 0,
-        "105(XL)": 0
+        "105(XL)": 3
       }
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%8F%84%ED%8A%B8-%EB%A7%88%EC%BC%93%EB%B0%B1pink/351/": {
@@ -827,9 +797,9 @@
       "name": "태닝 헬로키티 콜라보 도트 카라 져지(PINK)",
       "price": 85000,
       "stock": {
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0
+        "90(S)": 153,
+        "95(M)": 57,
+        "100(L)": 78
       }
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%9E%9C%EB%8D%A4-%ED%94%BC%EA%B7%9C%EC%96%B4-%ED%82%A4%EB%A7%81multi/352/": {
@@ -858,11 +828,11 @@
       "name": "태닝 헬로키티 콜라보 스트라이프 카라 져지(PINK/BLACK)",
       "price": 85000,
       "stock": {
-        "95(M)": 0,
-        "100(L)": 0,
-        "105(XL)": 0,
-        "110(2XL)": 0,
-        "120(4XL)": 0
+        "95(M)": 8,
+        "100(L)": 83,
+        "105(XL)": 43,
+        "110(2XL)": 4,
+        "120(4XL)": 13
       }
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%8B%A4%EB%A6%AC%EC%BD%98-%EC%86%90%EA%B1%B0%EC%9A%B8multi/354/": {
@@ -876,13 +846,13 @@
       "name": "태닝 헬로키티 콜라보 썸머 유니폼(SKY BLUE)",
       "price": 105000,
       "stock": {
-        "85(XS)": 0,
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0,
-        "105(XL)": 0,
-        "110(2XL)": 0,
-        "120(4XL)": 0
+        "85(XS)": 9,
+        "90(S)": 7,
+        "95(M)": 1,
+        "100(L)": 13,
+        "105(XL)": 6,
+        "110(2XL)": 1,
+        "120(4XL)": 4
       }
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%A0%88%ED%84%B0%EB%A7%81-%EB%B3%BC%EC%BA%A1black/344/": {
@@ -896,33 +866,33 @@
       "name": "태닝 헬로키티 콜라보 플레이어 져지(BEIGE/BLACK)",
       "price": 95000,
       "stock": {
-        "95(M)-임찬규": 0,
-        "95(M)-문보경": 0,
+        "95(M)-임찬규": 1,
+        "95(M)-문보경": 8,
         "95(M)-구본혁": 0,
-        "95(M)-오지환": 0,
+        "95(M)-오지환": 3,
         "95(M)-박해민": 0,
         "95(M)-오스틴": 0,
-        "95(M)-손주영": 0,
+        "95(M)-손주영": 4,
         "95(M)-홍창기": 0,
         "95(M)-송찬의": 0,
-        "100(L)-임찬규": 0,
-        "100(L)-문보경": 0,
-        "100(L)-구본혁": 0,
-        "100(L)-오지환": 0,
-        "100(L)-박해민": 0,
-        "100(L)-오스틴": 0,
-        "100(L)-손주영": 0,
-        "100(L)-홍창기": 0,
+        "100(L)-임찬규": 7,
+        "100(L)-문보경": 10,
+        "100(L)-구본혁": 5,
+        "100(L)-오지환": 7,
+        "100(L)-박해민": 2,
+        "100(L)-오스틴": 10,
+        "100(L)-손주영": 6,
+        "100(L)-홍창기": 5,
         "100(L)-송찬의": 0,
-        "105(XL)-임찬규": 0,
-        "105(XL)-문보경": 0,
-        "105(XL)-구본혁": 0,
-        "105(XL)-오지환": 0,
-        "105(XL)-박해민": 0,
-        "105(XL)-오스틴": 0,
-        "105(XL)-손주영": 0,
-        "105(XL)-홍창기": 0,
-        "105(XL)-송찬의": 0
+        "105(XL)-임찬규": 10,
+        "105(XL)-문보경": 10,
+        "105(XL)-구본혁": 10,
+        "105(XL)-오지환": 6,
+        "105(XL)-박해민": 9,
+        "105(XL)-오스틴": 10,
+        "105(XL)-손주영": 11,
+        "105(XL)-홍창기": 5,
+        "105(XL)-송찬의": 6
       }
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%94%BC%ED%81%AC%EB%8B%89-%ED%83%80%EC%98%ACpink/356/": {
@@ -950,11 +920,11 @@
       "name": "헬로키티 콜라보 로고 자켓(MULTI)",
       "price": 129000,
       "stock": {
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0,
-        "105(XL)": 0,
-        "110(2XL)": 0,
+        "90(S)": 70,
+        "95(M)": 186,
+        "100(L)": 45,
+        "105(XL)": 46,
+        "110(2XL)": 3,
         "120(4XL)": 0
       }
     },
@@ -990,7 +960,7 @@
       "name": "헬로키티 콜라보 캐릭터 유니폼 파우치백(WHITE/PINK)",
       "price": 25000,
       "stock": {
-        "재고": 24
+        "재고": 23
       }
     },
     "https://twinscorestore.co.kr/product/%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%A0%84%EC%82%AC%EB%A8%B8%ED%94%8C%EB%9F%ACwhiteblack/98/": {
@@ -1025,10 +995,10 @@
       "name": "호빵맨 콜라보 세균맨 레이어드 티셔츠(NAVY)",
       "price": 42000,
       "stock": {
-        "85(XS)": 0,
-        "95(M)": 0,
-        "105(XL)": 0,
-        "115(3XL)": 0
+        "85(XS)": 55,
+        "95(M)": 38,
+        "105(XL)": 37,
+        "115(3XL)": 4
       }
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%95%84%ED%81%AC%EB%A6%B4-%ED%82%A4%EB%A7%81%EC%84%B8%EA%B7%A0%EB%A7%A8/380/": {
@@ -1085,12 +1055,12 @@
       "price": 105000,
       "stock": {
         "85(XS)": 0,
-        "90(S)": 0,
-        "95(M)": 0,
-        "100(L)": 0,
-        "105(XL)": 0,
-        "110(2XL)": 0,
-        "120(4XL)": 0
+        "90(S)": 19,
+        "95(M)": 9,
+        "100(L)": 32,
+        "105(XL)": 24,
+        "110(2XL)": 35,
+        "120(4XL)": 39
       }
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%91%EC%9B%90%EB%A8%B8%ED%94%8C%EB%9F%ACsky-blue/367/": {
@@ -1108,7 +1078,7 @@
         "95(M)": 0,
         "100(L)": 0,
         "105(XL)": 0,
-        "110(2XL)": 0
+        "110(2XL)": 1
       }
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%A1%B0%EB%A6%AC%EA%B0%9C-%ED%8C%8C%EC%9A%B0%EC%B9%98%EC%84%B8%EA%B7%A0%EB%A7%A8/383/": {
@@ -1129,10 +1099,10 @@
       "name": "호빵맨 콜라보 캐릭터 레이어드 티셔츠(IVORY)",
       "price": 42000,
       "stock": {
-        "85(XS)": 0,
+        "85(XS)": 10,
         "95(M)": 0,
-        "105(XL)": 0,
-        "115(3XL)": 0
+        "105(XL)": 24,
+        "115(3XL)": 12
       }
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%B1%83%EC%A7%80%EC%84%B8%EA%B7%A0%EB%A7%A8/377/": {
@@ -1174,8 +1144,8 @@
       "name": "호빵맨 콜라보 키즈 유니폼(IVORY)",
       "price": 105000,
       "stock": {
-        "A5": 0,
-        "A7": 0,
+        "A5": 4,
+        "A7": 2,
         "A9": 0
       }
     },
@@ -1183,9 +1153,9 @@
       "name": "호빵맨 콜라보 펫유니폼(IVORY)",
       "price": 25000,
       "stock": {
-        "S": 0,
+        "S": 17,
         "M": 0,
-        "L": 0
+        "L": 7
       }
     },
     "https://twinscorestore.co.kr/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%B0%A9%ED%96%A5%EC%A0%9C%EC%84%B8%ED%8A%B8-v4%EC%B6%98%EC%8B%9D%EC%9D%B4/137/": {
@@ -1199,7 +1169,7 @@
       "name": "LG트윈스 승리요정 키링인형 V5_춘식이",
       "price": 20000,
       "stock": {
-        "재고": 863
+        "재고": 862
       }
     },
     "https://twinscorestore.co.kr/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9D%B8%ED%98%95%ED%82%A4%EB%A7%81-v4%EC%B6%98%EC%8B%9D%EC%9D%B4/136/": {
