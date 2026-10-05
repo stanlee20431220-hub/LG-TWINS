@@ -1,5 +1,5 @@
 {
-  "last_checked": "2026-10-05 09:01 KST",
+  "last_checked": "2026-10-05 14:02 KST",
   "products": {
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0%EB%B8%94%EB%9E%99/1782/": {
       "name": "[LG트윈스] 네로 에디션 반팔티셔츠(블랙)",
@@ -133,7 +133,7 @@
       "name": "[LG트윈스] 옐로우 무적타월",
       "price": 8000,
       "stock": {
-        "재고": 403
+        "재고": 400
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%AA%A8%EC%9E%90/436/": {
@@ -158,21 +158,21 @@
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 드로우색 STRIPE",
       "price": 59000,
       "stock": {
-        "재고": 3
+        "재고": 2
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC%EB%B8%8C%EB%A0%88%EC%9D%B4%ED%81%AC-black/2556/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 슈퍼브레이크 BLACK",
       "price": 79000,
       "stock": {
-        "재고": 104
+        "재고": 102
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC%EB%B8%8C%EB%A0%88%EC%9D%B4%ED%81%AC-stripe/2557/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 슈퍼브레이크 STRIPE",
       "price": 79000,
       "stock": {
-        "재고": 341
+        "재고": 340
       }
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC-%EC%8A%A4%ED%83%9C%EC%89%AC-black/2560/": {
@@ -425,7 +425,7 @@
       "name": "먼작귀 콜라보 캐릭터 사각쿠션(WHITE/PINK)",
       "price": 30000,
       "stock": {
-        "재고": 60
+        "재고": 59
       }
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%95%84%ED%81%AC%EB%A6%B4%ED%82%A4%EB%A7%81-3%EC%A2%85/223/": {
@@ -964,7 +964,7 @@
       "price": 105000,
       "stock": {
         "85(XS)": 0,
-        "90(S)": 17,
+        "90(S)": 16,
         "95(M)": 8,
         "100(L)": 31,
         "105(XL)": 21,
