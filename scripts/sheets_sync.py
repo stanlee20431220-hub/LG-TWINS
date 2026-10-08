@@ -25,6 +25,7 @@ HEADERS = [
 ]
 CAP_SENTINEL = 9999
 UNKNOWN_SENTINEL = -1
+SELECTABLE_UNKNOWN_SENTINEL = -2
 
 
 class SheetSyncError(RuntimeError):
@@ -39,7 +40,9 @@ def quantity_display(value):
         qty = int(value)
     except (TypeError, ValueError):
         return "확인불가"
-    if qty == UNKNOWN_SENTINEL:
+    if qty == SELECTABLE_UNKNOWN_SENTINEL:
+        return "수량 미확인"
+    if qty < 0:
         return "확인불가"
     if qty >= CAP_SENTINEL:
         return "주문가능 9999 이상"
@@ -87,7 +90,9 @@ def _status_for(
         qty = int(current)
     except (TypeError, ValueError):
         return "확인불가 · 불확실"
-    if uncertain or qty == UNKNOWN_SENTINEL:
+    if not uncertain and qty == SELECTABLE_UNKNOWN_SENTINEL:
+        return "선택가능 · 수량 미확인"
+    if uncertain or qty < 0:
         return "확인불가 · 불확실"
     transition = _transition(
         qty,

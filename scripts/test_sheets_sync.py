@@ -86,6 +86,26 @@ class SheetRowTests(unittest.TestCase):
         self.assertEqual(summary["restocked"], 0)
         self.assertEqual(summary["low_stock"], 1)
 
+    def test_selectable_unknown_never_becomes_stock_delta_or_alert(self):
+        url = "https://shop.example/product/p/1/"
+        products = {url: {"name": "P", "stock": {"M": -2, "L": -3}}}
+        previous = {url: {"stock": {"M": 0, "L": 5}}}
+        rows = sheets_sync.build_sheet_rows(products, previous)
+        self.assertEqual(rows[1][2], "수량 미확인")
+        self.assertEqual(rows[1][8], "선택가능 · 수량 미확인")
+        self.assertEqual(rows[1][7], "")
+        self.assertEqual(rows[2][2], "확인불가")
+        self.assertIn("확인불가", rows[2][8])
+        summary = sheets_sync.summarize_inventory(products, previous)
+        self.assertEqual(summary["newly_soldout"], 0)
+        self.assertEqual(summary["restocked"], 0)
+        self.assertEqual(summary["low_stock"], 0)
+        current = {url: {"name": "P", "stock": {"M": 4}}}
+        baseline = sheets_sync.build_sheet_rows(current, products)[1]
+        self.assertEqual(baseline[6], "수량 미확인")
+        self.assertEqual(baseline[7], "")
+        self.assertNotEqual(baseline[8], "재입고")
+
     def test_summary_counts_and_item_list_are_bounded(self):
         products = {}
         previous = {}

@@ -40,7 +40,7 @@ COMPACT_ITEM_LIMIT = 12
 PRODUCT_URL_RE = re.compile(r"/product/([^/]+/\d+)/")
 EXCLUDE_KEYWORDS = ["마킹키트"]
 UNCERTAIN_MARKER = "[불확실]"
-SCRIPT_VERSION = "v13-google-sheets"
+SCRIPT_VERSION = "v14-stock-retry"
 
 REMOVE_OVERLAYS_JS = """
 () => {
@@ -236,82 +236,110 @@ def extract_product_no(url):
 
 
 def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
-    """Use the existing CalculatorProduct orderability boundary logic without extra probes."""
-    js = """
+    """Prefer explicit server stock; bound retries and never invent quantities on errors."""
+    js = r"""
     async (args) => {
         const { domain, productNo, optionDataJson } = args;
+        const CAP = 9999;
+        const validStock = value => (
+            (typeof value === 'number' || typeof value === 'string') &&
+            /^\d+$/.test(String(value)) && Number.isSafeInteger(Number(value))
+        ) ? Number(value) : null;
+        const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
         async function tryQty(itemCode, qty) {
-            const url = `${domain}/exec/front/shop/CalculatorProduct?product_no=${productNo}&is_subscription=F&product[${itemCode}]=${qty}`;
-            try {
-                const data = await fetch(url).then(r => r.json());
-                return data.Result !== false;
-            } catch (e) {
-                return null;
+            const url = new URL('/exec/front/shop/CalculatorProduct', domain);
+            url.search = new URLSearchParams({product_no: productNo, is_subscription: 'F', ['product[' + itemCode + ']']: qty});
+            for (let attempt = 0; attempt < 3; attempt++) {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 8000);
+                try {
+                    const response = await fetch(url.href, {signal: controller.signal});
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    const data = await response.json();
+                    if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Invalid response');
+                    const row = data[itemCode];
+                    const matchesTop = data.sItemCode === itemCode || data.item_code === itemCode;
+                    const matchesRow = row && typeof row === 'object' && (!row.item_code || row.item_code === itemCode);
+                    const topStock = matchesTop ? validStock(data.stock_number) : null;
+                    const rowStock = matchesRow ? validStock(row.stock_number) : null;
+                    if (topStock !== null) return {exact: topStock};
+                    if (rowStock !== null) return {exact: rowStock};
+                    if (data.Result === false) {
+                        if (matchesTop && /재고|품절/.test(String(data.msg || ''))) return {ok: false};
+                        return {unknown: true};
+                    }
+                    if (matchesRow && String(row.product_no) === String(productNo) &&
+                        Number(row.quantity) === qty && Number.isFinite(Number(row.product_price))) return {ok: true};
+                    throw new Error('Missing valid item response');
+                } catch (e) {
+                    if (attempt === 2) return {unknown: true};
+                } finally {
+                    clearTimeout(timer);
+                }
+                await wait(250 * (attempt + 1));
             }
+            return {unknown: true};
         }
-        async function findMaxOrderable(itemCode) {
-            const CAP = 9999;
-            const bigOk = await tryQty(itemCode, CAP);
-            if (bigOk === null) return -1;
-            if (bigOk) return CAP;
-            const oneOk = await tryQty(itemCode, 1);
-            if (oneOk === null) return -1;
-            if (!oneOk) return 0;
+        async function findMaxOrderable(itemCode, selectable) {
+            const big = await tryQty(itemCode, CAP);
+            if (big.exact !== undefined) return big.exact;
+            if (big.ok === true) return CAP;
+            if (big.unknown) return selectable ? -2 : -1;
+            const one = await tryQty(itemCode, 1);
+            if (one.exact !== undefined) return one.exact;
+            if (one.unknown) return selectable ? -2 : -1;
+            if (one.ok === false) return 0;
             let lo = 1, hi = 2;
             while (hi < CAP) {
-                const ok = await tryQty(itemCode, hi);
-                if (ok === null) break;
-                if (!ok) break;
+                const probe = await tryQty(itemCode, hi);
+                if (probe.exact !== undefined) return probe.exact;
+                if (probe.unknown) return -2;
+                if (!probe.ok) break;
                 lo = hi;
-                hi = hi * 2;
+                hi = Math.min(CAP, hi * 2);
             }
-            if (hi > CAP) hi = CAP;
             while (hi - lo > 1) {
                 const mid = Math.floor((lo + hi) / 2);
-                const ok = await tryQty(itemCode, mid);
-                if (ok === null) { hi = mid; continue; }
-                if (ok) { lo = mid; } else { hi = mid; }
+                const probe = await tryQty(itemCode, mid);
+                if (probe.exact !== undefined) return probe.exact;
+                if (probe.unknown) return -2;
+                if (probe.ok) lo = mid; else hi = mid;
             }
             return lo;
         }
         try {
-            let items;
-            try {
-                items = (typeof optionDataJson === 'string')
-                    ? JSON.parse(optionDataJson)
-                    : optionDataJson;
+            const items = typeof optionDataJson === 'string' ? JSON.parse(optionDataJson) : optionDataJson;
+            if (!items || typeof items !== 'object' || Array.isArray(items)) return {error: '옵션 JSON 항목 형식 오류'};
+            const soldOutCodes = new Set();
+            const selectableCodes = new Set();
+            // Additional marking kits are separate products, not main-product options.
+            const selects = Array.from(document.querySelectorAll('select[id*="option"], select[name*="option"]'))
+                .filter(sel => !sel.closest('.xans-product-addproduct, [class*="addproduct"]'));
+            for (const sel of selects) {
+                for (const option of Array.from(sel.options)) {
+                    const code = option.value;
+                    if (!Object.prototype.hasOwnProperty.call(items, code)) continue;
+                    const text = String(option.textContent || '').trim();
+                    if (/\[품절\]/.test(text)) soldOutCodes.add(code);
+                    else if (!sel.disabled && !option.disabled) selectableCodes.add(code);
+                }
             }
-            catch (e) { return { error: "옵션 JSON 파싱 실패: " + e.message }; }
-
-            const soldOutLabels = new Set();
-            document.querySelectorAll('select[id*="option"], select[name*="option"]').forEach(sel => {
-                Array.from(sel.options).forEach(o => {
-                    const text = (o.textContent || '').trim();
-                    if (text.includes('[품절]')) {
-                        soldOutLabels.add(o.value);
-                        soldOutLabels.add(text.replace(/\\s*\\[품절\\]\\s*$/, '').trim());
-                    }
-                });
-            });
-
             const result = {};
             for (const [itemCode, val] of Object.entries(items)) {
+                if (!val || typeof val !== 'object') { result[itemCode] = -1; continue; }
                 const optName = val.option_value ?? itemCode;
-                const isSelling = val.is_selling === true || String(val.is_selling).toUpperCase() === "T";
-                if (typeof val.stock_number !== "undefined" && val.stock_number !== null) {
-                    const n = parseInt(val.stock_number, 10);
-                    result[optName] = Number.isFinite(n) ? n : -1;
-                    continue;
-                }
-                if (!isSelling || soldOutLabels.has(optName) || soldOutLabels.has(itemCode)) {
+                const direct = validStock(val.stock_number);
+                if (direct !== null) { result[optName] = direct; continue; }
+                const selling = String(val.is_selling).toUpperCase();
+                if (val.is_selling === false || selling === 'F' || soldOutCodes.has(itemCode)) {
                     result[optName] = 0;
                     continue;
                 }
-                result[optName] = await findMaxOrderable(itemCode);
+                result[optName] = await findMaxOrderable(itemCode, selectableCodes.has(itemCode));
             }
-            return { data: result };
+            return {data: result};
         } catch (e) {
-            return { error: e.message };
+            return {error: e.message};
         }
     }
     """
@@ -329,8 +357,14 @@ def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
     data = outcome.get("data") or {}
     if not data:
         return None, "CalculatorProduct 방식: 옵션 항목 없음"
-    unknown = [key for key, value in data.items() if value == -1]
-    diagnostic = f"일부 옵션 재고 조회 실패(확인불가): {unknown[:5]}" if unknown else None
+    unknown = [key for key, value in data.items() if value < 0 and value != -2]
+    selectable = [key for key, value in data.items() if value == -2]
+    notes = []
+    if unknown:
+        notes.append(f"일부 옵션 재고 조회 실패(확인불가): {unknown[:5]}")
+    if selectable:
+        notes.append(f"선택가능 · 수량 미확인 옵션: {selectable[:5]}")
+    diagnostic = " | ".join(notes) or None
     return data, diagnostic
 
 
@@ -515,7 +549,9 @@ def fmt_won(value):
 
 def stock_status(qty):
     qty = _to_int(qty)
-    if qty is None or qty == -1:
+    if qty == -2:
+        return "?", "선택가능 · 수량 미확인"
+    if qty is None or qty < 0:
         return "?", "확인불가"
     if qty == 0:
         return "[품절]", "품절"
