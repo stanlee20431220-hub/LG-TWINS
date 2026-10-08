@@ -1,3 +1,4 @@
+import copy
 import html
 import json
 import os
@@ -8,15 +9,18 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone, timedelta
 
-from playwright.sync_api import sync_playwright
+from sheets_sync import (
+    SheetSyncError,
+    build_sheet_rows,
+    summarize_inventory,
+    sync_to_sheet,
+)
 
 # === twinscorestore.co.kr (LG트윈스 콜랩샵) ===
 # 유니폼(42) / 의류(43) / 용품·잡화(60) / 트윈스 X 호빵맨 기획전(104)
 # 법인구매(75)는 재고 모니터링 대상이 아니라 제외
 # === nolmdshop.com (NOL MD shop - LG트윈스 공식 상품 판매처, 별도 사이트) ===
 # LG트윈스 전체(31)
-# 각 항목: (카테고리 URL, EXCLUDE_KEYWORDS 적용 여부)
-# 104(호빵맨 콜라보 기획전)는 "마킹키트"가 들어간 상품명도 모니터링 대상이라 키워드 제외를 적용하지 않음
 CATEGORY_URLS = [
     ("https://twinscorestore.co.kr/category/%EC%9C%A0%EB%8B%88%ED%8F%BC/42/", True),
     ("https://twinscorestore.co.kr/category/%EC%9D%98%EB%A5%98/43/", True),
@@ -25,10 +29,18 @@ CATEGORY_URLS = [
     ("https://nolmdshop.com/category/LG%ED%8A%B8%EC%9C%88%EC%8A%A4/31/", True),
 ]
 
-HISTORY_FILE = "data/stock_history.json"
+_DEFAULT_HISTORY = "data/stock_history.json"
+HISTORY_FILE = os.environ.get("STOCK_HISTORY_FILE") or (
+    _DEFAULT_HISTORY
+    if os.path.exists(_DEFAULT_HISTORY) or not os.path.exists("stock_history.json")
+    else "stock_history.json"
+)
 LOW_STOCK_THRESHOLD = 50
+COMPACT_ITEM_LIMIT = 12
 PRODUCT_URL_RE = re.compile(r"/product/([^/]+/\d+)/")
 EXCLUDE_KEYWORDS = ["마킹키트"]
+UNCERTAIN_MARKER = "[불확실]"
+SCRIPT_VERSION = "v13-google-sheets"
 
 REMOVE_OVERLAYS_JS = """
 () => {
@@ -41,24 +53,25 @@ REMOVE_OVERLAYS_JS = """
 }
 """
 
+
 def canonicalize_product_url(href):
-    """상품 링크를 정규화. 쿼리스트링을 제거하고 /product/{slug}/{번호}/ 형태로 통일하되,
-    href 자신의 도메인(스킴+호스트)을 그대로 유지한다 (여러 사이트를 동시에 모니터링하기 위함)."""
+    """Normalize product links while retaining each source site's origin."""
     href = href.split("?")[0]
-    m = PRODUCT_URL_RE.search(href)
-    if not m:
+    match = PRODUCT_URL_RE.search(href)
+    if not match:
         return None
     parsed = urllib.parse.urlparse(href)
     if not parsed.scheme or not parsed.netloc:
         return None
-    domain = f"{parsed.scheme}://{parsed.netloc}"
-    return f"{domain}/product/{m.group(1)}/"
+    return f"{parsed.scheme}://{parsed.netloc}/product/{match.group(1)}/"
+
 
 def is_excluded(url, apply_keywords=True):
     if not apply_keywords:
         return False
     decoded = urllib.parse.unquote(url)
-    return any(kw in decoded for kw in EXCLUDE_KEYWORDS)
+    return any(keyword in decoded for keyword in EXCLUDE_KEYWORDS)
+
 
 def dismiss_overlays(page):
     try:
@@ -66,23 +79,22 @@ def dismiss_overlays(page):
     except Exception:
         pass
 
-MAX_PAGES_PER_CATEGORY = 30  # 안전장치 (무한루프 방지)
+
+MAX_PAGES_PER_CATEGORY = 30
+
 
 def scrape_links_on_current_page(page, links, apply_keywords=True):
-    """현재 로드된 페이지에서 상품 링크를 수집 + 스크롤로 지연로딩 요소도 추가 수집."""
+    """Collect product links, including links exposed by ordinary lazy scrolling."""
     last_count = -1
     rounds_without_growth = 0
     for _ in range(60):
         hrefs = page.eval_on_selector_all(
             'a[href*="/product/"]', "els => els.map(e => e.href)"
         )
-        for h in hrefs:
-            canonical = canonicalize_product_url(h)
-            if not canonical:
-                continue
-            if is_excluded(canonical, apply_keywords):
-                continue
-            links.add(canonical)
+        for href in hrefs:
+            canonical = canonicalize_product_url(href)
+            if canonical and not is_excluded(canonical, apply_keywords):
+                links.add(canonical)
 
         current_count = len(links)
         if current_count > last_count:
@@ -90,7 +102,6 @@ def scrape_links_on_current_page(page, links, apply_keywords=True):
             rounds_without_growth = 0
         else:
             rounds_without_growth += 1
-
         if rounds_without_growth >= 5:
             break
 
@@ -98,9 +109,8 @@ def scrape_links_on_current_page(page, links, apply_keywords=True):
         page.mouse.wheel(0, 2500)
         page.wait_for_timeout(500)
 
+
 def find_next_page_url(page):
-    """카페24 카테고리 페이지네이션 UI에서 '다음 페이지' 링크를 찾아 반환.
-    없으면 None."""
     try:
         return page.evaluate(
             """
@@ -110,7 +120,6 @@ def find_next_page_url(page):
                 );
                 for (const box of containers) {
                     const anchors = Array.from(box.querySelectorAll('a'));
-                    // '다음' / 'next' 텍스트를 가진 링크 우선
                     let next = anchors.find(a => {
                         const t = (a.textContent || '').trim();
                         return t.includes('다음') || t.toLowerCase().includes('next');
@@ -122,7 +131,6 @@ def find_next_page_url(page):
                         }
                     }
                 }
-                // '다음' 링크가 없으면, 현재 활성 페이지 번호보다 큰 숫자 링크를 찾음
                 for (const box of containers) {
                     const active = box.querySelector('strong, .on, .active');
                     const activeNum = active ? parseInt((active.textContent || '').trim(), 10) : null;
@@ -145,18 +153,17 @@ def find_next_page_url(page):
     except Exception:
         return None
 
+
 def collect_product_links(page):
     links = set()
     page.mouse.move(700, 450)
     for base_url, apply_keywords in CATEGORY_URLS:
         current_url = base_url
         visited = set()
-
         for _ in range(MAX_PAGES_PER_CATEGORY):
             if current_url in visited:
                 break
             visited.add(current_url)
-
             page.goto(current_url, wait_until="domcontentloaded", timeout=60000)
             page.wait_for_timeout(1200)
             dismiss_overlays(page)
@@ -164,169 +171,118 @@ def collect_product_links(page):
             before_count = len(links)
             scrape_links_on_current_page(page, links, apply_keywords)
             after_count = len(links)
-
             print(f"  - {current_url}: 누적 {after_count}개")
-
             next_url = find_next_page_url(page)
-
-            # 다음 페이지가 없거나, 페이지를 넘겼는데도 새 상품이 전혀 없으면 종료
             if not next_url or (after_count == before_count and next_url in visited):
                 break
-
             current_url = next_url
-
     return sorted(links)
 
+
+def _to_int(value):
+    try:
+        return int(str(value).replace(",", "").strip())
+    except Exception:
+        return None
+
+
 def parse_option_stock(raw_option_data):
-    """option_stock_data를 {옵션라벨: 재고수} 형태로 변환.
-    실패 시 (None, 진단정보) 반환."""
+    """Convert option_stock_data, using -1 rather than false zeroes on parse uncertainty."""
     data = raw_option_data
     if isinstance(data, str):
         try:
             data = json.loads(data)
-        except Exception as e:
-            return None, f"JSON 파싱 실패({type(e).__name__}): {str(raw_option_data)[:200]}"
-
+        except Exception as exc:
+            return None, f"{UNCERTAIN_MARKER} JSON 파싱 실패({type(exc).__name__}): {str(raw_option_data)[:200]}"
     if not isinstance(data, dict):
-        return None, f"예상치 못한 최상위 타입({type(data).__name__}): {str(data)[:200]}"
+        return None, f"{UNCERTAIN_MARKER} 예상치 못한 최상위 타입({type(data).__name__}): {str(data)[:200]}"
 
-    # 재고 수량 필드명이 스킨/옵션 구성에 따라 다를 수 있어 후보를 순서대로 시도
-    STOCK_KEY_CANDIDATES = [
+    stock_keys = [
         "stock_number", "stock_cnt", "stock_qty", "stockQty",
         "quantity", "stock", "inventory", "safe_inventory",
     ]
-
-    def to_int(v):
-        try:
-            return int(str(v).replace(",", "").strip())
-        except Exception:
-            return None
-
     result = {}
-    unparsed_entries = []
-    unknown_key_entries = []
-    for key, v in data.items():
-        if not isinstance(v, dict):
-            unparsed_entries.append(f"{key}={str(v)[:60]}")
+    issues = []
+    for key, value in data.items():
+        if not isinstance(value, dict):
+            issues.append(f"{key}=항목형식({type(value).__name__})")
             continue
-
-        stock_raw = None
-        matched_key = None
-        for cand in STOCK_KEY_CANDIDATES:
-            if cand in v and v.get(cand) is not None:
-                stock_raw = v.get(cand)
-                matched_key = cand
-                break
-
-        label = v.get("option_value") or v.get("option_text") or str(key)
-
-        if matched_key is None:
-            # 알려진 필드명 중 어느 것도 없음 -> 0으로 두되, 실제 키 목록을 진단정보에 남김
-            unknown_key_entries.append(f"{label}: keys={list(v.keys())[:10]}")
-            result[label] = 0
+        label = value.get("option_value") or value.get("option_text") or str(key)
+        matched = next((candidate for candidate in stock_keys if value.get(candidate) is not None), None)
+        if not matched:
+            result[label] = -1
+            issues.append(f"{label}: 재고 필드 없음 keys={list(value.keys())[:10]}")
             continue
-
-        stock_int = to_int(stock_raw)
-        result[label] = stock_int if stock_int is not None else 0
-
-    diagnostic = None
-    if unknown_key_entries:
-        diagnostic = "재고 필드명을 못 찾아 0으로 처리(실제 키 확인 필요): " + " | ".join(unknown_key_entries[:3])
+        parsed = _to_int(value.get(matched))
+        if parsed is None:
+            result[label] = -1
+            issues.append(f"{label}: {matched} 숫자 변환 실패")
+        else:
+            result[label] = parsed
 
     if result:
+        diagnostic = None
+        if issues:
+            diagnostic = f"{UNCERTAIN_MARKER} 일부 옵션 파싱 불확실: " + " | ".join(issues[:3])
         return result, diagnostic
-    if unparsed_entries:
-        return {"재고": 0}, f"항목 형식이 달라 재고 0으로 처리함: {unparsed_entries[:5]}"
+    if issues:
+        return {"재고": -1}, f"{UNCERTAIN_MARKER} 옵션 항목 파싱 실패: " + " | ".join(issues[:5])
+    return None, f"{UNCERTAIN_MARKER} option_stock_data에 파싱 가능한 항목이 없음"
 
-    return None, "option_stock_data는 있었지만 파싱 가능한 항목이 없음"
 
 def extract_product_no(url):
-    """상품 URL에서 숫자 상품번호를 추출. 예: .../361/ -> "361" """
-    m = re.search(r"/(\d+)/?$", url.rstrip("/"))
-    return m.group(1) if m else None
+    match = re.search(r"/(\d+)/?$", url.rstrip("/"))
+    return match.group(1) if match else None
+
 
 def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
-    """옵션(사이즈 등)이 있는 상품의 실제 재고를 조회.
-
-    두 가지 신뢰도 문제가 확인됨:
-    1) CalculatorProduct API가 재고 부족 시 돌려주는 stock_number 필드는 실제 재고와
-       무관한 고정/부정확한 값(예: 항상 3). -> 이 값은 절대 쓰지 않고, 성공/실패
-       경계를 이분탐색으로 직접 찾는다.
-    2) 이분탐색만으로는 충분치 않음: 실제로는 품절(재고 0)인 옵션에도 이 API가
-       수량 1 주문은 통과시켜버리는 경우가 확인됨(품절 상품이 "1개"로 잘못 표시).
-       -> 그래서 화면에 실제로 보이는 옵션 드롭다운의 "[품절]" 표시를 최우선
-       신뢰 소스로 삼고, 거기서 품절로 확인된 옵션은 API 결과와 무관하게 0으로 확정.
-
-    option_data_json은 이미 로드된 페이지에서 읽어온 option_stock_data 값(JSON 문자열)을
-    그대로 넘겨받는다 — 다시 detail.html을 fetch할 필요 없음(현재 페이지가 이미 그 상품
-    페이지이므로, DOM의 [품절] 표시도 같은 페이지에서 함께 확인 가능).
-    domain은 상품 URL에서 추출한 "https://호스트" 형태(사이트별로 다름).
-    반환: ({옵션라벨: 재고수}, 진단정보) — 실패 시 (None, 진단정보)
-    """
+    """Use the existing CalculatorProduct orderability boundary logic without extra probes."""
     js = """
     async (args) => {
         const { domain, productNo, optionDataJson } = args;
-
         async function tryQty(itemCode, qty) {
             const url = `${domain}/exec/front/shop/CalculatorProduct?product_no=${productNo}&is_subscription=F&product[${itemCode}]=${qty}`;
             try {
                 const data = await fetch(url).then(r => r.json());
-                // Result가 명시적으로 false면 그 수량은 주문 불가(재고초과 등)
                 return data.Result !== false;
             } catch (e) {
-                return null; // 조회 자체 실패(네트워크 등) - 알 수 없음
+                return null;
             }
         }
-
-        // stock_number 값은 신뢰할 수 없으므로 절대 사용하지 않고,
-        // 성공/실패 경계를 직접 찾아 실제 주문 가능한 최대 수량을 구한다.
         async function findMaxOrderable(itemCode) {
             const CAP = 9999;
-
             const bigOk = await tryQty(itemCode, CAP);
             if (bigOk === null) return -1;
-            if (bigOk) return CAP; // 9999개도 통과 = 재고 충분
-
+            if (bigOk) return CAP;
             const oneOk = await tryQty(itemCode, 1);
             if (oneOk === null) return -1;
-            if (!oneOk) return 0; // 1개도 안 됨 = 품절
-
-            // 2배씩 늘려가며 실패 지점을 대략 찾음 (지수 탐색)
+            if (!oneOk) return 0;
             let lo = 1, hi = 2;
             while (hi < CAP) {
                 const ok = await tryQty(itemCode, hi);
-                if (ok === null) break; // 알 수 없음 -> 지금까지의 lo/hi로 이분탐색 진행
+                if (ok === null) break;
                 if (!ok) break;
                 lo = hi;
                 hi = hi * 2;
             }
             if (hi > CAP) hi = CAP;
-
-            // lo(성공)와 hi(실패) 사이를 이분탐색으로 좁혀 정확한 경계를 찾음
             while (hi - lo > 1) {
                 const mid = Math.floor((lo + hi) / 2);
                 const ok = await tryQty(itemCode, mid);
                 if (ok === null) { hi = mid; continue; }
                 if (ok) { lo = mid; } else { hi = mid; }
             }
-            return lo; // 마지막으로 성공이 확인된 수량(단, DOM [품절] 표시가 없을 때만 신뢰)
+            return lo;
         }
-
         try {
             let items;
             try {
-                items = JSON.parse(optionDataJson);
-            } catch (e) {
-                return { error: "옵션 JSON 파싱 실패: " + e.message };
+                items = (typeof optionDataJson === 'string')
+                    ? JSON.parse(optionDataJson)
+                    : optionDataJson;
             }
+            catch (e) { return { error: "옵션 JSON 파싱 실패: " + e.message }; }
 
-            // 신호 1: 옵션 드롭다운에 "[품절]" 표시가 붙은 옵션들 수집.
-            // (참고: 페이지 전체에서 "SOLD OUT" 텍스트를 찾아 전체 품절로 확정하던
-            // 이전 로직은 제거함. Cafe24 반응형 UI는 화면 크기별로 숨겨진 buy/cart
-            // 버튼 변형을 DOM에 여러 개 두는데, 그중 일부가 항상 "SOLD OUT" 텍스트를
-            // 갖고 있어서 일부 옵션만 품절인 상품(예: A5/A7/A9는 재고 있음, 85~120은
-            // 품절)도 전체 품절로 오판하는 문제가 있었음. 옵션별 판단은 아래의
-            // stock_number 필드와 드롭다운 [품절] 라벨만으로 충분히 정확함.
             const soldOutLabels = new Set();
             document.querySelectorAll('select[id*="option"], select[name*="option"]').forEach(sel => {
                 Array.from(sel.options).forEach(o => {
@@ -342,16 +298,11 @@ def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
             for (const [itemCode, val] of Object.entries(items)) {
                 const optName = val.option_value ?? itemCode;
                 const isSelling = val.is_selling === true || String(val.is_selling).toUpperCase() === "T";
-
-                // 신호 2: option_stock_data 자체에 stock_number가 박혀있으면(주로 자동품절 확정 시에만
-                // 나타남) 그 값을 그대로 신뢰. CalculatorProduct 에러 응답의 stock_number(항상
-                // 고정된 부정확한 값)와는 다른, 페이지 렌더링 시점의 값이라 신뢰할 수 있음.
                 if (typeof val.stock_number !== "undefined" && val.stock_number !== null) {
                     const n = parseInt(val.stock_number, 10);
-                    result[optName] = Number.isFinite(n) ? n : 0;
+                    result[optName] = Number.isFinite(n) ? n : -1;
                     continue;
                 }
-
                 if (!isSelling || soldOutLabels.has(optName) || soldOutLabels.has(itemCode)) {
                     result[optName] = 0;
                     continue;
@@ -369,28 +320,23 @@ def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
             js,
             {"domain": domain, "productNo": product_no, "optionDataJson": option_data_json},
         )
-    except Exception as e:
-        return None, f"CalculatorProduct 평가 실패({type(e).__name__}): {e}"
-
+    except Exception as exc:
+        return None, f"CalculatorProduct 평가 실패({type(exc).__name__}): {exc}"
     if not outcome:
         return None, "CalculatorProduct 평가 결과 없음"
     if outcome.get("error"):
         return None, f"CalculatorProduct 방식 실패: {outcome['error']}"
-
     data = outcome.get("data") or {}
     if not data:
         return None, "CalculatorProduct 방식: 옵션 항목 없음"
-
-    unknown_entries = [k for k, v in data.items() if v == -1]
-    diagnostic = None
-    if unknown_entries:
-        diagnostic = f"일부 옵션 재고 조회 실패(알 수 없음으로 표시): {unknown_entries[:5]}"
-
+    unknown = [key for key, value in data.items() if value == -1]
+    diagnostic = f"일부 옵션 재고 조회 실패(확인불가): {unknown[:5]}" if unknown else None
     return data, diagnostic
 
-def get_stock_for_product(page, url):
-    page.goto(url, wait_until="domcontentloaded", timeout=60000)
 
+def get_stock_for_product(page, url):
+    """Return (stock, name, price, diagnostic), preserving the existing interface."""
+    page.goto(url, wait_until="domcontentloaded", timeout=60000)
     option_data = page.evaluate(
         "() => (typeof option_stock_data !== 'undefined') ? option_stock_data : null"
     )
@@ -408,64 +354,94 @@ def get_stock_for_product(page, url):
         )
     except Exception:
         pass
-
     if not name:
         try:
-            title = page.title()
-            name = title.split(" - ")[0].strip()
+            name = page.title().split(" - ")[0].strip()
         except Exception:
             pass
-
-    price = None
-    if raw_price is not None:
-        try:
-            price = int(str(raw_price).replace(",", "").strip())
-        except Exception:
-            price = None
-
+    price = _to_int(raw_price) if raw_price is not None else None
     diagnostic = None
 
     if option_data:
         product_no = extract_product_no(url)
-        parsed = urllib.parse.urlparse(url)
-        domain = f"{parsed.scheme}://{parsed.netloc}" if parsed.scheme and parsed.netloc else None
-
+        parsed_url = urllib.parse.urlparse(url)
+        domain = f"{parsed_url.scheme}://{parsed_url.netloc}" if parsed_url.scheme and parsed_url.netloc else None
         api_result, api_diagnostic = (None, None)
         if product_no and domain:
-            api_result, api_diagnostic = get_option_stock_via_calculator(page, domain, product_no, option_data)
+            api_result, api_diagnostic = get_option_stock_via_calculator(
+                page, domain, product_no, option_data
+            )
         elif not domain:
             api_diagnostic = "상품 URL에서 도메인을 추출하지 못함"
-
         if api_result:
             return api_result, name, price, api_diagnostic
 
-        # API 방식 실패 시에만 기존 파싱 방식으로 폴백 (참고용, 정확하지 않을 수 있음)
-        result, diagnostic = parse_option_stock(option_data)
-        if result is not None:
-            fallback_note = "옵션 API 조회 실패 → 기존 방식으로 대체(부정확할 수 있음)"
+        fallback_result, fallback_diagnostic = parse_option_stock(option_data)
+        if fallback_result is not None:
+            note = f"{UNCERTAIN_MARKER} 옵션 API 조회 실패 후 페이지 데이터 폴백 사용; 품절/증감 판단 제외"
             if api_diagnostic:
-                fallback_note += f" | API 실패사유: {api_diagnostic}"
-            combined_diag = f"{diagnostic} | {fallback_note}" if diagnostic else fallback_note
-            return result, name, price, combined_diag
+                note += f" | API 실패사유: {api_diagnostic}"
+            if fallback_diagnostic:
+                note += f" | {fallback_diagnostic}"
+            return fallback_result, name, price, note
 
     if single_data:
         data = single_data
         if isinstance(data, str):
             try:
                 data = json.loads(data)
-            except Exception as e:
-                diagnostic = f"single_option_stock_data JSON 파싱 실패({type(e).__name__})"
+            except Exception as exc:
+                diagnostic = f"{UNCERTAIN_MARKER} single_option_stock_data JSON 파싱 실패({type(exc).__name__})"
                 data = {}
-        if isinstance(data, dict):
-            stock_number = data.get("stock_number")
-            if stock_number is not None:
-                return {"재고": stock_number}, name, price, None
+        if isinstance(data, dict) and data.get("stock_number") is not None:
+            qty = _to_int(data.get("stock_number"))
+            if qty is not None:
+                return {"재고": qty}, name, price, diagnostic
+            diagnostic = f"{UNCERTAIN_MARKER} single_option_stock_data 수량 변환 실패"
 
-    return None, name, price, (diagnostic or "option_stock_data / single_option_stock_data 둘 다 못 찾음")
+    return None, name, price, diagnostic or "option_stock_data / single_option_stock_data 둘 다 못 찾음"
+
+
+def normalize_image_url(raw_url, product_url):
+    """Return an absolute HTTPS representative image URL, or None."""
+    if not raw_url:
+        return None
+    candidate = html.unescape(str(raw_url)).strip()
+    if not candidate or candidate.lower().startswith(("data:", "javascript:")):
+        return None
+    absolute = urllib.parse.urljoin(product_url, candidate)
+    parsed = urllib.parse.urlparse(absolute)
+    if not parsed.netloc:
+        return None
+    return urllib.parse.urlunparse(("https", parsed.netloc, parsed.path, parsed.params, parsed.query, ""))
+
+
+def extract_representative_image(page, product_url):
+    """Read og:image from the product page already loaded by get_stock_for_product."""
+    try:
+        raw_url = page.evaluate(
+            """() => {
+                const selectors = [
+                    'meta[property="og:image"]',
+                    'meta[property="og:image:secure_url"]',
+                    'meta[name="twitter:image"]'
+                ];
+                for (const selector of selectors) {
+                    const value = document.querySelector(selector)?.getAttribute('content');
+                    if (value && value.trim()) return value.trim();
+                }
+                return null;
+            }"""
+        )
+    except Exception:
+        return None
+    return normalize_image_url(raw_url, product_url)
+
 
 def html_link(name, url):
     safe_name = html.escape(name or url, quote=False)
     return f'<a href="{html.escape(url, quote=True)}">{safe_name}</a>'
+
 
 def send_telegram(token, chat_id, text):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
@@ -475,59 +451,148 @@ def send_telegram(token, chat_id, text):
         "parse_mode": "HTML",
         "disable_web_page_preview": True,
     }).encode("utf-8")
-    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
-    urllib.request.urlopen(req, timeout=15)
+    request = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+    urllib.request.urlopen(request, timeout=15)
+
 
 def send_telegram_chunked(token, chat_id, text, limit=3500):
-    if len(text) <= limit:
-        send_telegram(token, chat_id, text)
-        return
-    chunk = ""
-    for line in text.split("\n"):
-        if len(chunk) + len(line) + 1 > limit:
-            send_telegram(token, chat_id, chunk)
-            chunk = ""
-        chunk += line + "\n"
-    if chunk.strip():
-        send_telegram(token, chat_id, chunk)
+    pending = ""
+    for line in text.splitlines(True):
+        while len(line) > limit:
+            if pending:
+                send_telegram(token, chat_id, pending.rstrip())
+                pending = ""
+            send_telegram(token, chat_id, line[:limit])
+            line = line[limit:]
+        if len(pending) + len(line) > limit and pending:
+            send_telegram(token, chat_id, pending.rstrip())
+            pending = ""
+        pending += line
+    if pending.strip():
+        send_telegram(token, chat_id, pending.rstrip())
+
+
+def load_history():
+    if not os.path.exists(HISTORY_FILE):
+        return {"last_checked": None, "products": {}}
+    try:
+        with open(HISTORY_FILE, "r", encoding="utf-8") as handle:
+            saved = json.load(handle)
+    except Exception as exc:
+        print(f"History load failed: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return {"last_checked": None, "products": {}}
+    if not isinstance(saved, dict):
+        return {"last_checked": None, "products": {}}
+    return {
+        "last_checked": saved.get("last_checked"),
+        "products": saved.get("products") if isinstance(saved.get("products"), dict) else {},
+    }
+
 
 def load_previous():
-    if not os.path.exists(HISTORY_FILE):
-        return {}
-    with open(HISTORY_FILE, "r", encoding="utf-8") as f:
-        saved = json.load(f)
-    return saved.get("products", {})
+    """Compatibility helper retained for callers that only need product entries."""
+    return load_history()["products"]
 
-def fmt_won(v):
-    return f"{v:,}원"
+
+def save_history(now, products):
+    directory = os.path.dirname(HISTORY_FILE)
+    if directory:
+        os.makedirs(directory, exist_ok=True)
+    temp_path = HISTORY_FILE + ".tmp"
+    with open(temp_path, "w", encoding="utf-8") as handle:
+        json.dump(
+            {"last_checked": now, "products": products},
+            handle,
+            ensure_ascii=False,
+            indent=2,
+        )
+    os.replace(temp_path, HISTORY_FILE)
+
+
+def fmt_won(value):
+    return f"{value:,}원"
+
 
 def stock_status(qty):
-    """재고 수량을 (기호, 표시문구) 튜플로 변환.
-    9999는 'CalculatorProduct API가 9999개 주문도 통과시킴' = 충분한 재고를 뜻하는 상한 센티널,
-    -1은 옵션 재고 조회 자체가 실패했음(확인불가)을 뜻함."""
-    if qty == -1:
-        return "❓", "확인불가"
+    qty = _to_int(qty)
+    if qty is None or qty == -1:
+        return "?", "확인불가"
     if qty == 0:
-        return "🔴", "품절"
+        return "[품절]", "품절"
     if qty < LOW_STOCK_THRESHOLD:
-        return "🟡", f"{qty}개 (50개 미만)"
+        return "[저재고]", f"{qty}개 ({LOW_STOCK_THRESHOLD}개 미만)"
     if qty >= 9999:
-        return "🟢", "재고 있음(9999개 이상)"
-    return "🟢", f"{qty}개"
+        return "[재고]", "9999 이상 (주문 가능 상한, 실제 재고 아님)"
+    return "[재고]", f"{qty}개"
 
-def is_fully_sold_out(stock):
-    """모든 옵션이 확인된 품절(0)인 경우에만 True. 확인불가(-1)가 섞여 있으면
-    전체품절 여부를 단정할 수 없으므로 False로 취급."""
-    values = list(stock.values())
-    if not values:
+
+def is_fully_sold_out(stock, uncertain=False):
+    if uncertain:
         return False
-    return all(v == 0 for v in values)
+    values = [_to_int(value) for value in stock.values()]
+    return bool(values) and all(value == 0 for value in values)
+
+
+def _stale_entry(url, previous_entry, reason, now, previous_checked, name=None, image_url=None):
+    entry = copy.deepcopy(previous_entry) if previous_entry else {}
+    entry.setdefault("name", name or url)
+    entry.setdefault("price", None)
+    entry.setdefault("stock", {})
+    if image_url:
+        entry["image_url"] = image_url
+    else:
+        entry.setdefault("image_url", None)
+    entry["diagnostic"] = reason
+    entry["stale"] = True
+    entry["uncertain"] = True
+    entry["checked_at"] = entry.get("checked_at") or previous_checked
+    entry["last_attempt"] = now
+    return entry
+
+
+def _safe_sheet_error(exc):
+    if isinstance(exc, SheetSyncError):
+        return str(exc)[:500]
+    return f"{type(exc).__name__} (상세 내용은 실행 로그 확인)"
+
+
+def _compact_telegram(now, products, previous_products, sheet_result):
+    summary = summarize_inventory(
+        products,
+        previous_products,
+        low_threshold=LOW_STOCK_THRESHOLD,
+        item_limit=COMPACT_ITEM_LIMIT,
+    )
+    stale_count = sum(1 for entry in products.values() if entry.get("stale"))
+    lines = [
+        f"[재고 모니터] {now} ({SCRIPT_VERSION})",
+        f"신규 품절 옵션 {summary['newly_soldout']} | 재입고 옵션 {summary['restocked']} | 저재고 옵션 {summary['low_stock']}",
+        f"상품 {len(products)}개 · 이전 데이터 유지 {stale_count}개",
+    ]
+    if summary["items"]:
+        lines.append("")
+        for kind, item in summary["items"]:
+            lines.append(f"- [{html.escape(kind)}] {html.escape(item)}")
+        if summary["omitted"]:
+            lines.append(f"- 외 {summary['omitted']}건")
+    sheet_url = html.escape(sheet_result["url"], quote=True)
+    lines.extend(["", f'<a href="{sheet_url}">Google Sheets에서 전체 재고 보기</a>'])
+    return "\n".join(lines)
+
 
 def main():
+    from playwright.sync_api import sync_playwright
+
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID")
+    service_account_json = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON")
+    spreadsheet_id = os.environ.get("GOOGLE_SHEET_ID")
 
-    prev_products = load_previous()
+    kst = timezone(timedelta(hours=9))
+    now = datetime.now(kst).strftime("%Y-%m-%d %H:%M KST")
+    history = load_history()
+    previous_products = history["products"]
+    previous_checked = history.get("last_checked")
     current_products = {}
 
     change_blocks = []
@@ -538,111 +603,145 @@ def main():
     error_lines = []
     diagnostic_lines = []
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch()
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch()
         page = browser.new_page(viewport={"width": 1400, "height": 900})
-
         product_urls = collect_product_links(page)
         print(f"Found {len(product_urls)} products across categories (마킹키트 제외)")
 
         for url in product_urls:
+            previous_entry = previous_products.get(url) or {}
             try:
                 stock, name, price, diagnostic = get_stock_for_product(page, url)
-            except Exception as e:
-                error_lines.append(f"{url}: {type(e).__name__}: {e}")
+                # Deliberately read the image only after the stock function returns, while
+                # the same product page is still loaded.
+                image_url = extract_representative_image(page, url)
+            except Exception as exc:
+                reason = f"수집 실패({type(exc).__name__}): {exc}"
+                current_products[url] = _stale_entry(
+                    url, previous_entry, reason, now, previous_checked
+                )
+                error_lines.append(
+                    f"{html_link(previous_entry.get('name') or url, url)}: {html.escape(reason)} · 이전 데이터 유지"
+                )
                 continue
 
-            name = name or url
+            name = name or previous_entry.get("name") or url
             link = html_link(name, url)
-
             if stock is None:
-                detail = f" ({diagnostic})" if diagnostic else ""
-                error_lines.append(f"{link}{detail}")
+                reason = diagnostic or "재고 데이터 없음"
+                current_products[url] = _stale_entry(
+                    url, previous_entry, reason, now, previous_checked, name=name, image_url=image_url
+                )
+                error_lines.append(f"{link}: {html.escape(reason)} · 이전 데이터 유지")
                 continue
 
-            current_products[url] = {"name": name, "price": price, "stock": stock}
+            normalized_stock = {}
+            normalization_issues = []
+            for option, raw_qty in stock.items():
+                qty = _to_int(raw_qty)
+                if qty is None:
+                    qty = -1
+                    normalization_issues.append(str(option))
+                normalized_stock[str(option)] = qty
+            if normalization_issues:
+                extra = f"{UNCERTAIN_MARKER} 수량 변환 실패 옵션: {normalization_issues[:5]}"
+                diagnostic = f"{diagnostic} | {extra}" if diagnostic else extra
 
+            uncertain = bool(diagnostic and UNCERTAIN_MARKER in diagnostic)
+            entry = {
+                "name": name,
+                "price": price,
+                "stock": normalized_stock,
+                "image_url": image_url or previous_entry.get("image_url"),
+                "diagnostic": diagnostic,
+                "stale": False,
+                "uncertain": uncertain,
+                "checked_at": now,
+                "last_attempt": now,
+            }
+            current_products[url] = entry
             if diagnostic:
-                diagnostic_lines.append(f"{link}: {diagnostic}")
+                diagnostic_lines.append(f"{link}: {html.escape(diagnostic)}")
 
-            prev_entry = prev_products.get(url, {})
-            prev_stock = prev_entry.get("stock", {})
-            prev_price = prev_entry.get("price")
-
-            price_str = f" ({fmt_won(price)})" if price is not None else ""
-
-            # 전체 재고 표시용: 모든 옵션을 항상 출력, 변동이 있으면 증감도 같이 표시
+            previous_stock = previous_entry.get("stock") or {}
+            previous_price = previous_entry.get("price")
+            previous_unreliable = bool(
+                previous_entry.get("stale") or previous_entry.get("uncertain")
+            )
+            price_text = f" ({fmt_won(price)})" if price is not None else ""
             full_option_lines = []
             changed_option_lines = []
             has_low_stock = False
 
-            for size, qty in stock.items():
+            for option, qty in normalized_stock.items():
                 symbol, status_label = stock_status(qty)
-                display = f"{symbol} {status_label}"
-
-                # -1(조회 실패)은 증감 비교나 저재고 판정 대상에서 제외
-                if qty == -1:
-                    full_option_lines.append(f"  - {size}: {display}")
-                    continue
-
-                prev_qty = prev_stock.get(size, qty)
-                diff = qty - prev_qty if prev_qty != -1 else 0
-                diff_str = ""
-                if diff != 0:
-                    sign = "+" if diff > 0 else ""
-                    diff_str = f" ({sign}{diff})"
-                    changed_option_lines.append(f"  - {size}: {display}{diff_str}")
-
-                full_option_lines.append(f"  - {size}: {display}{diff_str}")
-
-                if 0 < qty < LOW_STOCK_THRESHOLD:
+                display_text = f"{symbol} {status_label}"
+                diff_text = ""
+                previous_exists = option in previous_stock
+                previous_qty = _to_int(previous_stock.get(option)) if previous_exists else None
+                comparable = (
+                    not uncertain
+                    and not previous_unreliable
+                    and qty >= 0
+                    and qty < 9999
+                    and previous_exists
+                    and previous_qty is not None
+                    and 0 <= previous_qty < 9999
+                )
+                if comparable:
+                    difference = qty - previous_qty
+                    if difference:
+                        sign = "+" if difference > 0 else ""
+                        diff_text = f" ({sign}{difference})"
+                        changed_option_lines.append(
+                            f"  - {html.escape(option)}: {display_text}{diff_text}"
+                        )
+                full_option_lines.append(
+                    f"  - {html.escape(option)}: {display_text}{diff_text}"
+                )
+                if not uncertain and 0 < qty < LOW_STOCK_THRESHOLD:
                     has_low_stock = True
 
-            fully_sold_out = is_fully_sold_out(stock)
-            header_prefix = "⛔ [전체품절] " if fully_sold_out else "■ "
-            block_text = f"{header_prefix}{link}{price_str}\n" + "\n".join(full_option_lines)
+            fully_sold_out = is_fully_sold_out(normalized_stock, uncertain=uncertain)
+            header_prefix = "[전체품절] " if fully_sold_out else "■ "
+            block_text = f"{header_prefix}{link}{price_text}\n" + "\n".join(full_option_lines)
             full_stock_blocks.append(block_text)
-
             if fully_sold_out:
                 sold_out_blocks.append(block_text)
             elif has_low_stock:
                 low_stock_blocks.append(block_text)
-
             if changed_option_lines:
-                change_blocks.append(f"■ {link}{price_str}\n" + "\n".join(changed_option_lines))
-
-            if price is not None and prev_price is not None and price != prev_price:
+                change_blocks.append(f"■ {link}{price_text}\n" + "\n".join(changed_option_lines))
+            if (
+                not uncertain
+                and not previous_unreliable
+                and price is not None
+                and previous_price is not None
+                and price != previous_price
+            ):
                 price_change_lines.append(
-                    f"{link}: {fmt_won(prev_price)} → {fmt_won(price)}"
+                    f"{link}: {fmt_won(previous_price)} → {fmt_won(price)}"
                 )
-
             time.sleep(0.4)
-
         browser.close()
-
-    kst = timezone(timedelta(hours=9))
-    now = datetime.now(kst).strftime("%Y-%m-%d %H:%M KST")
-
-    SCRIPT_VERSION = "v12-remove-page-soldout"  # 배포 확인용 - 이 값이 메시지에 안 보이면 구버전이 실행된 것
 
     header = (
         f"[전상품 재고 확인] {now} ({SCRIPT_VERSION})\n"
-        f"확인된 상품: {len(current_products)}개"
+        f"확인 대상 상품: {len(current_products)}개"
     )
-
-    # 메시지 순서: 헤더 -> 진단(필드명 문제) -> 전체품절 -> 50개 미만 재고 -> 재고 변동 -> 가격 변동 -> 전체 재고 -> 오류
     messages = [header]
     if diagnostic_lines:
         messages.append(
-            "[진단: 재고 필드명 확인 필요]\n"
+            "[진단: 불확실한 재고는 품절/증감에서 제외]\n"
             + "\n".join(diagnostic_lines[:20])
             + (f"\n...외 {len(diagnostic_lines) - 20}건" if len(diagnostic_lines) > 20 else "")
         )
     if sold_out_blocks:
-        messages.append("[⛔ 전체품절]\n\n" + "\n\n".join(sold_out_blocks))
+        messages.append("[전체품절]\n\n" + "\n\n".join(sold_out_blocks))
     if low_stock_blocks:
         messages.append(
-            f"[🟡 {LOW_STOCK_THRESHOLD}개 미만 재고]\n\n" + "\n\n".join(low_stock_blocks)
+            f"[{LOW_STOCK_THRESHOLD}개 미만 재고]\n\n" + "\n\n".join(low_stock_blocks)
         )
     if change_blocks:
         messages.append("[재고 변동]\n\n" + "\n\n".join(change_blocks))
@@ -651,24 +750,61 @@ def main():
     if full_stock_blocks:
         messages.append("[전체 재고]\n\n" + "\n\n".join(full_stock_blocks))
     if error_lines:
-        messages.append("[오류]\n" + "\n".join(error_lines))
-
+        messages.append("[오류 · 이전 데이터 유지]\n" + "\n".join(error_lines))
     full_message = "\n\n".join(messages)
     print(full_message)
 
+    sheet_result = None
+    sheet_error = None
+    if service_account_json and spreadsheet_id:
+        try:
+            rows = build_sheet_rows(
+                current_products,
+                previous_products,
+                default_checked_time=now,
+                low_threshold=LOW_STOCK_THRESHOLD,
+            )
+            sheet_result = sync_to_sheet(spreadsheet_id, service_account_json, rows)
+            print(f"Google Sheets export complete: {sheet_result['row_count']} option rows")
+        except Exception as exc:
+            sheet_error = _safe_sheet_error(exc)
+            print(f"Google Sheets export failed: {sheet_error}", file=sys.stderr)
+    else:
+        missing = []
+        if not service_account_json:
+            missing.append("GOOGLE_SERVICE_ACCOUNT_JSON")
+        if not spreadsheet_id:
+            missing.append("GOOGLE_SHEET_ID")
+        print(
+            "Google Sheets export skipped; missing " + ", ".join(missing) + ". Using full Telegram report.",
+            file=sys.stderr,
+        )
+
+    # Persist after the Sheets attempt and before Telegram, so notification failure cannot
+    # discard a completed scrape or stale-state bookkeeping.
+    save_history(now, current_products)
+
+    if sheet_result:
+        telegram_message = _compact_telegram(
+            now, current_products, previous_products, sheet_result
+        )
+    else:
+        telegram_message = full_message
+        if sheet_error:
+            telegram_message += (
+                "\n\n[Google Sheets 내보내기 실패]\n"
+                + html.escape(sheet_error)
+                + "\n전체 Telegram 보고서로 대체했습니다."
+            )
+
     if token and chat_id:
-        send_telegram_chunked(token, chat_id, full_message)
+        try:
+            send_telegram_chunked(token, chat_id, telegram_message)
+        except Exception as exc:
+            print(f"Telegram send failed after history save: {type(exc).__name__}: {exc}", file=sys.stderr)
     else:
         print("Telegram credentials not set; skipping notification", file=sys.stderr)
 
-    os.makedirs("data", exist_ok=True)
-    with open(HISTORY_FILE, "w", encoding="utf-8") as f:
-        json.dump(
-            {"last_checked": now, "products": current_products},
-            f,
-            ensure_ascii=False,
-            indent=2,
-        )
 
 if __name__ == "__main__":
     main()

@@ -2,11 +2,15 @@ name: Twinscorestore Stock Check
 
 on:
   schedule:
-    - cron: "0 */3 * * *"  # 3시간마다 (전체 상품 크롤링이라 너무 자주 돌리지 않는 게 좋음)
+    - cron: "15 0 * * *"  # 매일 한국 시간 09:15 (GitHub 예약 실행은 지연될 수 있음)
   workflow_dispatch: {}
 
 permissions:
   contents: write
+
+concurrency:
+  group: lg-twins-stock-monitor
+  cancel-in-progress: false
 
 jobs:
   check-stock:
@@ -15,24 +19,27 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
           playwright install --with-deps chromium
-
+      - name: Validate code
+        run: |
+          python -m py_compile scripts/check_stock.py scripts/sheets_sync.py
+          python -m unittest discover -s scripts -p "test_*.py"
       - name: Run stock check
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
         run: python scripts/check_stock.py
-
       - name: Commit updated history
+        if: always()
         run: |
           git config user.name "stock-monitor-bot"
           git config user.email "actions@github.com"
