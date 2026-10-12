@@ -40,7 +40,7 @@ COMPACT_ITEM_LIMIT = 12
 PRODUCT_URL_RE = re.compile(r"/product/([^/]+/\d+)/")
 EXCLUDE_KEYWORDS = ["마킹키트"]
 UNCERTAIN_MARKER = "[불확실]"
-SCRIPT_VERSION = "v14-stock-retry"
+SCRIPT_VERSION = "v15-stock-schema2"
 
 REMOVE_OVERLAYS_JS = """
 () => {
@@ -235,137 +235,151 @@ def extract_product_no(url):
     return match.group(1) if match else None
 
 
+def _explicit_server_stock(payload, item_code, product_no):
+    """Trust only exact nonnegative stock tied to item/product and managed-stock metadata."""
+    if not isinstance(payload, dict):
+        return None
+    value = None
+    if payload.get("sItemCode") == item_code or payload.get("item_code") == item_code:
+        value = payload.get("stock_number")
+        if payload.get("product_no") is not None and str(payload["product_no"]) != str(product_no):
+            return None
+    row = payload.get(item_code)
+    if value is None and isinstance(row, dict):
+        if row.get("item_code") not in (None, item_code):
+            return None
+        if row.get("product_no") is not None and str(row["product_no"]) != str(product_no):
+            return None
+        value = row.get("stock_number")
+    if isinstance(value, bool) or not isinstance(value, (int, str)):
+        return None
+    text = str(value)
+    if not re.fullmatch(r"\d+", text):
+        return None
+    quantity = int(text)
+    return quantity if quantity <= 9007199254740991 else None
+
+
+def get_explicit_stock_via_request(page, domain, product_no, item_code):
+    """Same-context API fallback, bypassing browser fetch/CORS only for explicit stock."""
+    query = urllib.parse.urlencode({
+        "product_no": str(product_no),
+        "is_subscription": "F",
+        f"product[{item_code}]": "9999",
+    })
+    url = f"{domain}/exec/front/shop/CalculatorProduct?{query}"
+    final_host = urllib.parse.urlparse(domain).hostname or "unknown"
+    page_host = urllib.parse.urlparse(getattr(page, "url", "")).hostname or "unknown"
+    failure = "no_explicit_stock"
+    for attempt in range(3):
+        response = None
+        status = "unknown"
+        content_type = "unknown"
+        try:
+            response = page.request.get(url, timeout=8000)
+            status = response.status
+            final_host = urllib.parse.urlparse(response.url).hostname or "unknown"
+            content_type = re.sub(r"[^A-Za-z0-9/;= ._-]", "", str(response.headers.get("content-type", "unknown")))[:80]
+            if not response.ok:
+                failure = "HTTPError"
+            else:
+                payload = response.json()
+                exact = _explicit_server_stock(payload, item_code, product_no)
+                if exact is not None:
+                    return exact, None
+                # A price calculation for 9999 units is not an exact inventory value.
+                failure = "no_matching_explicit_stock"
+                break
+        except Exception as exc:
+            failure = re.sub(r"[^A-Za-z0-9_]", "", type(exc).__name__)[:40] or "RequestError"
+        finally:
+            if response is not None:
+                try:
+                    response.dispose()
+                except Exception:
+                    pass
+        if attempt < 2:
+            time.sleep(0.25 * (attempt + 1))
+    diagnostic = (
+        f"request-fallback: {failure}; HTTP={status}; type={content_type}; "
+        f"response-host={final_host}; page-host={page_host}"
+    )
+    return None, diagnostic
+
+
 def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
-    """Prefer explicit server stock; bound retries and never invent quantities on errors."""
+    """Use only validated explicit inventory; calculator purchase checks are not stock."""
     js = r"""
-    async (args) => {
-        const { domain, productNo, optionDataJson } = args;
-        const CAP = 9999;
-        const validStock = value => (
-            (typeof value === 'number' || typeof value === 'string') &&
-            /^\d+$/.test(String(value)) && Number.isSafeInteger(Number(value))
-        ) ? Number(value) : null;
-        const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-        async function tryQty(itemCode, qty) {
-            const url = new URL('/exec/front/shop/CalculatorProduct', domain);
-            url.search = new URLSearchParams({product_no: productNo, is_subscription: 'F', ['product[' + itemCode + ']']: qty});
-            for (let attempt = 0; attempt < 3; attempt++) {
-                const controller = new AbortController();
-                const timer = setTimeout(() => controller.abort(), 8000);
-                try {
-                    const response = await fetch(url.href, {signal: controller.signal});
-                    if (!response.ok) throw new Error('HTTP ' + response.status);
-                    const data = await response.json();
-                    if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Invalid response');
-                    const row = data[itemCode];
-                    const matchesTop = data.sItemCode === itemCode || data.item_code === itemCode;
-                    const matchesRow = row && typeof row === 'object' && (!row.item_code || row.item_code === itemCode);
-                    const topStock = matchesTop ? validStock(data.stock_number) : null;
-                    const rowStock = matchesRow ? validStock(row.stock_number) : null;
-                    if (topStock !== null) return {exact: topStock};
-                    if (rowStock !== null) return {exact: rowStock};
-                    if (data.Result === false) {
-                        if (matchesTop && /재고|품절/.test(String(data.msg || ''))) return {ok: false};
-                        return {unknown: true};
-                    }
-                    if (matchesRow && String(row.product_no) === String(productNo) &&
-                        Number(row.quantity) === qty && Number.isFinite(Number(row.product_price))) return {ok: true};
-                    throw new Error('Missing valid item response');
-                } catch (e) {
-                    if (attempt === 2) return {unknown: true};
-                } finally {
-                    clearTimeout(timer);
-                }
-                await wait(250 * (attempt + 1));
-            }
-            return {unknown: true};
-        }
-        async function findMaxOrderable(itemCode, selectable) {
-            const big = await tryQty(itemCode, CAP);
-            if (big.exact !== undefined) return big.exact;
-            if (big.ok === true) return CAP;
-            if (big.unknown) return selectable ? -2 : -1;
-            const one = await tryQty(itemCode, 1);
-            if (one.exact !== undefined) return one.exact;
-            if (one.unknown) return selectable ? -2 : -1;
-            if (one.ok === false) return 0;
-            let lo = 1, hi = 2;
-            while (hi < CAP) {
-                const probe = await tryQty(itemCode, hi);
-                if (probe.exact !== undefined) return probe.exact;
-                if (probe.unknown) return -2;
-                if (!probe.ok) break;
-                lo = hi;
-                hi = Math.min(CAP, hi * 2);
-            }
-            while (hi - lo > 1) {
-                const mid = Math.floor((lo + hi) / 2);
-                const probe = await tryQty(itemCode, mid);
-                if (probe.exact !== undefined) return probe.exact;
-                if (probe.unknown) return -2;
-                if (probe.ok) lo = mid; else hi = mid;
-            }
-            return lo;
-        }
-        try {
-            const items = typeof optionDataJson === 'string' ? JSON.parse(optionDataJson) : optionDataJson;
-            if (!items || typeof items !== 'object' || Array.isArray(items)) return {error: '옵션 JSON 항목 형식 오류'};
-            const soldOutCodes = new Set();
-            const selectableCodes = new Set();
-            // Additional marking kits are separate products, not main-product options.
-            const selects = Array.from(document.querySelectorAll('select[id*="option"], select[name*="option"]'))
-                .filter(sel => !sel.closest('.xans-product-addproduct, [class*="addproduct"]'));
-            for (const sel of selects) {
-                for (const option of Array.from(sel.options)) {
-                    const code = option.value;
-                    if (!Object.prototype.hasOwnProperty.call(items, code)) continue;
-                    const text = String(option.textContent || '').trim();
-                    if (/\[품절\]/.test(text)) soldOutCodes.add(code);
-                    else if (!sel.disabled && !option.disabled) selectableCodes.add(code);
-                }
-            }
-            const result = {};
-            for (const [itemCode, val] of Object.entries(items)) {
-                if (!val || typeof val !== 'object') { result[itemCode] = -1; continue; }
-                const optName = val.option_value ?? itemCode;
-                const direct = validStock(val.stock_number);
-                if (direct !== null) { result[optName] = direct; continue; }
-                const selling = String(val.is_selling).toUpperCase();
-                if (val.is_selling === false || selling === 'F' || soldOutCodes.has(itemCode)) {
-                    result[optName] = 0;
-                    continue;
-                }
-                result[optName] = await findMaxOrderable(itemCode, selectableCodes.has(itemCode));
-            }
-            return {data: result};
-        } catch (e) {
-            return {error: e.message};
-        }
-    }
+async (args) => {
+ const items=typeof args.optionDataJson==='string'?JSON.parse(args.optionDataJson):args.optionDataJson;
+ if(!items||typeof items!=='object'||Array.isArray(items))return {error:'invalid options'};
+ const selects=[...document.querySelectorAll('select[id*="option"],select[name*="option"]')].filter(s=>!s.closest('.xans-product-addproduct,[class*="addproduct"]'));
+ const flag=x=>x===true||String(x).toUpperCase()==='T'?true:x===false||String(x).toUpperCase()==='F'?false:null;
+ const number=x=>(typeof x==='number'||typeof x==='string')&&/^\d+$/.test(String(x))&&Number.isSafeInteger(Number(x))?Number(x):null;
+ const cap=number(window.product_max),hasCap=cap>0&&flag(window.product_max_type)===true;
+ const productSold=flag(window.is_soldout_icon)===true;
+ const madeOrder=String(args.productNo)==='2812'&&/^(www\.)?nolmdshop\.com$/.test(new URL(args.domain).hostname);
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
+ async function explicitStock(code){
+  if(code==='__single')return null;
+  const u=new URL('/exec/front/shop/CalculatorProduct',args.domain);u.search=new URLSearchParams({product_no:String(args.productNo),is_subscription:'F',['product['+code+']']:'9999'});
+  for(let attempt=0;attempt<3;attempt++){
+   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
+   try{const response=await fetch(u.href,{signal:controller.signal});if(!response.ok)throw new Error('HTTP');const d=await response.json();
+    if(!d||typeof d!=='object')throw new Error('JSON');const row=d[code];
+    if((d.sItemCode===code||d.item_code===code)&&(d.product_no==null||String(d.product_no)===String(args.productNo)))return number(d.stock_number);
+    if(row&&(!row.item_code||row.item_code===code)&&(row.product_no==null||String(row.product_no)===String(args.productNo)))return number(row.stock_number);
+    return null;
+   }catch(e){if(attempt===2)return null;}finally{clearTimeout(timer);}await wait(250*(attempt+1));
+  }return null;
+ }
+ const out={},info={};
+ for(const [code,v0]of Object.entries(items)){
+  const v=v0&&typeof v0==='object'?v0:{};const name=code==='__single'?'재고':v.option_value||v.option_text||code;
+  const domOptions=selects.flatMap(s=>[...s.options].filter(o=>o.value===code||String(o.textContent||'').replace(/\s*\[품절\]\s*$/,'').trim()===String(name).trim()).map(o=>({o,s})));
+  const sold=productSold||domOptions.some(({o})=>/\[품절\]/.test(o.textContent||''));
+  const selectable=domOptions.some(({o,s})=>!s.disabled&&!o.disabled&&!/\[품절\]/.test(o.textContent||''))||(code==='__single'&&flag(window.is_soldout_icon)===false);
+  const managed=flag(v.use_stock)??flag(v.use_stock_original)??flag(window.use_stock);
+  let kind='quantity_unknown',availability=selectable?'selectable':'unknown',qty=selectable?-2:-1,source='selection';
+  if(sold){kind='soldout';availability='soldout';qty=0;source='dom';}
+  else if(madeOrder){kind='made_to_order';source='user_override';}
+  else if(managed===false){kind='stock_unmanaged';source='page_flags';}
+  else if(flag(v.is_selling)===false){kind='not_selling';availability='not_selling';qty=-1;source='page_flags';}
+  else {
+   let exact=managed===true?number(v.stock_number):null;
+   if(exact===0&&selectable)exact=null;
+   if(exact!==null){kind='server_stock';qty=exact;source='page';}
+   else if(hasCap){kind='purchase_limit';}
+   else if(managed===true){exact=await explicitStock(code);if(exact!==null&&!(exact===0&&selectable)){kind='server_stock';qty=exact;source='calculator';}}
+  }
+  out[name]=qty;info[name]={kind,availability,purchase_limit:hasCap?cap:null,source,stock_managed:managed};
+ }
+ window.__lg_stock_option_info=info;return {data:out,option_info:info};
+}
     """
     try:
-        outcome = page.evaluate(
-            js,
-            {"domain": domain, "productNo": product_no, "optionDataJson": option_data_json},
-        )
+        outcome = page.evaluate(js, {"domain":domain,"productNo":product_no,"optionDataJson":option_data_json})
     except Exception as exc:
         return None, f"CalculatorProduct 평가 실패({type(exc).__name__}): {exc}"
-    if not outcome:
-        return None, "CalculatorProduct 평가 결과 없음"
-    if outcome.get("error"):
-        return None, f"CalculatorProduct 방식 실패: {outcome['error']}"
-    data = outcome.get("data") or {}
-    if not data:
-        return None, "CalculatorProduct 방식: 옵션 항목 없음"
-    unknown = [key for key, value in data.items() if value < 0 and value != -2]
-    selectable = [key for key, value in data.items() if value == -2]
-    notes = []
-    if unknown:
-        notes.append(f"일부 옵션 재고 조회 실패(확인불가): {unknown[:5]}")
-    if selectable:
-        notes.append(f"선택가능 · 수량 미확인 옵션: {selectable[:5]}")
-    diagnostic = " | ".join(notes) or None
-    return data, diagnostic
+    if not outcome or outcome.get("error"):
+        return None, "옵션 재고 메타데이터 조회 실패"
+    data=outcome.get("data") or {}
+    infos=outcome.get("option_info") or {}
+    # Same-context request fallback is restricted to managed, uncapped options.
+    try:
+        items = json.loads(option_data_json) if isinstance(option_data_json, str) else option_data_json
+        for code, item in items.items():
+            label = item.get("option_value") or item.get("option_text") or code
+            info = infos.get(label) or {}
+            if data.get(label, -1) < 0 and info.get("kind") == "quantity_unknown" and info.get("stock_managed") is True and not info.get("purchase_limit"):
+                exact, _ = get_explicit_stock_via_request(page, domain, product_no, code)
+                if exact is not None and not (exact == 0 and info.get("availability") == "selectable"):
+                    data[label] = exact
+                    info.update(kind="server_stock", source="calculator")
+        page.evaluate("info => { window.__lg_stock_option_info = info; }", infos)
+    except Exception:
+        pass
+    return (data or None), None
 
 
 def get_stock_for_product(page, url):
@@ -420,18 +434,14 @@ def get_stock_for_product(page, url):
             return fallback_result, name, price, note
 
     if single_data:
-        data = single_data
-        if isinstance(data, str):
-            try:
-                data = json.loads(data)
-            except Exception as exc:
-                diagnostic = f"{UNCERTAIN_MARKER} single_option_stock_data JSON 파싱 실패({type(exc).__name__})"
-                data = {}
-        if isinstance(data, dict) and data.get("stock_number") is not None:
-            qty = _to_int(data.get("stock_number"))
-            if qty is not None:
-                return {"재고": qty}, name, price, diagnostic
-            diagnostic = f"{UNCERTAIN_MARKER} single_option_stock_data 수량 변환 실패"
+        try:
+            data = json.loads(single_data) if isinstance(single_data, str) else single_data
+            if isinstance(data, dict):
+                parsed_url = urllib.parse.urlparse(url)
+                stock, note = get_option_stock_via_calculator(page, f"{parsed_url.scheme}://{parsed_url.netloc}", extract_product_no(url), {"__single": data})
+                return stock, name, price, note
+        except Exception as exc:
+            diagnostic = f"{UNCERTAIN_MARKER} 단일상품 판정 실패({type(exc).__name__})"
 
     return None, name, price, diagnostic or "option_stock_data / single_option_stock_data 둘 다 못 찾음"
 
@@ -519,6 +529,7 @@ def load_history():
         return {"last_checked": None, "products": {}}
     return {
         "last_checked": saved.get("last_checked"),
+        "inventory_schema": saved.get("inventory_schema"),
         "products": saved.get("products") if isinstance(saved.get("products"), dict) else {},
     }
 
@@ -535,7 +546,7 @@ def save_history(now, products):
     temp_path = HISTORY_FILE + ".tmp"
     with open(temp_path, "w", encoding="utf-8") as handle:
         json.dump(
-            {"last_checked": now, "products": products},
+            {"last_checked": now, "inventory_schema": 2, "products": products},
             handle,
             ensure_ascii=False,
             indent=2,
@@ -547,18 +558,21 @@ def fmt_won(value):
     return f"{value:,}원"
 
 
-def stock_status(qty):
+def stock_status(qty, info=None):
+    info = info or {}
+    kind = info.get("kind")
+    labels = {"made_to_order": "주문제작 · 수량 없음", "stock_unmanaged": "재고 미관리 · 수량 없음",
+              "purchase_limit": "구매제한 있음 · 재고 미공개", "not_selling": "판매중지 · 수량 미공개",
+              "quantity_unknown": "선택가능 · 수량 미공개" if info.get("availability") == "selectable" else "확인불가"}
+    if kind in labels:
+        return "[정책]", labels[kind]
     qty = _to_int(qty)
-    if qty == -2:
-        return "?", "선택가능 · 수량 미확인"
-    if qty is None or qty < 0:
+    if kind not in {"server_stock", "soldout"} or qty is None or qty < 0:
         return "?", "확인불가"
     if qty == 0:
         return "[품절]", "품절"
     if qty < LOW_STOCK_THRESHOLD:
         return "[저재고]", f"{qty}개 ({LOW_STOCK_THRESHOLD}개 미만)"
-    if qty >= 9999:
-        return "[재고]", "9999 이상 (주문 가능 상한, 실제 재고 아님)"
     return "[재고]", f"{qty}개"
 
 
@@ -649,6 +663,7 @@ def main():
             previous_entry = previous_products.get(url) or {}
             try:
                 stock, name, price, diagnostic = get_stock_for_product(page, url)
+                option_info = page.evaluate("() => window.__lg_stock_option_info || null") or {}
                 # Deliberately read the image only after the stock function returns, while
                 # the same product page is still loaded.
                 image_url = extract_representative_image(page, url)
@@ -679,6 +694,9 @@ def main():
                 if qty is None:
                     qty = -1
                     normalization_issues.append(str(option))
+                info = option_info.get(str(option)) or {}
+                if info.get("kind") not in {"server_stock", "soldout"} and qty >= 0:
+                    qty = -2 if info.get("availability") == "selectable" else -1
                 normalized_stock[str(option)] = qty
             if normalization_issues:
                 extra = f"{UNCERTAIN_MARKER} 수량 변환 실패 옵션: {normalization_issues[:5]}"
@@ -689,6 +707,8 @@ def main():
                 "name": name,
                 "price": price,
                 "stock": normalized_stock,
+                "option_info": option_info,
+                "inventory_schema": 2,
                 "image_url": image_url or previous_entry.get("image_url"),
                 "diagnostic": diagnostic,
                 "stale": False,
@@ -704,6 +724,8 @@ def main():
             previous_price = previous_entry.get("price")
             previous_unreliable = bool(
                 previous_entry.get("stale") or previous_entry.get("uncertain")
+                or history.get("inventory_schema") != 2
+                or previous_entry.get("inventory_schema") != 2
             )
             price_text = f" ({fmt_won(price)})" if price is not None else ""
             full_option_lines = []
@@ -711,7 +733,7 @@ def main():
             has_low_stock = False
 
             for option, qty in normalized_stock.items():
-                symbol, status_label = stock_status(qty)
+                symbol, status_label = stock_status(qty, option_info.get(option))
                 display_text = f"{symbol} {status_label}"
                 diff_text = ""
                 previous_exists = option in previous_stock
@@ -720,10 +742,11 @@ def main():
                     not uncertain
                     and not previous_unreliable
                     and qty >= 0
-                    and qty < 9999
+                    and (option_info.get(option) or {}).get("kind") in {"server_stock", "soldout"}
+                    and ((previous_entry.get("option_info") or {}).get(option) or {}).get("kind") in {"server_stock", "soldout"}
                     and previous_exists
                     and previous_qty is not None
-                    and 0 <= previous_qty < 9999
+                    and previous_qty >= 0
                 )
                 if comparable:
                     difference = qty - previous_qty

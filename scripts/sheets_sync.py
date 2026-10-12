@@ -13,7 +13,7 @@ SHEETS_API = "https://sheets.googleapis.com/v4/spreadsheets"
 HEADERS = [
     "상품명",
     "옵션",
-    "수량",
+    "재고 수량",
     "상품 링크",
     "이미지",
     "확인 시각",
@@ -22,6 +22,8 @@ HEADERS = [
     "상태",
     "가격",
     "출처 도메인",
+    "구매제한",
+    "수량 근거",
 ]
 CAP_SENTINEL = 9999
 UNKNOWN_SENTINEL = -1
@@ -32,85 +34,87 @@ class SheetSyncError(RuntimeError):
     """Safe-to-report Sheets export failure (never includes credentials)."""
 
 
-def quantity_display(value):
-    """Convert stored quantities to the human-facing value used in Sheets."""
-    if value is None or value == "":
-        return ""
-    try:
-        qty = int(value)
-    except (TypeError, ValueError):
-        return "확인불가"
-    if qty == SELECTABLE_UNKNOWN_SENTINEL:
-        return "수량 미확인"
-    if qty < 0:
-        return "확인불가"
-    if qty >= CAP_SENTINEL:
-        return "주문가능 9999 이상"
-    return qty
+TRUSTED_KINDS = {"server_stock", "soldout"}
+
+
+def _trusted_option(entry, option):
+    info = (entry.get("option_info") or {}).get(option) or {}
+    return (entry.get("inventory_schema") == 2 and info.get("kind") in TRUSTED_KINDS
+            and not entry.get("stale") and not entry.get("uncertain"))
 
 
 def _exact_quantity(value):
+    if isinstance(value, bool) or not isinstance(value, (int, str)):
+        return None
     try:
         qty = int(value)
     except (TypeError, ValueError):
         return None
-    if qty < 0 or qty >= CAP_SENTINEL:
-        return None
-    return qty
+    return qty if qty >= 0 else None
+
+
+def quantity_display(value, info=None):
+    info = info or {}
+    kind = info.get("kind")
+    if kind in {"stock_unmanaged", "made_to_order"}:
+        return "수량 없음"
+    if kind in TRUSTED_KINDS:
+        qty = _exact_quantity(value)
+        return qty if qty is not None else "확인불가"
+    if kind == "quantity_unknown":
+        return "미공개" if info.get("availability") == "selectable" else "확인불가"
+    if kind in {"purchase_limit", "not_selling"}:
+        return "미공개"
+    if value is None or value == "":
+        return ""
+    return "확인불가" if value == -1 else "미검증"
 
 
 def _transition(current, previous, stale=False, uncertain=False):
-    if stale or uncertain or previous is None:
+    if stale or uncertain:
         return None
-    try:
-        current_known = int(current)
-        previous_known = int(previous)
-    except (TypeError, ValueError):
+    current = _exact_quantity(current)
+    previous = _exact_quantity(previous)
+    if current is None or previous is None:
         return None
-    if current_known < 0 or previous_known < 0:
-        return None
-    if current_known == 0 and previous_known > 0:
+    if current == 0 and previous > 0:
         return "soldout"
-    if current_known > 0 and previous_known == 0:
+    if current > 0 and previous == 0:
         return "restocked"
     return None
 
 
-def _status_for(
-    current,
-    previous,
-    stale=False,
-    uncertain=False,
-    low_threshold=50,
-    suppress_transition=False,
-):
+def _status_for(current, previous, stale=False, uncertain=False, low_threshold=50,
+                suppress_transition=False, info=None):
     if stale:
         return "오류 · 이전 데이터"
-    try:
-        qty = int(current)
-    except (TypeError, ValueError):
+    info = info or {}
+    kind = info.get("kind")
+    if uncertain:
         return "확인불가 · 불확실"
-    if not uncertain and qty == SELECTABLE_UNKNOWN_SENTINEL:
-        return "선택가능 · 수량 미확인"
-    if uncertain or qty < 0:
-        return "확인불가 · 불확실"
-    transition = _transition(
-        qty,
-        previous,
-        stale=stale,
-        uncertain=uncertain or suppress_transition,
-    )
-    if transition == "soldout":
+    if kind == "made_to_order":
+        return "주문제작 · 수량 없음"
+    if kind == "stock_unmanaged":
+        return "재고 미관리 · 수량 없음"
+    if kind == "purchase_limit":
+        return "선택가능 · 구매제한 있음 · 재고 미공개" if info.get("availability") == "selectable" else "구매제한 있음 · 재고 미공개"
+    if kind == "not_selling":
+        return "판매중지 · 수량 미공개"
+    if kind == "quantity_unknown":
+        return "선택가능 · 수량 미공개" if info.get("availability") == "selectable" else "확인불가"
+    if kind not in TRUSTED_KINDS:
+        return "확인불가 · 이전 방식 미검증"
+    qty = _exact_quantity(current)
+    if qty is None:
+        return "확인불가"
+    change = _transition(qty, previous, uncertain=suppress_transition)
+    if change == "soldout":
         return "신규 품절"
-    if transition == "restocked":
+    if change == "restocked":
         return "재입고"
     if qty == 0:
         return "품절"
-    if 0 < qty < low_threshold:
-        return "저재고"
-    if qty >= CAP_SENTINEL:
-        return "주문 가능 상한 · 실재고 아님"
-    return "재고 있음"
+    return "저재고" if qty < low_threshold else "재고 있음"
 
 
 def image_formula(image_url):
@@ -121,112 +125,69 @@ def image_formula(image_url):
 
 
 def build_sheet_rows(products, previous_products=None, default_checked_time="", low_threshold=50):
-    """Build one Sheets row per product option.
-
-    Missing previous options remain blank baselines. Unknown, capped, uncertain, and stale
-    quantities never produce a delta.
-    """
     previous_products = previous_products or {}
     rows = [list(HEADERS)]
+    sources = {"page": "페이지 재고값", "calculator": "재고관리 활성 · 서버값",
+               "selection": "옵션 선택 상태", "dom": "옵션 품절 표시",
+               "user_override": "사용자 제보", "page_flags": "페이지 재고관리 설정"}
     for url in sorted(products):
         entry = products[url] or {}
-        previous_entry = previous_products.get(url) or {}
-        previous_stock = previous_entry.get("stock") or {}
-        previous_unreliable = bool(
-            previous_entry.get("stale") or previous_entry.get("uncertain")
-        )
-        stock = entry.get("stock") or {}
-        option_items = list(stock.items()) or [("-", UNKNOWN_SENTINEL)]
-        stale = bool(entry.get("stale"))
-        uncertain = bool(entry.get("uncertain"))
-        checked_time = entry.get("checked_at") or ("" if stale else default_checked_time)
-        parsed = urllib.parse.urlparse(url)
-        source_domain = parsed.netloc.lower()
-
-        for option, qty in option_items:
-            has_previous = option in previous_stock
-            previous_qty = previous_stock.get(option) if has_previous else None
-            delta = ""
-            current_exact = _exact_quantity(qty)
-            previous_exact = _exact_quantity(previous_qty) if has_previous else None
-            if (
-                not stale
-                and not uncertain
-                and has_previous
-                and not previous_unreliable
-                and current_exact is not None
-                and previous_exact is not None
-            ):
-                delta = current_exact - previous_exact
-
+        previous = previous_products.get(url) or {}
+        previous_stock = previous.get("stock") or {}
+        stale, uncertain = bool(entry.get("stale")), bool(entry.get("uncertain"))
+        infos = entry.get("option_info") or {}
+        previous_infos = previous.get("option_info") or {}
+        for option, qty in (entry.get("stock") or {"-": -1}).items():
+            info = infos.get(option) or {}
+            previous_qty = previous_stock.get(option)
+            current_trusted = _trusted_option(entry, option)
+            previous_trusted = option in previous_stock and _trusted_option(previous, option)
+            current_exact = _exact_quantity(qty) if current_trusted else None
+            previous_exact = _exact_quantity(previous_qty) if previous_trusted else None
+            delta = current_exact - previous_exact if current_exact is not None and previous_exact is not None else ""
+            limit = info.get("purchase_limit")
             rows.append([
-                entry.get("name") or url,
-                option,
-                quantity_display(qty),
-                url,
-                image_formula(entry.get("image_url")),
-                checked_time,
-                quantity_display(previous_qty) if has_previous else "",
+                entry.get("name") or url, option,
+                quantity_display(qty, info if entry.get("inventory_schema") == 2 else None),
+                url, image_formula(entry.get("image_url")),
+                entry.get("checked_at") or ("" if stale else default_checked_time),
+                quantity_display(previous_qty, previous_infos.get(option)) if previous_trusted else "",
                 delta,
-                _status_for(
-                    qty,
-                    previous_qty,
-                    stale,
-                    uncertain,
-                    low_threshold,
-                    suppress_transition=previous_unreliable,
-                ),
+                _status_for(qty, previous_qty, stale, uncertain, low_threshold,
+                            suppress_transition=not (current_trusted and previous_trusted), info=info if entry.get("inventory_schema") == 2 else None),
                 entry.get("price") if entry.get("price") is not None else "",
-                source_domain,
+                urllib.parse.urlparse(url).netloc.lower(),
+                f"{limit}개" if isinstance(limit, int) and limit > 0 else "",
+                sources.get(info.get("source"), "미확인"),
             ])
     return rows
 
 
 def summarize_inventory(products, previous_products=None, low_threshold=50, item_limit=12):
-    """Return alert counts and a priority-ordered, bounded list of option labels."""
     previous_products = previous_products or {}
-    soldout = []
-    restocked = []
-    low = []
+    soldout, restocked, low = [], [], []
     for url in sorted(products):
         entry = products[url] or {}
-        if entry.get("stale") or entry.get("uncertain"):
-            continue
-        previous_entry = previous_products.get(url) or {}
-        previous_stock = previous_entry.get("stock") or {}
-        previous_unreliable = bool(
-            previous_entry.get("stale") or previous_entry.get("uncertain")
-        )
+        previous = previous_products.get(url) or {}
         for option, raw_qty in (entry.get("stock") or {}).items():
-            try:
-                qty = int(raw_qty)
-            except (TypeError, ValueError):
+            if not _trusted_option(entry, option):
                 continue
-            if qty < 0:
+            qty = _exact_quantity(raw_qty)
+            if qty is None:
                 continue
             label = f"{entry.get('name') or url} / {option}"
-            previous = previous_stock.get(option) if option in previous_stock else None
-            transition = _transition(qty, previous, uncertain=previous_unreliable)
-            if transition == "soldout":
+            old = (previous.get("stock") or {}).get(option) if _trusted_option(previous, option) else None
+            change = _transition(qty, old)
+            if change == "soldout":
                 soldout.append(label)
-            elif transition == "restocked":
+            elif change == "restocked":
                 restocked.append(label)
             if 0 < qty < low_threshold:
                 low.append(f"{label}: {qty}개")
-
-    prioritized = (
-        [("신규 품절", item) for item in soldout]
-        + [("재입고", item) for item in restocked]
-        + [("저재고", item) for item in low]
-    )
+    prioritized = ([('신규 품절', x) for x in soldout] + [('재입고', x) for x in restocked] + [('저재고', x) for x in low])
     bounded = prioritized[:max(0, int(item_limit))]
-    return {
-        "newly_soldout": len(soldout),
-        "restocked": len(restocked),
-        "low_stock": len(low),
-        "items": bounded,
-        "omitted": max(0, len(prioritized) - len(bounded)),
-    }
+    return {"newly_soldout": len(soldout), "restocked": len(restocked), "low_stock": len(low),
+            "items": bounded, "omitted": max(0, len(prioritized) - len(bounded))}
 
 
 def _safe_sheet_title(title):
@@ -326,7 +287,7 @@ def _format_requests(sheet_id, row_count, conditional_rule_count=0):
         {
             "repeatCell": {
                 "range": {"sheetId": sheet_id, "startRowIndex": 0, "endRowIndex": 1, "startColumnIndex": 2, "endColumnIndex": 3},
-                "cell": {"note": "수량은 CalculatorProduct 기준 주문 가능한 최대 수량입니다. 실제 창고 재고를 보장하지 않으며, '주문가능 9999 이상'은 조회 상한까지 주문 가능했다는 뜻입니다."},
+                "cell": {"note": "숫자는 재고관리 활성 상태에서 확인된 서버 재고값만 표시합니다. 구매제한이 있는 상품의 CalculatorProduct 수량은 재고로 쓰지 않습니다. 주문제작·재고 미관리는 수량 없음, 수량을 공개하지 않는 상품은 미공개로 표시합니다. 이전 방식 수량은 비교 기준에서 제외합니다."},
                 "fields": "note",
             }
         },
@@ -363,7 +324,7 @@ def _format_requests(sheet_id, row_count, conditional_rule_count=0):
             },
         ])
 
-    widths = [260, 130, 105, 280, 100, 155, 105, 80, 145, 105, 150]
+    widths = [260, 130, 110, 280, 100, 155, 105, 80, 225, 105, 150, 100, 170]
     for index, width in enumerate(widths):
         requests.append({
             "updateDimensionProperties": {
@@ -462,7 +423,7 @@ def sync_to_sheet(spreadsheet_id, service_account_json, rows):
     values_payload = {
         "valueInputOption": "USER_ENTERED",
         "data": [{
-            "range": f"{range_prefix}!A1:K{row_count}",
+            "range": f"{range_prefix}!A1:M{row_count}",
             "majorDimension": "ROWS",
             "values": rows,
         }],
@@ -473,7 +434,7 @@ def sync_to_sheet(spreadsheet_id, service_account_json, rows):
 
     # Only after the new table exists do we remove values left from an older, longer run.
     if old_row_count > row_count:
-        tail_range = urllib.parse.quote(f"{range_prefix}!A{row_count + 1}:K{old_row_count}", safe="")
+        tail_range = urllib.parse.quote(f"{range_prefix}!A{row_count + 1}:M{old_row_count}", safe="")
         clear_url = f"{SHEETS_API}/{quoted_id}/values/{tail_range}:clear"
         _request_json("POST", clear_url, token, {})
 

@@ -10,7 +10,9 @@ class SheetRowTests(unittest.TestCase):
             "https://shop.example/product/a/1/": {
                 "name": "A",
                 "price": 1000,
-                "stock": {"unknown": -1, "cap": 9999, "baseline": 3, "exact": 7},
+                "stock": {"unknown": -1, "cap": -1, "baseline": 3, "exact": 7},
+                "inventory_schema": 2,
+                "option_info": {"unknown": {"kind": "quantity_unknown", "availability": "unknown"}, "cap": {"kind": "purchase_limit", "purchase_limit": 3}, "baseline": {"kind": "server_stock", "source": "page"}, "exact": {"kind": "server_stock", "source": "calculator"}},
                 "image_url": "https://cdn.example/a.jpg",
                 "checked_at": "2026-10-08 11:00 KST",
                 "stale": False,
@@ -19,7 +21,8 @@ class SheetRowTests(unittest.TestCase):
             "https://shop.example/product/b/2/": {
                 "name": "B",
                 "price": 2000,
-                "stock": {"M": 4},
+                "stock": {"M": 4}, "inventory_schema": 2,
+                "option_info": {"M": {"kind": "server_stock", "source": "page"}},
                 "checked_at": "2026-10-07 11:00 KST",
                 "stale": True,
                 "uncertain": True,
@@ -27,9 +30,9 @@ class SheetRowTests(unittest.TestCase):
         }
         previous = {
             "https://shop.example/product/a/1/": {
-                "stock": {"unknown": 4, "cap": 20, "exact": 10}
+                "stock": {"unknown": 4, "cap": 20, "exact": 10}, "inventory_schema": 2, "option_info": {"exact": {"kind": "server_stock"}}
             },
-            "https://shop.example/product/b/2/": {"stock": {"M": 9}},
+            "https://shop.example/product/b/2/": {"stock": {"M": 9}, "inventory_schema": 2, "option_info": {"M": {"kind": "server_stock"}}},
         }
         rows = sheets_sync.build_sheet_rows(products, previous)
         by_product_option = {(row[0], row[1]): row for row in rows[1:]}
@@ -40,7 +43,8 @@ class SheetRowTests(unittest.TestCase):
         self.assertIn("확인불가", unknown[8])
 
         cap = by_product_option[("A", "cap")]
-        self.assertEqual(cap[2], "주문가능 9999 이상")
+        self.assertEqual(cap[2], "미공개")
+        self.assertEqual(cap[11], "3개")
         self.assertEqual(cap[7], "")
 
         baseline = by_product_option[("A", "baseline")]
@@ -50,6 +54,7 @@ class SheetRowTests(unittest.TestCase):
         exact = by_product_option[("A", "exact")]
         self.assertEqual(exact[6], 10)
         self.assertEqual(exact[7], -3)
+        self.assertEqual(exact[12], "재고관리 활성 · 서버값")
         self.assertTrue(exact[4].startswith('=IMAGE("https://'))
 
         stale = by_product_option[("B", "M")]
@@ -60,10 +65,10 @@ class SheetRowTests(unittest.TestCase):
     def test_stale_or_uncertain_previous_run_is_only_a_baseline(self):
         products = {
             "https://shop.example/product/c/3/": {
-                "name": "C", "stock": {"M": 0}, "stale": False, "uncertain": False
+                "name": "C", "stock": {"M": 0}, "inventory_schema": 2, "option_info": {"M": {"kind": "soldout"}}, "stale": False, "uncertain": False
             },
             "https://shop.example/product/d/4/": {
-                "name": "D", "stock": {"M": 4}, "stale": False, "uncertain": False
+                "name": "D", "stock": {"M": 4}, "inventory_schema": 2, "option_info": {"M": {"kind": "server_stock"}}, "stale": False, "uncertain": False
             },
         }
         previous = {
@@ -88,11 +93,11 @@ class SheetRowTests(unittest.TestCase):
 
     def test_selectable_unknown_never_becomes_stock_delta_or_alert(self):
         url = "https://shop.example/product/p/1/"
-        products = {url: {"name": "P", "stock": {"M": -2, "L": -3}}}
+        products = {url: {"name": "P", "stock": {"M": -2, "L": -3}, "inventory_schema": 2, "option_info": {"M": {"kind": "quantity_unknown", "availability": "selectable"}, "L": {"kind": "quantity_unknown"}}}}
         previous = {url: {"stock": {"M": 0, "L": 5}}}
         rows = sheets_sync.build_sheet_rows(products, previous)
-        self.assertEqual(rows[1][2], "수량 미확인")
-        self.assertEqual(rows[1][8], "선택가능 · 수량 미확인")
+        self.assertEqual(rows[1][2], "미공개")
+        self.assertEqual(rows[1][8], "선택가능 · 수량 미공개")
         self.assertEqual(rows[1][7], "")
         self.assertEqual(rows[2][2], "확인불가")
         self.assertIn("확인불가", rows[2][8])
@@ -102,9 +107,28 @@ class SheetRowTests(unittest.TestCase):
         self.assertEqual(summary["low_stock"], 0)
         current = {url: {"name": "P", "stock": {"M": 4}}}
         baseline = sheets_sync.build_sheet_rows(current, products)[1]
-        self.assertEqual(baseline[6], "수량 미확인")
+        self.assertEqual(baseline[6], "")
         self.assertEqual(baseline[7], "")
         self.assertNotEqual(baseline[8], "재입고")
+
+    def test_unmanaged_order_and_legacy_quantities_are_not_inventory(self):
+        url = "https://shop.example/product/p/1/"
+        entry = {"name": "P", "inventory_schema": 2,
+                 "stock": {"unmanaged": 0, "order": -2, "real": 9999},
+                 "option_info": {"unmanaged": {"kind": "stock_unmanaged"},
+                                 "order": {"kind": "made_to_order"},
+                                 "real": {"kind": "server_stock"}}}
+        rows = sheets_sync.build_sheet_rows({url: entry}, {url: {"stock": {"real": 0}}})
+        self.assertEqual(rows[1][2], "수량 없음")
+        self.assertEqual(rows[2][2], "수량 없음")
+        self.assertEqual(rows[3][2], 9999)
+        self.assertEqual(rows[3][6], "")
+        self.assertEqual(rows[3][7], "")
+        self.assertEqual(len(rows[0]), 13)
+        summary = sheets_sync.summarize_inventory({url: entry}, {url: {"stock": {"real": 0}}})
+        self.assertEqual(summary["newly_soldout"], 0)
+        self.assertEqual(summary["restocked"], 0)
+        self.assertEqual(summary["low_stock"], 0)
 
     def test_summary_counts_and_item_list_are_bounded(self):
         products = {}
@@ -114,10 +138,12 @@ class SheetRowTests(unittest.TestCase):
             products[url] = {
                 "name": f"P{index}",
                 "stock": {"M": 0 if index < 4 else 3},
+                "inventory_schema": 2,
+                "option_info": {"M": {"kind": "server_stock"}},
                 "stale": False,
                 "uncertain": False,
             }
-            previous[url] = {"stock": {"M": 2 if index < 4 else 0}}
+            previous[url] = {"stock": {"M": 2 if index < 4 else 0}, "inventory_schema": 2, "option_info": {"M": {"kind": "server_stock"}}}
         summary = sheets_sync.summarize_inventory(products, previous, item_limit=3)
         self.assertEqual(summary["newly_soldout"], 4)
         self.assertEqual(summary["restocked"], 6)
@@ -145,7 +171,7 @@ class SheetApiOrderingTests(unittest.TestCase):
                 }
             return {}
 
-        rows = [sheets_sync.HEADERS] + [[""] * 11 for _ in range(1005)]
+        rows = [sheets_sync.HEADERS] + [[""] * 13 for _ in range(1005)]
         with patch.object(sheets_sync, "get_access_token", return_value="token"), patch.object(
             sheets_sync, "_request_json", side_effect=fake_request
         ):
@@ -162,7 +188,7 @@ class SheetApiOrderingTests(unittest.TestCase):
             i for i, (_, url, _) in enumerate(calls) if "values:batchUpdate" in url
         )
         growth = calls[grow_index][2]["requests"][0]["updateSheetProperties"]["properties"]["gridProperties"]
-        self.assertEqual(growth, {"rowCount": len(rows), "columnCount": 11})
+        self.assertEqual(growth, {"rowCount": len(rows), "columnCount": 13})
         self.assertLess(grow_index, write_index)
         self.assertFalse(any(":clear" in url for _, url, _ in calls[:write_index]))
 
@@ -190,7 +216,7 @@ class SheetApiOrderingTests(unittest.TestCase):
             sheets_sync, "_request_json", side_effect=fake_request
         ):
             with self.assertRaises(sheets_sync.SheetSyncError):
-                sheets_sync.sync_to_sheet("sheet-id", "{}", [sheets_sync.HEADERS, [""] * 11])
+                sheets_sync.sync_to_sheet("sheet-id", "{}", [sheets_sync.HEADERS, [""] * 13])
 
         self.assertTrue(any("values:batchUpdate" in url for _, url, _ in calls))
         self.assertFalse(any(":clear" in url for _, url, _ in calls))
@@ -217,7 +243,7 @@ class SheetApiOrderingTests(unittest.TestCase):
             sheets_sync, "_request_json", side_effect=fake_request
         ):
             result = sheets_sync.sync_to_sheet(
-                "sheet-id", "{}", [sheets_sync.HEADERS, [""] * 11]
+                "sheet-id", "{}", [sheets_sync.HEADERS, [""] * 13]
             )
 
         write_index = next(i for i, url in enumerate(calls) if "values:batchUpdate" in url)

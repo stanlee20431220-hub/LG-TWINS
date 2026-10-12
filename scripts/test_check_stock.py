@@ -1,116 +1,80 @@
-import unittest
 import inspect
-import ast
+import json
 import shutil
 import subprocess
+import unittest
+from types import SimpleNamespace
+from unittest.mock import Mock
 
 import check_stock
 
 
-class ScraperHelperTests(unittest.TestCase):
-    def test_unknown_option_field_is_not_false_soldout(self):
-        parsed, diagnostic = check_stock.parse_option_stock({
-            "item-code": {"option_value": "M", "unexpected": "value"}
-        })
+class HelperTests(unittest.TestCase):
+    def test_parse_and_image_helpers(self):
+        parsed, diagnostic = check_stock.parse_option_stock({"A": {"option_value": "M", "stock_number": 3}})
+        self.assertEqual(parsed, {"M": 3})
+        self.assertIsNone(diagnostic)
+        parsed, diagnostic = check_stock.parse_option_stock({"A": {"option_value": "M"}})
         self.assertEqual(parsed, {"M": -1})
         self.assertIn(check_stock.UNCERTAIN_MARKER, diagnostic)
-        self.assertFalse(check_stock.is_fully_sold_out(parsed))
+        self.assertIsNone(check_stock.parse_option_stock("not json")[0])
+        self.assertEqual(check_stock.normalize_image_url("//cdn.example/a.jpg", "http://shop.example/p/1/"), "https://cdn.example/a.jpg")
+        self.assertIsNone(check_stock.normalize_image_url("data:image/png,x", "https://shop.example/p/1/"))
 
-    def test_bad_json_is_uncertain_failure(self):
-        parsed, diagnostic = check_stock.parse_option_stock("not json")
-        self.assertIsNone(parsed)
-        self.assertIn(check_stock.UNCERTAIN_MARKER, diagnostic)
-
-    def test_image_url_is_absolute_https(self):
-        self.assertEqual(
-            check_stock.normalize_image_url(
-                "//cdn.example.com/images/a.jpg?size=large",
-                "http://shop.example/product/a/1/",
-            ),
-            "https://cdn.example.com/images/a.jpg?size=large",
-        )
-        self.assertEqual(
-            check_stock.normalize_image_url(
-                "/images/a.jpg", "https://shop.example/product/a/1/"
-            ),
-            "https://shop.example/images/a.jpg",
-        )
-        self.assertIsNone(
-            check_stock.normalize_image_url(
-                "data:image/png;base64,abc", "https://shop.example/product/a/1/"
-            )
-        )
-
-    def test_cap_and_unknown_display(self):
-        self.assertEqual(check_stock.stock_status(-1)[1], "확인불가")
-        self.assertEqual(check_stock.stock_status(-2)[1], "선택가능 · 수량 미확인")
-        self.assertEqual(check_stock.stock_status(-3)[1], "확인불가")
-        self.assertFalse(check_stock.is_fully_sold_out({"M": -2}))
-        self.assertIn("실제 재고 아님", check_stock.stock_status(9999)[1])
+    def test_stock_status_requires_option_kind(self):
+        self.assertEqual(check_stock.stock_status(3)[1], "확인불가")
+        self.assertEqual(check_stock.stock_status(9999)[1], "확인불가")
+        self.assertEqual(check_stock.stock_status(3, {"kind": "purchase_limit", "purchase_limit": 3})[1], "구매제한 있음 · 재고 미공개")
+        self.assertEqual(check_stock.stock_status(0, {"kind": "stock_unmanaged"})[1], "재고 미관리 · 수량 없음")
+        self.assertEqual(check_stock.stock_status(9999, {"kind": "server_stock"})[1], "9999개")
 
 
-@unittest.skipUnless(shutil.which("node"), "Node.js is required for real CalculatorProduct JS tests")
-class CalculatorJsTests(unittest.TestCase):
-    def test_real_js_response_validation_retries_and_unknowns(self):
-        tree = ast.parse(inspect.getsource(check_stock.get_option_stock_via_calculator))
-        js = next(node.value.value for node in ast.walk(tree)
-                  if isinstance(node, ast.Assign)
-                  and any(isinstance(target, ast.Name) and target.id == "js" for target in node.targets))
-        harness = "const calculate = (" + js + ");\n" + r'''
-const assert = (condition, message) => { if (!condition) throw new Error(message); };
-// Exercise the production JS without real network delays or unexpired timeout handles.
-globalThis.setTimeout = (callback, delay) => { if (delay < 1000) queueMicrotask(callback); return 1; };
-globalThis.clearTimeout = () => {};
-const code = 'P000TEST000A';
-const exact = qty => ({Result:false, msg:'상품의 수량이 재고수량 보다 많습니다.', sItemCode:code, stock_number:qty});
-const inventoryFailure = {Result:false, msg:'재고수량 초과', sItemCode:code};
-async function run(replies, {selectable=true, additional=false, soldout=false}={}) {
-  let calls = 0;
-  globalThis.document = {querySelectorAll: () => selectable || additional || soldout ? [{
-    disabled:false,
-    closest: () => additional ? {} : null,
-    options:[{value:code, textContent:soldout ? 'M [품절]' : 'M', disabled:false}]
-  }] : []};
-  globalThis.fetch = async url => {
-    const qty = Number(new URL(url).searchParams.get('product['+code+']'));
-    const reply = replies[Math.min(calls++, replies.length-1)];
-    if (reply instanceof Error) throw reply;
-    if (reply === 'HTTP503') return {ok:false, status:503};
-    if (reply === 'JSONFAIL') return {ok:true, json:async()=>{throw new Error('bad JSON');}};
-    const body = reply === 'SUCCESS' ? {[code]:{item_code:code, product_no:1, quantity:qty, product_price:'1000'}} : reply;
-    return {ok:true, json:async()=>body};
-  };
-  const result = await calculate({domain:'https://shop.example', productNo:'1', optionDataJson:{[code]:{option_value:'M', is_selling:true}}});
-  return {qty:result.data?.M, calls, error:result.error};
-}
-let result = await run([exact(14)]);
-assert(result.qty===14 && result.calls===1, 'explicit server stock must bypass binary search');
-result = await run(['HTTP503', 'JSONFAIL', exact(1)]);
-assert(result.qty===1 && result.calls===3, 'HTTP/JSON errors must retry and recover');
-result = await run([{}], {selectable:false});
-assert(result.qty===-1 && result.calls===3, 'malformed response must fail closed after 3 retries');
-result = await run([{}]);
-assert(result.qty===-2 && result.calls===3, 'selectable main option can retain unknown quantity');
-result = await run([{}], {selectable:false, additional:true});
-assert(result.qty===-1, 'additional marking-kit selector must not imply main availability');
-result = await run([{...exact(14), sItemCode:'ANOTHER_PRODUCT'}], {selectable:false});
-assert(result.qty===-1, 'mismatched stock item must not be trusted');
-result = await run([inventoryFailure, 'SUCCESS', new Error('network failed')]);
-assert(result.qty===-2 && result.calls===5, 'search errors must not become a false exact lower boundary');
-result = await run([exact(0)]);
-assert(result.qty===0 && result.calls===1, 'explicit zero server stock remains zero');
-result = await run(['SUCCESS']);
-assert(result.qty===9999 && result.calls===1, 'valid per-item success can retain capped orderable boundary');
-result = await run([{}], {soldout:true});
-assert(result.qty===0 && result.calls===0, 'main option soldout must avoid unnecessary requests');
-result = await run([{Result:false, msg:'최대 구매수량을 초과했습니다.', sItemCode:code}]);
-assert(result.qty===-2, 'non-inventory restriction must not become false soldout');
-console.log('11 CalculatorProduct JS cases passed');
-'''
-        completed = subprocess.run([shutil.which("node"), "--input-type=module"],
-                                   input=harness, text=True, capture_output=True, timeout=30)
-        self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
-        self.assertIn("11 CalculatorProduct JS cases passed", completed.stdout)
+class ExplicitStockTests(unittest.TestCase):
+    def test_explicit_server_stock_requires_matching_item_and_valid_integer(self):
+        self.assertEqual(check_stock._explicit_server_stock({"sItemCode": "A", "product_no": 1785, "stock_number": 14}, "A", "1785"), 14)
+        self.assertEqual(check_stock._explicit_server_stock({"A": {"item_code": "A", "product_no": 1785, "stock_number": "1"}}, "A", "1785"), 1)
+        for value in (-1, True, 1.5, "1.5", "", None):
+            self.assertIsNone(check_stock._explicit_server_stock({"sItemCode": "A", "stock_number": value}, "A", "1785"))
+        self.assertIsNone(check_stock._explicit_server_stock({"sItemCode": "OTHER", "stock_number": 14}, "A", "1785"))
+        self.assertIsNone(check_stock._explicit_server_stock({"sItemCode": "A", "product_no": 9, "stock_number": 14}, "A", "1785"))
+
+    def test_same_context_request_fallback_gating_and_recovery(self):
+        page = SimpleNamespace(url="https://shop.example/product/x/1/", evaluate=Mock(), request=SimpleNamespace(get=Mock()))
+        items = {"A": {"option_value": "M", "use_stock": "T"}}
+        def outcome(kind="quantity_unknown", managed=True, cap=None, qty=-2):
+            return {"data": {"M": qty}, "option_info": {"M": {"kind": kind, "availability": "selectable", "stock_managed": managed, "purchase_limit": cap}}}
+        page.evaluate.return_value = outcome()
+        response = SimpleNamespace(status=200, ok=True, url="https://shop.example/api", headers={"content-type": "application/json"}, json=Mock(return_value={"sItemCode": "A", "product_no": "1", "stock_number": 14}), dispose=Mock())
+        page.request.get.return_value = response
+        data, _ = check_stock.get_option_stock_via_calculator(page, "https://shop.example", "1", items)
+        self.assertEqual(data["M"], 14)
+        self.assertEqual(page.evaluate.call_count, 2)
+        self.assertEqual(page.evaluate.call_args_list[-1].args[0], "info => { window.__lg_stock_option_info = info; }")
+        for kind, managed, cap, qty in [("purchase_limit", True, 3, -1), ("quantity_unknown", False, None, -1), ("quantity_unknown", None, None, -1)]:
+            page.evaluate.reset_mock()
+            page.evaluate.return_value = outcome(kind, managed, cap, qty)
+            page.request.get.reset_mock()
+            check_stock.get_option_stock_via_calculator(page, "https://shop.example", "1", items)
+            page.request.get.assert_not_called()
+
+    def test_legacy_history_is_not_a_schema_two_baseline(self):
+        source = inspect.getsource(check_stock.main)
+        self.assertIn('history.get("inventory_schema") != 2', source)
+        self.assertIn('previous_entry.get("inventory_schema") != 2', source)
+        self.assertIn('"inventory_schema": 2', inspect.getsource(check_stock.save_history))
+
+
+class ProductionJavaScriptHarness(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("node"), "Node.js required for production JS harness")
+    def test_actual_calculator_js_policy_cases(self):
+        source = inspect.getsource(check_stock.get_option_stock_via_calculator)
+        js = source.split('js = r"""', 1)[1].split('"""', 1)[0]
+        harness = r'''const fn=__FUNCTION__;
+async function run(c){const option={A:{option_value:'M',use_stock:c.useStock,is_selling:c.isSelling===false?'F':'T',stock_number:c.pageStock}};const sel={disabled:false,closest:()=>null,options:[{value:'A',textContent:c.text||'M',disabled:false}]};global.document={querySelectorAll:()=>[sel]};global.window={product_max:c.max??0,product_max_type:c.maxType??'F',is_soldout_icon:c.sold??'F',use_stock:c.globalUse??'T'};global.fetch=async()=>({ok:true,json:async()=>c.api??{sItemCode:'A',product_no:'77',stock_number:c.apiQty??14}});return (await fn({optionDataJson:option,productNo:c.productNo||'77',domain:c.domain||'https://shop.example'})).data.M;}
+(async()=>{const cases=[['page exact',{useStock:'T',pageStock:7},7],['managed uncapped API 14',{useStock:'T'},14],['purchase cap',{useStock:'T',max:3,maxType:'T'},-2],['unmanaged zero ignored',{useStock:'F',pageStock:0},-2],['unmanaged positive ignored',{useStock:'F',pageStock:14},-2],['unknown management API ignored',{useStock:undefined,globalUse:'?'},-2],['made order explicit override',{useStock:'F',pageStock:0,domain:'https://nolmdshop.com',productNo:'2812'},-2],['DOM soldout wins',{useStock:'F',text:'M [품절]'},0],['selectable zero stays unknown',{useStock:'T',pageStock:0,apiQty:0},-2],['numeric 9999 is exact',{useStock:'T',pageStock:9999},9999],['not selling',{useStock:'T',isSelling:false},-1]];for(const [n,c,w] of cases){if(c.isSelling===false) c.api={sItemCode:'A',stock_number:14};const got=await run(c);if(got!==w)throw Error(n+': got '+got+' expected '+w)}console.log('passed '+cases.length+' policy cases')})().catch(e=>{console.error(e);process.exit(1)});'''.replace('__FUNCTION__', js)
+        result = subprocess.run(["node", "-e", harness], capture_output=True, text=True, timeout=20)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+        self.assertIn("passed 11", result.stdout)
 
 
 if __name__ == "__main__":
