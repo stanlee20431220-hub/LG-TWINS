@@ -1,0 +1,24 @@
+name: Stock API Diagnostic
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe-stock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+      - name: Validate and test
+        run: |
+          python -m py_compile scripts/diagnose_stock.py scripts/check_stock.py
+          python -m unittest discover -s scripts -p 'test_*.py'
+      - name: Probe cap stock without updating inventory
+        run: python scripts/diagnose_stock.py
