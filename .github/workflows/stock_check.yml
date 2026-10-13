@@ -3,7 +3,13 @@ name: Twinscorestore Stock Check
 on:
   schedule:
     - cron: "15 0 * * *"  # 매일 한국 시간 09:15 (GitHub 예약 실행은 지연될 수 있음)
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      browser_stock_evidence:
+        description: "Optional fresh verified browser API evidence JSON (10-minute validity)"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: write
@@ -37,6 +43,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          BROWSER_STOCK_EVIDENCE_JSON: ${{ inputs.browser_stock_evidence || '' }}
         run: python scripts/check_stock.py
       - name: Commit updated history
         if: always()

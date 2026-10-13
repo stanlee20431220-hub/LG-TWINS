@@ -344,6 +344,62 @@ def get_explicit_stock_via_request(page, domain, product_no, item_code):
     return None, diagnostic(failure)
 
 
+def get_explicit_stock_via_browser_evidence(domain, product_no, item_code, now=None):
+    """Optional last-tier evidence from a recent, same-origin browser API capture."""
+    raw = os.environ.get("BROWSER_STOCK_EVIDENCE_JSON", "")
+    if not raw or len(raw.encode("utf-8")) > 1_000_000 or item_code == "__single":
+        return None, None
+    try:
+        evidence = json.loads(raw)
+        if not isinstance(evidence, dict) or type(evidence.get("schema")) is not int or evidence["schema"] != 1:
+            return None, None
+        captures = evidence.get("captures")
+        if not isinstance(captures, list) or len(captures) > 1000:
+            return None, None
+        origin = urllib.parse.urlparse(domain)
+        def same_origin(url):
+            return (url.scheme, url.hostname, url.port or (443 if url.scheme == "https" else 80)) == (
+                origin.scheme, origin.hostname, origin.port or (443 if origin.scheme == "https" else 80)
+            ) and not url.username and not url.password
+        if origin.scheme not in {"http", "https"} or not origin.hostname or origin.username or origin.password:
+            return None, None
+        current = now if now is not None else datetime.now(timezone.utc)
+        if current.tzinfo is None:
+            return None, None
+        valid = []
+        for capture in captures:
+            if not isinstance(capture, dict):
+                continue
+            try:
+                if str(capture.get("product_no")) != str(product_no) or capture.get("item_code") != item_code:
+                    continue
+                captured = datetime.fromisoformat(capture["captured_at"].replace("Z", "+00:00"))
+                if captured.tzinfo is None or not 0 <= (current - captured).total_seconds() <= 600:
+                    continue
+                request = urllib.parse.urlparse(capture["request_url"])
+                response = urllib.parse.urlparse(capture["response_url"])
+                endpoint = "/exec/front/shop/CalculatorProduct"
+                if not same_origin(request) or not same_origin(response) or request.path != endpoint or response.path != endpoint:
+                    continue
+                query = urllib.parse.parse_qs(request.query, keep_blank_values=True)
+                if query.get("product_no") != [str(product_no)] or f"product[{item_code}]" not in query:
+                    continue
+                media_type = capture["content_type"].split(";", 1)[0].strip().lower()
+                if not (media_type == "application/json" or (media_type.startswith("application/") and media_type.endswith("+json"))):
+                    continue
+                qty = _explicit_server_stock(capture.get("api_payload"), item_code, product_no)
+                if qty is not None:
+                    valid.append((captured, qty))
+            except (ValueError, TypeError, KeyError, AttributeError):
+                continue
+        if valid:
+            captured, qty = max(valid, key=lambda entry: entry[0])
+            return qty, {"captured_at": captured.isoformat(), "quantity_checked_at": captured.astimezone(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S KST")}
+    except (ValueError, TypeError, AttributeError):
+        pass
+    return None, None
+
+
 def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
     """Use only validated explicit inventory; calculator purchase checks are not stock."""
     js = r"""
@@ -370,6 +426,37 @@ async (args) => {
    }catch(e){if(attempt===2)return null;}finally{clearTimeout(timer);}await wait(250*(attempt+1));
   }return null;
  }
+ // Structured offers supply availability only, never an inventory quantity.
+ const structuredOffers=[];
+ const collect=node=>{
+  if(Array.isArray(node)){node.forEach(collect);return;}
+  if(!node||typeof node!=='object')return;
+  if(node['@type']==='ProductGroup'&&Array.isArray(node.hasVariant)){
+   for(const variant of node.hasVariant){
+    if(!variant||variant['@type']!=='Product')continue;
+    for(const offer of Array.isArray(variant.offers)?variant.offers:[variant.offers])
+     if(offer&&typeof offer==='object')structuredOffers.push({sku:variant.sku,offer});
+   }
+  }
+  if(node['@graph'])collect(node['@graph']);
+ };
+ for(const script of document.querySelectorAll('script[type="application/ld+json"]')){
+  try{collect(JSON.parse(script.textContent||''));}catch(e){}
+ }
+ function structuredAvailability(code){
+  const matches=[];
+  for(const {sku,offer} of structuredOffers){
+   if(typeof sku!=='string'||!sku.endsWith('_'+args.productNo+'_'+code))continue;
+   try{
+    const u=new URL(offer.url,args.domain),origin=new URL(args.domain).origin;
+    const product=u.pathname.match(/\/product\/(?:[^/]+\/)?(\d+)\/?$/);
+    if(u.origin!==origin||!product||product[1]!==String(args.productNo)||u.searchParams.get('item_code')!==code)continue;
+    if(/^https?:\/\/schema\.org\/InStock$/.test(offer.availability))matches.push('selectable');
+    if(/^https?:\/\/schema\.org\/OutOfStock$/.test(offer.availability))matches.push('soldout');
+   }catch(e){}
+  }
+  return matches.length&&matches.every(x=>x===matches[0])?matches[0]:null;
+ }
  const out={},info={};
  for(const [code,v0]of Object.entries(items)){
   const v=v0&&typeof v0==='object'?v0:{};const name=code==='__single'?'재고':v.option_value||v.option_text||code;
@@ -377,19 +464,26 @@ async (args) => {
   const sold=productSold||domOptions.some(({o})=>/\[품절\]/.test(o.textContent||''));
   const selectable=domOptions.some(({o,s})=>!s.disabled&&!o.disabled&&!/\[품절\]/.test(o.textContent||''))||(code==='__single'&&flag(window.is_soldout_icon)===false);
   const managed=flag(v.use_stock)??flag(v.use_stock_original)??flag(window.use_stock);
-  let kind='quantity_unknown',availability=selectable?'selectable':'unknown',qty=selectable?-2:-1,source='selection';
-  if(sold){kind='soldout';availability='soldout';qty=0;source='dom';}
+  const selling=flag(v.is_selling),displayed=flag(v.is_display);
+  let kind='quantity_unknown',availability=selectable?'selectable':'unknown',qty=selectable?-2:-1,source='selection',availability_source=selectable?'dom':null;
+  if(sold){kind='soldout';availability='soldout';qty=0;source='dom';availability_source='dom';}
+  // Explicit storefront soldout wins; blocked options are not warehouse zero.
+  else if(selling===false||displayed===false){kind='not_selling';availability='not_selling';qty=-1;source='page_flags';availability_source='page_flags';}
   else if(madeOrder){kind='made_to_order';source='user_override';}
   else if(managed===false){kind='stock_unmanaged';source='page_flags';}
-  else if(flag(v.is_selling)===false){kind='not_selling';availability='not_selling';qty=-1;source='page_flags';}
   else {
+   const structured=availability==='unknown'?structuredAvailability(code):null;
+   if(structured==='selectable'){availability='selectable';qty=-2;availability_source='jsonld';}
    let exact=managed===true?number(v.stock_number):null;
-   if(exact===0&&selectable)exact=null;
+   if(structured==='soldout'&&(exact===null||exact===0)){kind='soldout';availability='soldout';qty=0;source='jsonld';availability_source='jsonld';}
+   else {
+   if(exact===0&&availability==='selectable')exact=null;
    if(exact!==null){kind='server_stock';qty=exact;source='page';}
    else if(hasCap){kind='purchase_limit';}
-   else if(managed===true){exact=await explicitStock(code);if(exact!==null&&!(exact===0&&selectable)){kind='server_stock';qty=exact;source='calculator';}}
+   else if(managed===true){exact=await explicitStock(code);if(exact!==null&&!(exact===0&&availability==='selectable')){kind='server_stock';qty=exact;source='calculator';}}
   }
-  out[name]=qty;info[name]={kind,availability,purchase_limit:hasCap?cap:null,source,stock_managed:managed};
+  }
+  out[name]=qty;info[name]={kind,availability,availability_source,purchase_limit:hasCap?cap:null,source,stock_managed:managed,selling,displayed};
  }
  window.__lg_stock_option_info=info;return {data:out,option_info:info};
 }
@@ -425,7 +519,16 @@ async (args) => {
                     note = note or "request-fallback: selectable_zero_not_confirmed"
                     info["diagnostic"] = note
                     info["error"] = "quantity_unknown" if "no_matching_explicit_stock" in note or "selectable_zero_not_confirmed" in note else "network_failure"
-                    failures.append(f"{label}: {note}")
+                    # Browser captures are optional, recent evidence, not a repair of API access.
+                    evidence_qty, capture_info = get_explicit_stock_via_browser_evidence(domain, product_no, code) if info.get("availability") == "selectable" else (None, None)
+                    if evidence_qty is not None and evidence_qty > 0:
+                        data[label] = evidence_qty
+                        info.update(kind="server_stock", source="verified_browser", quantity_checked_at=capture_info["quantity_checked_at"], primary_diagnostic=note)
+                        info["lookup_path"] = ["page", "calculator", "request_fallback", "verified_browser"]
+                        info.pop("diagnostic", None)
+                        info.pop("error", None)
+                    else:
+                        failures.append(f"{label}: {note}")
                 infos[label] = info
     except Exception as exc:
         failures.append(f"request-fallback metadata: {type(exc).__name__}")
@@ -617,10 +720,11 @@ def stock_status(qty, info=None):
     info = info or {}
     kind = info.get("kind")
     labels = {"made_to_order": "주문제작 · 수량 없음", "stock_unmanaged": "재고 미관리 · 수량 없음",
-              "purchase_limit": "구매제한 있음 · 재고 미공개", "not_selling": "판매중지 · 수량 미공개",
-              "quantity_unknown": "선택가능 · 수량 미공개" if info.get("availability") == "selectable" else "확인불가"}
+              "purchase_limit": "구매제한 있음 · 재고 미공개", "not_selling": "구매불가 · 비노출/판매중지",
+              "quantity_unknown": "구매가능 · 수량미확인" if info.get("availability") == "selectable" else "확인불가"}
+    # API failure is not evidence of soldout; retain storefront availability.
     if kind == "quantity_unknown" and info.get("diagnostic"):
-        return "?", "재고 조회 실패 · 수량 미확인"
+        return "?", "구매가능 · 수량조회실패" if info.get("availability") == "selectable" else "재고 조회 실패 · 수량 미확인"
     if kind in labels:
         return "[정책]", labels[kind]
     qty = _to_int(qty)

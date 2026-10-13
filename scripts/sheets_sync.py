@@ -63,9 +63,11 @@ def quantity_display(value, info=None):
         return qty if qty is not None else "확인불가"
     if kind == "quantity_unknown":
         if info.get("diagnostic"):
-            return "조회실패"
-        return "미공개" if info.get("availability") == "selectable" else "확인불가"
-    if kind in {"purchase_limit", "not_selling"}:
+            return "수량 미확인"
+        return "수량 미확인" if info.get("availability") == "selectable" else "확인불가"
+    if kind == "not_selling":
+        return "구매불가"
+    if kind == "purchase_limit":
         return "미공개"
     if value is None or value == "":
         return ""
@@ -101,11 +103,11 @@ def _status_for(current, previous, stale=False, uncertain=False, low_threshold=5
     if kind == "purchase_limit":
         return "선택가능 · 구매제한 있음 · 재고 미공개" if info.get("availability") == "selectable" else "구매제한 있음 · 재고 미공개"
     if kind == "not_selling":
-        return "판매중지 · 수량 미공개"
+        return "구매불가 · 비노출/판매중지"
     if kind == "quantity_unknown":
         if info.get("diagnostic"):
-            return "조회실패 · 수량 미확인"
-        return "선택가능 · 수량 미공개" if info.get("availability") == "selectable" else "확인불가"
+            return "구매가능 · 수량조회실패" if info.get("availability") == "selectable" else "판매상태 미확인 · 수량조회실패"
+        return "구매가능 · 수량미확인" if info.get("availability") == "selectable" else "확인불가"
     if kind not in TRUSTED_KINDS:
         return "확인불가 · 이전 방식 미검증"
     qty = _exact_quantity(current)
@@ -133,7 +135,9 @@ def build_sheet_rows(products, previous_products=None, default_checked_time="", 
     rows = [list(HEADERS)]
     sources = {"page": "페이지 재고값", "calculator": "재고관리 활성 · 서버값",
                "selection": "옵션 선택 상태", "dom": "옵션 품절 표시",
-               "user_override": "사용자 제보", "page_flags": "페이지 재고관리 설정"}
+               "user_override": "사용자 제보", "page_flags": "페이지 재고관리 설정",
+               "verified_browser": "정상 브라우저 서버값 · 10분 이내 검증",
+               "jsonld": "상품 구조화 데이터 판매 상태"}
     for url in sorted(products):
         entry = products[url] or {}
         previous = previous_products.get(url) or {}
@@ -154,7 +158,7 @@ def build_sheet_rows(products, previous_products=None, default_checked_time="", 
                 entry.get("name") or url, option,
                 quantity_display(qty, info if entry.get("inventory_schema") == 2 else None),
                 url, image_formula(entry.get("image_url")),
-                entry.get("checked_at") or ("" if stale else default_checked_time),
+                info.get("quantity_checked_at") or entry.get("checked_at") or ("" if stale else default_checked_time),
                 quantity_display(previous_qty, previous_infos.get(option)) if previous_trusted else "",
                 delta,
                 _status_for(qty, previous_qty, stale, uncertain, low_threshold,

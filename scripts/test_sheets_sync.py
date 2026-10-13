@@ -96,8 +96,8 @@ class SheetRowTests(unittest.TestCase):
         products = {url: {"name": "P", "stock": {"M": -2, "L": -3}, "inventory_schema": 2, "option_info": {"M": {"kind": "quantity_unknown", "availability": "selectable"}, "L": {"kind": "quantity_unknown"}}}}
         previous = {url: {"stock": {"M": 0, "L": 5}}}
         rows = sheets_sync.build_sheet_rows(products, previous)
-        self.assertEqual(rows[1][2], "미공개")
-        self.assertEqual(rows[1][8], "선택가능 · 수량 미공개")
+        self.assertEqual(rows[1][2], "수량 미확인")
+        self.assertEqual(rows[1][8], "구매가능 · 수량미확인")
         self.assertEqual(rows[1][7], "")
         self.assertEqual(rows[2][2], "확인불가")
         self.assertIn("확인불가", rows[2][8])
@@ -119,13 +119,37 @@ class SheetRowTests(unittest.TestCase):
                  "option_info": {"S": {"kind": "quantity_unknown", "availability": "selectable", "diagnostic": reason},
                                  "M": {"kind": "server_stock", "source": "calculator"}}}
         rows = sheets_sync.build_sheet_rows({url: entry})
-        self.assertEqual(rows[1][2], "조회실패")
-        self.assertEqual(rows[1][8], "조회실패 · 수량 미확인")
+        self.assertEqual(rows[1][2], "수량 미확인")
+        self.assertEqual(rows[1][8], "구매가능 · 수량조회실패")
         self.assertEqual(rows[1][12], reason)
         self.assertEqual(rows[2][2], 17)
         summary = sheets_sync.summarize_inventory({url: entry})
         self.assertEqual(summary["low_stock"], 1)
         self.assertEqual(summary["newly_soldout"], 0)
+
+    def test_verified_browser_quantity_keeps_its_actual_confirmation_time(self):
+        url = "https://shop.example/product/p/436/"
+        product = {"name": "Cap", "inventory_schema": 2, "checked_at": "later job time",
+                   "stock": {"S": 21},
+                   "option_info": {"S": {"kind": "server_stock", "availability": "selectable",
+                                         "source": "verified_browser", "quantity_checked_at": "2026-10-13 10:50 KST"}}}
+        row = sheets_sync.build_sheet_rows({url: product})[1]
+        self.assertEqual(row[2], 21)
+        self.assertEqual(row[5], "2026-10-13 10:50 KST")
+        self.assertEqual(row[12], "정상 브라우저 서버값 · 10분 이내 검증")
+
+    def test_hidden_stopped_option_is_unavailable_not_unpublished_or_zero(self):
+        url = "https://shop.example/product/p/1782/"
+        product = {"name": "Black", "inventory_schema": 2,
+                   "stock": {"M": -1, "L": 0},
+                   "option_info": {"M": {"kind": "not_selling", "availability": "not_selling", "selling": False, "displayed": False},
+                                   "L": {"kind": "soldout", "availability": "soldout"}}}
+        rows = sheets_sync.build_sheet_rows({url: product})
+        self.assertEqual(rows[1][2], "구매불가")
+        self.assertEqual(rows[1][8], "구매불가 · 비노출/판매중지")
+        self.assertEqual(rows[2][2], 0)
+        self.assertEqual(rows[2][8], "품절")
+        self.assertEqual(sheets_sync.summarize_inventory({url: product})["low_stock"], 0)
 
     def test_unmanaged_order_and_legacy_quantities_are_not_inventory(self):
         url = "https://shop.example/product/p/1/"
