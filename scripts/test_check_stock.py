@@ -33,6 +33,12 @@ class HelperTests(unittest.TestCase):
 
 
 class ExplicitStockTests(unittest.TestCase):
+    def setUp(self):
+        # Legacy fake evaluate methods model calculator results, not a native XHR.
+        self.xhr_patch = patch.object(check_stock, "get_explicit_stock_via_browser_xhr", return_value=(None, "browser-xhr: unsupported_xhr", None))
+        self.xhr_mock = self.xhr_patch.start()
+        self.addCleanup(self.xhr_patch.stop)
+
     def test_explicit_server_stock_requires_matching_item_and_valid_integer(self):
         self.assertEqual(check_stock._explicit_server_stock({"sItemCode": "A", "product_no": 1785, "stock_number": 14}, "A", "1785"), 14)
         self.assertEqual(check_stock._explicit_server_stock({"A": {"item_code": "A", "product_no": 1785, "stock_number": "1"}}, "A", "1785"), 1)
@@ -217,11 +223,13 @@ class ExplicitStockTests(unittest.TestCase):
                 self.assertEqual(data["M"], qty)
                 request.assert_not_called()
                 evidence.assert_not_called()
+                self.xhr_mock.assert_not_called()
         page = SimpleNamespace(evaluate=Mock(return_value={"data": {"M": -2}, "option_info": {"M": {"kind": "quantity_unknown", "stock_managed": True, "availability": "selectable"}}}))
         with patch.object(check_stock, "get_explicit_stock_via_request", return_value=(17, None)), patch.object(check_stock, "get_explicit_stock_via_browser_evidence") as evidence:
             data, _ = check_stock.get_option_stock_via_calculator(page, "https://shop.example", "1785", items)
             self.assertEqual(data["M"], 17)
             evidence.assert_not_called()
+            self.xhr_mock.assert_not_called()
 
     def test_legacy_history_is_not_a_schema_two_baseline(self):
         source = inspect.getsource(check_stock.main)
@@ -230,7 +238,151 @@ class ExplicitStockTests(unittest.TestCase):
         self.assertIn('"inventory_schema": 2', inspect.getsource(check_stock.save_history))
 
 
+class BrowserXHRTests(unittest.TestCase):
+    domain = "https://shop.example"
+
+    def response(self, quantity=82, **overrides):
+        result = {"status": 200,
+                  "responseURL": self.domain + "/exec/front/shop/CalculatorProduct?product_no=2792&is_subscription=F&product%5BA%5D=9999",
+                  "contentType": "application/json; charset=utf-8",
+                  "responseText": json.dumps({"sItemCode": "A", "product_no": "2792", "stock_number": quantity}),
+                  "capturedAt": datetime.now(timezone.utc).isoformat()}
+        result.update(overrides)
+        return result
+
+    def page(self, result):
+        return SimpleNamespace(url=self.domain + "/product/glass/2792/", evaluate=Mock(return_value=result))
+
+    def test_xhr_returns_explicit_server_stock_and_completion_timestamp(self):
+        page = self.page(self.response())
+        qty, note, capture = check_stock.get_explicit_stock_via_browser_xhr(page, self.domain, "2792", "A")
+        self.assertEqual(qty, 82)
+        self.assertIsNone(note)
+        self.assertRegex(capture["quantity_checked_at"], r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} KST$")
+        self.assertIsNotNone(datetime.fromisoformat(capture["captured_at"]).tzinfo)
+        self.assertEqual(page.evaluate.call_args.args[1]["itemCode"], "A")
+
+    def test_xhr_rejects_redirect_html_wrong_item_and_invalid_payload(self):
+        invalid = [
+            ({"responseURL": self.response()["responseURL"].replace("shop.example", "other.example")}, "unexpected_response_origin"),
+            ({"responseURL": self.response()["responseURL"].replace("shop.example", "shop.example:444")}, "unexpected_response_origin"),
+            ({"responseURL": self.domain + "/error"}, "unexpected_response_endpoint"),
+            ({"responseURL": self.response()["responseURL"].replace("product_no=2792", "product_no=9")}, "unexpected_response_product_item"),
+            ({"contentType": "text/html", "responseText": "<html>secret</html>"}, "non_json_response"),
+            ({"contentType": "application /json"}, "non_json_response"),
+            ({"responseText": "<html>secret</html>"}, "non_json_response"),
+            ({"responseText": "{broken"}, "malformed_json"),
+            ({"responseText": json.dumps({"sItemCode": "B", "stock_number": 89})}, "no_matching_explicit_stock"),
+            ({"responseText": json.dumps({"sItemCode": "A", "product_no": 9, "stock_number": 89})}, "no_matching_explicit_stock"),
+            ({"responseText": json.dumps({"sItemCode": "A", "Result": True, "message": "9999", "max": 89})}, "no_matching_explicit_stock"),
+            ({"status": 500}, "HTTPError"),
+            ({"status": True}, "HTTPError"),
+            ({"error": "timeout"}, "timeout"),
+            ({"error": "unsupported_xhr"}, "unsupported_xhr"),
+            ({"capturedAt": "bad"}, "ValueError"),
+        ]
+        for overrides, reason in invalid:
+            with self.subTest(reason=reason, overrides=overrides):
+                qty, note, capture = check_stock.get_explicit_stock_via_browser_xhr(self.page(self.response(**overrides)), self.domain, "2792", "A")
+                self.assertIsNone(qty)
+                self.assertIsNone(capture)
+                self.assertIn(reason, note)
+                self.assertNotIn("secret", note)
+
+    def test_xhr_input_gate_and_malformed_results_are_conservative(self):
+        for page_url, product, item in [("https://other.example/product/x/2792/", "2792", "A"), (self.domain + "/product/x/9/", "2792", "A"), (self.domain + "/product/x/2792/", "2792", "__single"), (self.domain + "/product/x/2792/", "bad", "A"), (self.domain + "/product/x/2792/", "2792", "A]&x=1")]:
+            page = SimpleNamespace(url=page_url, evaluate=Mock())
+            self.assertIsNone(check_stock.get_explicit_stock_via_browser_xhr(page, self.domain, product, item)[0])
+            page.evaluate.assert_not_called()
+        for result in (None, [], "bad", {}, {"responseURL": 1}):
+            self.assertIsNone(check_stock.get_explicit_stock_via_browser_xhr(self.page(result), self.domain, "2792", "A")[0])
+        page = self.page(None)
+        page.evaluate.side_effect = RuntimeError("cookie=secret")
+        self.assertNotIn("secret", check_stock.get_explicit_stock_via_browser_xhr(page, self.domain, "2792", "A")[1])
+
+    def test_xhr_auto_recovers_fixture_counts_without_environment(self):
+        # Historical glass/kids quantities are fixtures only, never production constants.
+        for fixture_qty in (89, 86, 2, 6, 2):
+            outcome = {"data": {"M": -2}, "option_info": {"M": {"kind": "quantity_unknown", "stock_managed": True, "availability": "selectable"}}}
+            page = self.page(None)
+            page.evaluate.side_effect = [outcome, self.response(fixture_qty), None]
+            with patch.object(check_stock, "get_explicit_stock_via_request", return_value=(None, "request-fallback: non_json_response")), patch.object(check_stock, "get_explicit_stock_via_browser_evidence") as evidence, patch.dict(check_stock.os.environ, {}, clear=True):
+                data, note = check_stock.get_option_stock_via_calculator(page, self.domain, "2792", {"A": {"option_value": "M"}})
+            self.assertEqual(data["M"], fixture_qty)
+            self.assertIsNone(note)
+            evidence.assert_not_called()
+            info = outcome["option_info"]["M"]
+            self.assertEqual(info["source"], "browser_xhr")
+            self.assertEqual(info["kind"], "server_stock")
+            self.assertEqual(info["lookup_path"], ["page", "calculator", "request_fallback", "browser_xhr"])
+            self.assertIn("non_json_response", info["primary_diagnostic"])
+            self.assertNotIn("error", info)
+            self.assertNotIn("diagnostic", info)
+
+    def test_xhr_selected_zero_remains_unknown_and_recent_capture_is_last_tier(self):
+        for native_qty, env_qty, expected in [(0, None, -2), (None, 14, 14), (0, 14, 14)]:
+            outcome = {"data": {"M": -2}, "option_info": {"M": {"kind": "quantity_unknown", "stock_managed": True, "availability": "selectable"}}}
+            page = self.page(None)
+            page.evaluate.side_effect = [outcome, self.response(native_qty) if native_qty is not None else {"error": "timeout"}, None]
+            with patch.object(check_stock, "get_explicit_stock_via_request", return_value=(None, "request-fallback: non_json_response")), patch.object(check_stock, "get_explicit_stock_via_browser_evidence", return_value=(env_qty, {"quantity_checked_at": "2026-10-08 21:00:00 KST"})) as evidence:
+                data, note = check_stock.get_option_stock_via_calculator(page, self.domain, "2792", {"A": {"option_value": "M"}})
+            self.assertEqual(data["M"], expected)
+            evidence.assert_called_once()
+            info = outcome["option_info"]["M"]
+            self.assertIn("browser_xhr", info["lookup_path"])
+            self.assertIn("non_json_response", info["primary_diagnostic"])
+            self.assertIn("browser-xhr", info["browser_xhr_diagnostic"])
+            if env_qty:
+                self.assertEqual(info["source"], "verified_browser")
+                self.assertEqual(info["lookup_path"][-2:], ["browser_xhr", "verified_browser"])
+                self.assertIsNone(note)
+            else:
+                self.assertEqual(info["kind"], "quantity_unknown")
+                self.assertIn("selectable_zero_not_confirmed", note)
+                self.assertIn("non_json_response", note)
+
+    def test_xhr_skips_blocked_and_primary_success_paths(self):
+        cases = [("server_stock", True, None, "selectable", 14), ("soldout", True, None, "soldout", 0), ("not_selling", True, None, "selectable", -1), ("made_to_order", True, None, "selectable", -2), ("quantity_unknown", False, None, "selectable", -2), ("quantity_unknown", True, 3, "selectable", -2), ("quantity_unknown", True, None, "unknown", -1)]
+        for kind, managed, cap, availability, qty in cases:
+            page = self.page({"data": {"M": qty}, "option_info": {"M": {"kind": kind, "stock_managed": managed, "purchase_limit": cap, "availability": availability}}})
+            with patch.object(check_stock, "get_explicit_stock_via_request", return_value=(None, "request-fallback: failed")), patch.object(check_stock, "get_explicit_stock_via_browser_xhr") as xhr, patch.object(check_stock, "get_explicit_stock_via_browser_evidence") as evidence:
+                check_stock.get_option_stock_via_calculator(page, self.domain, "2792", {"A": {"option_value": "M"}})
+                xhr.assert_not_called()
+                evidence.assert_not_called()
+
+
 class ProductionJavaScriptHarness(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("node"), "Node.js required for production JS harness")
+    def test_actual_native_xhr_request_and_failure_events(self):
+        source = inspect.getsource(check_stock.get_explicit_stock_via_browser_xhr)
+        js = source.split('js = r"""', 1)[1].split('"""', 1)[0]
+        harness = r'''const fn=__FUNCTION__;
+(async()=>{let count=0;
+for(const category of [undefined,104,'31',0,-1,'bad']){
+ let req;
+ class XHR {constructor(){this.status=200;this.responseText='{"sItemCode":"A","stock_number":82}';this.headers={};}open(method,url,async){req=this;Object.assign(this,{method,url,async,responseURL:url});}setRequestHeader(k,v){this.headers[k]=v;}getResponseHeader(){return 'application/json';}send(){this.onload();}}
+ global.window={location:{href:'https://shop.example/product/glass/2792/'},iCategoryNo:category,XMLHttpRequest:XHR};
+ const out=await fn({domain:'https://shop.example',productNo:'2792',itemCode:'A'}),q=new URL(req.url).searchParams;
+ if(out.status!==200||out.error||req.method!=='GET'||req.async!==true||req.timeout!==8000||req.withCredentials!==undefined||req.headers['X-Requested-With']!=='XMLHttpRequest'||req.headers.Accept!=='application/json, text/javascript, */*; q=0.01')throw Error('request mismatch');
+ if(q.get('product[A]')!=='9999'||q.get('is_subscription')!=='F'||q.get('product_no')!=='2792'||q.get('cate_no')!==([104,'31'].includes(category)?String(category):null))throw Error('query mismatch');
+ if(Number.isNaN(Date.parse(out.capturedAt)))throw Error('completion missing');count++;
+}
+for(const [event,error] of [['ontimeout','timeout'],['onerror','network_failure'],['onabort','aborted']]){
+ class XHR {open(){}setRequestHeader(){}getResponseHeader(){return '';}send(){this[event]();}}
+ global.window={location:{href:'https://shop.example/product/x/2792/'},XMLHttpRequest:XHR};
+ if((await fn({domain:'https://shop.example',productNo:'2792',itemCode:'A'})).error!==error)throw Error('failure mismatch');count++;
+}
+for(const href of ['https://other.example/product/x/2792/','https://shop.example:444/product/x/2792/','https://shop.example/product/x/9/']){
+ global.window={location:{href},XMLHttpRequest:class{constructor(){throw Error('must not construct');}}};
+ if((await fn({domain:'https://shop.example',productNo:'2792',itemCode:'A'})).error!=='same_origin_product_required')throw Error('gate mismatch');count++;
+}
+global.window={location:{href:'https://shop.example/product/x/2792/'}};
+if((await fn({domain:'https://shop.example',productNo:'2792',itemCode:'A'})).error!=='unsupported_xhr')throw Error('unsupported mismatch');count++;
+console.log('passed '+count+' native XHR cases');})().catch(e=>{console.error(e);process.exit(1)});'''.replace('__FUNCTION__', js)
+        result = subprocess.run(["node", "-e", harness], capture_output=True, text=True, timeout=20)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+        self.assertIn("passed 13", result.stdout)
+
     @unittest.skipUnless(shutil.which("node"), "Node.js required for production JS harness")
     def test_actual_calculator_js_policy_cases(self):
         source = inspect.getsource(check_stock.get_option_stock_via_calculator)

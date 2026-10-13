@@ -138,6 +138,21 @@ class SheetRowTests(unittest.TestCase):
         self.assertEqual(row[5], "2026-10-13 10:50 KST")
         self.assertEqual(row[12], "정상 브라우저 서버값 · 10분 이내 검증")
 
+    def test_automatic_browser_xhr_stock_records_source_and_actual_check_time(self):
+        url = "https://shop.example/product/p/2792/"
+        product = {"name": "Bottle", "inventory_schema": 2, "checked_at": "later job time",
+                   "stock": {"Lucky": 82},
+                   "option_info": {"Lucky": {"kind": "server_stock", "availability": "selectable",
+                                              "source": "browser_xhr",
+                                              "quantity_checked_at": "2026-10-13 11:35:10 KST",
+                                              "primary_diagnostic": "old request failed"}}}
+        row = sheets_sync.build_sheet_rows({url: product})[1]
+        self.assertEqual(row[2], 82)
+        self.assertEqual(row[5], "2026-10-13 11:35:10 KST")
+        self.assertEqual(row[12], "브라우저 XHR 서버값 · 자동 재확인")
+        self.assertEqual(row[6], "")
+        self.assertEqual(row[7], "")
+
     def test_hidden_stopped_option_is_unavailable_not_unpublished_or_zero(self):
         url = "https://shop.example/product/p/1782/"
         product = {"name": "Black", "inventory_schema": 2,

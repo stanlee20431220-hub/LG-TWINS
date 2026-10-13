@@ -136,6 +136,7 @@ def build_sheet_rows(products, previous_products=None, default_checked_time="", 
     sources = {"page": "페이지 재고값", "calculator": "재고관리 활성 · 서버값",
                "selection": "옵션 선택 상태", "dom": "옵션 품절 표시",
                "user_override": "사용자 제보", "page_flags": "페이지 재고관리 설정",
+               "browser_xhr": "브라우저 XHR 서버값 · 자동 재확인",
                "verified_browser": "정상 브라우저 서버값 · 10분 이내 검증",
                "jsonld": "상품 구조화 데이터 판매 상태"}
     for url in sorted(products):

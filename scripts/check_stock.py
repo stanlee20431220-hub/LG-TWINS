@@ -40,7 +40,7 @@ COMPACT_ITEM_LIMIT = 12
 PRODUCT_URL_RE = re.compile(r"/product/([^/]+/\d+)/")
 EXCLUDE_KEYWORDS = ["마킹키트"]
 UNCERTAIN_MARKER = "[불확실]"
-SCRIPT_VERSION = "v15-stock-schema2"
+SCRIPT_VERSION = "v16-stock-schema2-browser-xhr"
 
 REMOVE_OVERLAYS_JS = """
 () => {
@@ -344,6 +344,97 @@ def get_explicit_stock_via_request(page, domain, product_no, item_code):
     return None, diagnostic(failure)
 
 
+def get_explicit_stock_via_browser_xhr(page, domain, product_no, item_code):
+    """Ask the current Chromium page for explicit inventory using its native XHR."""
+    status, media_type, response_host = "unknown", "unknown", "unknown"
+
+    def diagnostic(reason):
+        return (f"browser-xhr: {reason}; HTTP={status}; type={media_type}; "
+                f"response-host={response_host}")
+
+    def origin_key(url):
+        parsed = urllib.parse.urlparse(url)
+        if parsed.scheme not in {"https", "http"} or not parsed.hostname or parsed.username or parsed.password:
+            raise ValueError("invalid origin")
+        return parsed.scheme, parsed.hostname, parsed.port or (443 if parsed.scheme == "https" else 80)
+
+    js = r"""
+async (args) => {
+ const endpoint='/exec/front/shop/CalculatorProduct';
+ try {
+  const base=new URL(args.domain), here=new URL(window.location.href);
+  const product=here.pathname.match(/\/product\/(?:[^/]+\/)?(\d+)\/?$/);
+  if(base.origin!==here.origin||base.username||base.password||here.username||here.password||!product||product[1]!==args.productNo)return {error:'same_origin_product_required'};
+  if(typeof window.XMLHttpRequest!=='function')return {error:'unsupported_xhr'};
+  const url=new URL(endpoint,base);
+  url.search=new URLSearchParams({product_no:args.productNo,is_subscription:'F',['product['+args.itemCode+']']:'9999'});
+  const category=window.iCategoryNo;
+  if((typeof category==='number'||typeof category==='string')&&/^\d+$/.test(String(category))&&Number.isSafeInteger(Number(category))&&Number(category)>0)url.searchParams.set('cate_no',String(Number(category)));
+  return await new Promise(resolve=>{
+   const xhr=new window.XMLHttpRequest();let done=false;
+   const finish=error=>{if(done)return;done=true;try{resolve({error,status:xhr.status,responseURL:xhr.responseURL,contentType:xhr.getResponseHeader('Content-Type')||'',responseText:error?'':xhr.responseText,capturedAt:new Date().toISOString()});}catch(e){resolve({error:'response_read_failure'});}};
+   xhr.open('GET',url.href,true);xhr.timeout=8000;
+   xhr.setRequestHeader('Accept','application/json, text/javascript, */*; q=0.01');
+   xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
+   xhr.onload=()=>finish(null);xhr.onerror=()=>finish('network_failure');xhr.ontimeout=()=>finish('timeout');xhr.onabort=()=>finish('aborted');
+   xhr.send();
+  });
+ }catch(e){return {error:'xhr_exception'};}
+}
+    """
+    try:
+        if item_code == "__single":
+            return None, diagnostic("unsupported_single_item"), None
+        if not isinstance(item_code, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", item_code) or not re.fullmatch(r"[1-9]\d*", str(product_no)):
+            return None, diagnostic("invalid_item_product"), None
+        page_url = getattr(page, "url", "")
+        if origin_key(domain) != origin_key(page_url) or extract_product_no(urllib.parse.urlparse(page_url).path) != str(product_no) or not re.fullmatch(r"/product/(?:[^/]+/)?\d+/?", urllib.parse.urlparse(page_url).path):
+            return None, diagnostic("same_origin_product_required"), None
+        result = page.evaluate(js, {"domain": domain, "productNo": str(product_no), "itemCode": item_code})
+        if not isinstance(result, dict):
+            return None, diagnostic("malformed_result"), None
+        raw_status = result.get("status")
+        status = raw_status if type(raw_status) is int else "unknown"
+        raw_type = result.get("contentType", "")
+        actual_type = raw_type.split(";", 1)[0].strip().lower() if isinstance(raw_type, str) else ""
+        media_type = re.sub(r"[^A-Za-z0-9/._+-]", "", actual_type)[:80] or "unknown"
+        if result.get("error"):
+            reason = result["error"]
+            allowed = {"same_origin_product_required", "unsupported_xhr", "network_failure", "timeout", "aborted", "response_read_failure", "xhr_exception"}
+            return None, diagnostic(reason if isinstance(reason, str) and reason in allowed else "xhr_failure"), None
+        response = urllib.parse.urlparse(result.get("responseURL", ""))
+        response_host = re.sub(r"[^A-Za-z0-9._-]", "", response.hostname or "unknown")[:253]
+        if origin_key(result.get("responseURL", "")) != origin_key(domain):
+            return None, diagnostic("unexpected_response_origin"), None
+        if response.path != "/exec/front/shop/CalculatorProduct" or response.fragment:
+            return None, diagnostic("unexpected_response_endpoint"), None
+        query = urllib.parse.parse_qs(response.query, keep_blank_values=True)
+        if query.get("product_no") != [str(product_no)] or query.get(f"product[{item_code}]") != ["9999"]:
+            return None, diagnostic("unexpected_response_product_item"), None
+        if type(raw_status) is not int or not 200 <= raw_status < 300:
+            return None, diagnostic("HTTPError"), None
+        if not (actual_type == "application/json" or (actual_type.startswith("application/") and actual_type.endswith("+json") and re.fullmatch(r"application/[A-Za-z0-9!#        if not (media_type == "application/json" or (media_type.startswith("application/") and media_type.endswith("+json"))):
+            return None, diagnostic("non_json_response"), None^_.+-]+", actual_type))):
+            return None, diagnostic("non_json_response"), None
+        body = result.get("responseText")
+        if not isinstance(body, str) or len(body) > 1_000_000 or not body.lstrip().startswith("{"):
+            return None, diagnostic("non_json_response"), None
+        try:
+            payload = json.loads(body)
+        except (ValueError, TypeError):
+            return None, diagnostic("malformed_json"), None
+        quantity = _explicit_server_stock(payload, item_code, product_no)
+        if quantity is None:
+            return None, diagnostic("no_matching_explicit_stock"), None
+        captured = datetime.fromisoformat(result["capturedAt"].replace("Z", "+00:00"))
+        if captured.tzinfo is None or not -5 <= (datetime.now(timezone.utc) - captured).total_seconds() <= 60:
+            return None, diagnostic("invalid_completion_time"), None
+        capture_info = {"captured_at": captured.astimezone(timezone.utc).isoformat(), "quantity_checked_at": captured.astimezone(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S KST")}
+        return quantity, None, capture_info
+    except Exception as exc:
+        return None, diagnostic(re.sub(r"[^A-Za-z0-9_]", "", type(exc).__name__)[:40] or "XHRFailure"), None
+
+
 def get_explicit_stock_via_browser_evidence(domain, product_no, item_code, now=None):
     """Optional last-tier evidence from a recent, same-origin browser API capture."""
     raw = os.environ.get("BROWSER_STOCK_EVIDENCE_JSON", "")
@@ -519,16 +610,36 @@ async (args) => {
                     note = note or "request-fallback: selectable_zero_not_confirmed"
                     info["diagnostic"] = note
                     info["error"] = "quantity_unknown" if "no_matching_explicit_stock" in note or "selectable_zero_not_confirmed" in note else "network_failure"
-                    # Browser captures are optional, recent evidence, not a repair of API access.
-                    evidence_qty, capture_info = get_explicit_stock_via_browser_evidence(domain, product_no, code) if info.get("availability") == "selectable" else (None, None)
-                    if evidence_qty is not None and evidence_qty > 0:
-                        data[label] = evidence_qty
-                        info.update(kind="server_stock", source="verified_browser", quantity_checked_at=capture_info["quantity_checked_at"], primary_diagnostic=note)
-                        info["lookup_path"] = ["page", "calculator", "request_fallback", "verified_browser"]
+                    path = ["page", "calculator", "request_fallback"]
+                    xhr_qty, xhr_note, xhr_capture = None, None, None
+                    if info.get("availability") == "selectable" and info.get("selling") is not False and info.get("displayed") is not False:
+                        path.append("browser_xhr")
+                        try:
+                            xhr_qty, xhr_note, xhr_capture = get_explicit_stock_via_browser_xhr(page, domain, product_no, code)
+                        except Exception as exc:
+                            xhr_note = f"browser-xhr: {type(exc).__name__}"
+                        if xhr_qty == 0:
+                            xhr_note = "browser-xhr: selectable_zero_not_confirmed"
+                    info["primary_diagnostic"] = note
+                    if xhr_qty is not None and xhr_qty > 0 and isinstance(xhr_capture, dict) and xhr_capture.get("quantity_checked_at"):
+                        data[label] = xhr_qty
+                        info.update(kind="server_stock", source="browser_xhr", quantity_checked_at=xhr_capture["quantity_checked_at"], lookup_path=path)
                         info.pop("diagnostic", None)
                         info.pop("error", None)
                     else:
-                        failures.append(f"{label}: {note}")
+                        # Optional recent captures remain the final tier, never the primary lookup.
+                        evidence_qty, capture_info = get_explicit_stock_via_browser_evidence(domain, product_no, code) if info.get("availability") == "selectable" else (None, None)
+                        if xhr_note:
+                            info["browser_xhr_diagnostic"] = xhr_note
+                        if evidence_qty is not None and evidence_qty > 0:
+                            data[label] = evidence_qty
+                            info.update(kind="server_stock", source="verified_browser", quantity_checked_at=capture_info["quantity_checked_at"], lookup_path=path + ["verified_browser"])
+                            info.pop("diagnostic", None)
+                            info.pop("error", None)
+                        else:
+                            info["lookup_path"] = path
+                            info["diagnostic"] = " | ".join(filter(None, [note, xhr_note]))
+                            failures.append(f"{label}: {info['diagnostic']}")
                 infos[label] = info
     except Exception as exc:
         failures.append(f"request-fallback metadata: {type(exc).__name__}")
