@@ -413,8 +413,7 @@ async (args) => {
             return None, diagnostic("unexpected_response_product_item"), None
         if type(raw_status) is not int or not 200 <= raw_status < 300:
             return None, diagnostic("HTTPError"), None
-        if not (actual_type == "application/json" or (actual_type.startswith("application/") and actual_type.endswith("+json") and re.fullmatch(r"application/[A-Za-z0-9!#        if not (media_type == "application/json" or (media_type.startswith("application/") and media_type.endswith("+json"))):
-            return None, diagnostic("non_json_response"), None^_.+-]+", actual_type))):
+        if not (actual_type == "application/json" or re.fullmatch(r"application/[A-Za-z0-9._+-]+\+json", actual_type)):
             return None, diagnostic("non_json_response"), None
         body = result.get("responseText")
         if not isinstance(body, str) or len(body) > 1_000_000 or not body.lstrip().startswith("{"):
