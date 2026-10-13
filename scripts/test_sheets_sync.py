@@ -111,6 +111,22 @@ class SheetRowTests(unittest.TestCase):
         self.assertEqual(baseline[7], "")
         self.assertNotEqual(baseline[8], "재입고")
 
+    def test_api_failure_is_not_mislabelled_as_unpublished_inventory(self):
+        url = "https://shop.example/product/p/1/"
+        reason = "request-fallback: redirect; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com"
+        entry = {"name": "P", "inventory_schema": 2,
+                 "stock": {"S": -2, "M": 17},
+                 "option_info": {"S": {"kind": "quantity_unknown", "availability": "selectable", "diagnostic": reason},
+                                 "M": {"kind": "server_stock", "source": "calculator"}}}
+        rows = sheets_sync.build_sheet_rows({url: entry})
+        self.assertEqual(rows[1][2], "조회실패")
+        self.assertEqual(rows[1][8], "조회실패 · 수량 미확인")
+        self.assertEqual(rows[1][12], reason)
+        self.assertEqual(rows[2][2], 17)
+        summary = sheets_sync.summarize_inventory({url: entry})
+        self.assertEqual(summary["low_stock"], 1)
+        self.assertEqual(summary["newly_soldout"], 0)
+
     def test_unmanaged_order_and_legacy_quantities_are_not_inventory(self):
         url = "https://shop.example/product/p/1/"
         entry = {"name": "P", "inventory_schema": 2,

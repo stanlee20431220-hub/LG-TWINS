@@ -54,19 +54,20 @@ with sync_playwright() as playwright:
         if 'payload' in browser_result:
             browser_result['payload'] = summarize(browser_result['payload'], code)
         emit('BROWSER_FETCH_' + code, browser_result)
-        response = None
-        try:
-            response = page.request.get(url, timeout=10000)
-            result = {'status': response.status, 'host': urllib.parse.urlparse(response.url).hostname,
-                      'content_type': response.headers.get('content-type')}
+        for mode, headers in [('PLAIN', {}), ('XHR', {'Referer': page.url, 'Accept': 'application/json, text/javascript, */*; q=0.01', 'X-Requested-With': 'XMLHttpRequest'})]:
+            response = None
             try:
-                result['payload'] = summarize(response.json(), code)
+                response = page.request.get(url, timeout=10000, headers=headers)
+                result = {'status': response.status, 'host': urllib.parse.urlparse(response.url).hostname,
+                          'content_type': response.headers.get('content-type')}
+                try:
+                    result['payload'] = summarize(response.json(), code)
+                except Exception as exc:
+                    result['error'] = type(exc).__name__
+                emit('REQUEST_FETCH_' + mode + '_' + code, result)
             except Exception as exc:
-                result['error'] = type(exc).__name__
-            emit('REQUEST_FETCH_' + code, result)
-        except Exception as exc:
-            emit('REQUEST_FETCH_' + code, {'error': type(exc).__name__})
-        finally:
-            if response is not None:
-                response.dispose()
+                emit('REQUEST_FETCH_' + mode + '_' + code, {'error': type(exc).__name__})
+            finally:
+                if response is not None:
+                    response.dispose()
     browser.close()

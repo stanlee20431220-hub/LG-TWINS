@@ -62,6 +62,8 @@ def quantity_display(value, info=None):
         qty = _exact_quantity(value)
         return qty if qty is not None else "확인불가"
     if kind == "quantity_unknown":
+        if info.get("diagnostic"):
+            return "조회실패"
         return "미공개" if info.get("availability") == "selectable" else "확인불가"
     if kind in {"purchase_limit", "not_selling"}:
         return "미공개"
@@ -101,6 +103,8 @@ def _status_for(current, previous, stale=False, uncertain=False, low_threshold=5
     if kind == "not_selling":
         return "판매중지 · 수량 미공개"
     if kind == "quantity_unknown":
+        if info.get("diagnostic"):
+            return "조회실패 · 수량 미확인"
         return "선택가능 · 수량 미공개" if info.get("availability") == "selectable" else "확인불가"
     if kind not in TRUSTED_KINDS:
         return "확인불가 · 이전 방식 미검증"
@@ -158,7 +162,7 @@ def build_sheet_rows(products, previous_products=None, default_checked_time="", 
                 entry.get("price") if entry.get("price") is not None else "",
                 urllib.parse.urlparse(url).netloc.lower(),
                 f"{limit}개" if isinstance(limit, int) and limit > 0 else "",
-                sources.get(info.get("source"), "미확인"),
+                info.get("diagnostic") or sources.get(info.get("source"), "미확인"),
             ])
     return rows
 

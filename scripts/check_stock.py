@@ -261,28 +261,69 @@ def _explicit_server_stock(payload, item_code, product_no):
 
 
 def get_explicit_stock_via_request(page, domain, product_no, item_code):
-    """Same-context API fallback, bypassing browser fetch/CORS only for explicit stock."""
+    """Same-origin XHR-style fallback, trusting only explicit JSON inventory."""
+    origin = urllib.parse.urlparse(domain)
+    page_url = urllib.parse.urlparse(getattr(page, "url", ""))
+    safe_host = lambda host: re.sub(r"[^A-Za-z0-9._-]", "", host or "unknown")[:253]
+    final_host = safe_host(origin.hostname)
+    page_host = safe_host(page_url.hostname)
+    status, content_type = "unknown", "unknown"
+
+    def diagnostic(failure):
+        return (
+            f"request-fallback: {failure}; HTTP={status}; type={content_type}; "
+            f"response-host={final_host}; page-host={page_host}"
+        )
+
+    def same_origin(left, right):
+        return (left.scheme, left.hostname, left.port or (443 if left.scheme == "https" else 80)) == (
+            right.scheme, right.hostname, right.port or (443 if right.scheme == "https" else 80)
+        )
+
+    if item_code == "__single":
+        return None, diagnostic("unsupported_single_item")
+    if origin.scheme not in {"http", "https"} or not origin.hostname or origin.username or origin.password or page_url.username or page_url.password or not same_origin(origin, page_url):
+        return None, diagnostic("same_origin_required")
     query = urllib.parse.urlencode({
         "product_no": str(product_no),
         "is_subscription": "F",
         f"product[{item_code}]": "9999",
     })
     url = f"{domain}/exec/front/shop/CalculatorProduct?{query}"
-    final_host = urllib.parse.urlparse(domain).hostname or "unknown"
-    page_host = urllib.parse.urlparse(getattr(page, "url", "")).hostname or "unknown"
+    # Exclude credentials, query and fragment from the same-origin Referer.
+    referer = urllib.parse.urlunparse((page_url.scheme, origin.netloc, page_url.path, "", "", ""))
+    headers = {
+        "Referer": referer,
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "X-Requested-With": "XMLHttpRequest",
+    }
     failure = "no_explicit_stock"
     for attempt in range(3):
         response = None
-        status = "unknown"
-        content_type = "unknown"
+        status, content_type = "unknown", "unknown"
         try:
-            response = page.request.get(url, timeout=8000)
+            response = page.request.get(url, timeout=8000, headers=headers)
             status = response.status
-            final_host = urllib.parse.urlparse(response.url).hostname or "unknown"
-            content_type = re.sub(r"[^A-Za-z0-9/;= ._-]", "", str(response.headers.get("content-type", "unknown")))[:80]
+            response_url = urllib.parse.urlparse(response.url)
+            final_host = safe_host(response_url.hostname)
+            response_headers = response.headers
+            raw_type = next((value for key, value in response_headers.items() if key.lower() == "content-type"), "unknown")
+            media_type = str(raw_type).split(";", 1)[0].strip().lower()
+            content_type = re.sub(r"[^A-Za-z0-9/._+-]", "", media_type)[:80] or "unknown"
+            if not same_origin(origin, response_url):
+                failure = "unexpected_response_origin"
+                break
             if not response.ok:
                 failure = "HTTPError"
             else:
+                is_json_type = media_type == "application/json" or (media_type.startswith("application/") and media_type.endswith("+json"))
+                if not is_json_type:
+                    # Some same-origin Cafe24 endpoints mislabel JSON as text/html.
+                    # Inspect only the prefix; never feed an HTML document to JSON parsing.
+                    body = response.text().lstrip()
+                    if not body.startswith("{"):
+                        failure = "non_json_response"
+                        break
                 payload = response.json()
                 exact = _explicit_server_stock(payload, item_code, product_no)
                 if exact is not None:
@@ -300,11 +341,7 @@ def get_explicit_stock_via_request(page, domain, product_no, item_code):
                     pass
         if attempt < 2:
             time.sleep(0.25 * (attempt + 1))
-    diagnostic = (
-        f"request-fallback: {failure}; HTTP={status}; type={content_type}; "
-        f"response-host={final_host}; page-host={page_host}"
-    )
-    return None, diagnostic
+    return None, diagnostic(failure)
 
 
 def get_option_stock_via_calculator(page, domain, product_no, option_data_json):
@@ -360,26 +397,44 @@ async (args) => {
     try:
         outcome = page.evaluate(js, {"domain":domain,"productNo":product_no,"optionDataJson":option_data_json})
     except Exception as exc:
-        return None, f"CalculatorProduct 평가 실패({type(exc).__name__}): {exc}"
+        return None, f"CalculatorProduct 평가 실패({type(exc).__name__})"
     if not outcome or outcome.get("error"):
         return None, "옵션 재고 메타데이터 조회 실패"
     data=outcome.get("data") or {}
     infos=outcome.get("option_info") or {}
     # Same-context request fallback is restricted to managed, uncapped options.
+    failures = []
     try:
         items = json.loads(option_data_json) if isinstance(option_data_json, str) else option_data_json
         for code, item in items.items():
+            if code == "__single" or not isinstance(item, dict):
+                continue
             label = item.get("option_value") or item.get("option_text") or code
             info = infos.get(label) or {}
             if data.get(label, -1) < 0 and info.get("kind") == "quantity_unknown" and info.get("stock_managed") is True and not info.get("purchase_limit"):
-                exact, _ = get_explicit_stock_via_request(page, domain, product_no, code)
+                try:
+                    exact, note = get_explicit_stock_via_request(page, domain, product_no, code)
+                except Exception as exc:
+                    exact, note = None, f"request-fallback: {type(exc).__name__}"
                 if exact is not None and not (exact == 0 and info.get("availability") == "selectable"):
                     data[label] = exact
                     info.update(kind="server_stock", source="calculator")
+                    info.pop("diagnostic", None)
+                    info.pop("error", None)
+                else:
+                    note = note or "request-fallback: selectable_zero_not_confirmed"
+                    info["diagnostic"] = note
+                    info["error"] = "quantity_unknown" if "no_matching_explicit_stock" in note or "selectable_zero_not_confirmed" in note else "network_failure"
+                    failures.append(f"{label}: {note}")
+                infos[label] = info
+    except Exception as exc:
+        failures.append(f"request-fallback metadata: {type(exc).__name__}")
+    try:
         page.evaluate("info => { window.__lg_stock_option_info = info; }", infos)
-    except Exception:
-        pass
-    return (data or None), None
+    except Exception as exc:
+        failures.append(f"option metadata persistence: {type(exc).__name__}")
+    # Partial failures must not suppress genuine counts on successful options.
+    return (data or None), (" | ".join(failures) if failures else None)
 
 
 def get_stock_for_product(page, url):
@@ -564,6 +619,8 @@ def stock_status(qty, info=None):
     labels = {"made_to_order": "주문제작 · 수량 없음", "stock_unmanaged": "재고 미관리 · 수량 없음",
               "purchase_limit": "구매제한 있음 · 재고 미공개", "not_selling": "판매중지 · 수량 미공개",
               "quantity_unknown": "선택가능 · 수량 미공개" if info.get("availability") == "selectable" else "확인불가"}
+    if kind == "quantity_unknown" and info.get("diagnostic"):
+        return "?", "재고 조회 실패 · 수량 미확인"
     if kind in labels:
         return "[정책]", labels[kind]
     qty = _to_int(qty)
