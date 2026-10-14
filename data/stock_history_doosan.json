@@ -1,0 +1,1542 @@
+{
+  "last_checked": "2026-10-14 16:24 KST",
+  "inventory_schema": 2,
+  "products": {
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A1%9C%EA%B3%A0%EB%B3%BC-%EC%86%8C/1620/": {
+      "name": "[두산베어스] 로고볼 (소)",
+      "price": 7000,
+      "stock": {
+        "재고": 334
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/20250424/8af6de0ce1fb134c0440a692134aee68.jpg",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A6%AC%EC%9C%A0%EC%A0%80%EB%B8%94%EB%B0%B1-%EC%A4%91/1640/": {
+      "name": "[두산베어스] 리유저블백 (중)",
+      "price": 4000,
+      "stock": {
+        "재고": 68
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/20250421/78d3ea9ed9c63e9a924a53b99f408e32.jpg",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A7%88%EA%B7%B8%EB%84%B7-%EC%8A%A4%ED%83%A0%EB%94%A9-%EC%9D%B8%ED%98%95/2781/": {
+      "name": "[두산베어스] 망그러진곰 콜라보 마그넷 스탠딩 인형",
+      "price": 28000,
+      "stock": {
+        "재고": 35
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": 3,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202609/13efe9c02700853200dd2dfbf639c000.png",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9A%B0%EB%B8%90%EB%A7%A8%ED%88%AC%EB%A7%A8/2795/": {
+      "name": "[두산베어스] 망그러진곰 콜라보 우븐맨투맨",
+      "price": 72000,
+      "stock": {
+        "S": -2,
+        "M": -2,
+        "L": 0,
+        "XL": -2
+      },
+      "option_info": {
+        "S": {
+          "kind": "purchase_limit",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": 3,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "M": {
+          "kind": "purchase_limit",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": 3,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "L": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": 3,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "XL": {
+          "kind": "purchase_limit",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": 3,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202609/ae00928538fc7470816416f8736df388.png",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%91%EC%9B%90%ED%83%80%EC%9B%94%EC%95%84%EA%B8%B0%EB%A7%9D%EA%B3%B0/2798/": {
+      "name": "[두산베어스] 망그러진곰 콜라보 응원타월(아기망곰)",
+      "price": 12000,
+      "stock": {
+        "재고": 924
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": 3,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202609/74bbbc3f9a220d6dcdc797d41c51f5de.png",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BF%A8%EB%9F%AC%ED%8C%8C%EC%9A%B0%EC%B9%98/2796/": {
+      "name": "[두산베어스] 망그러진곰 콜라보 쿨러파우치",
+      "price": 38000,
+      "stock": {
+        "재고": 31
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": 3,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202609/d5fde15bcbf2cf03964a372d048f7910.png",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%94%BC%EA%B7%9C%EC%96%B4-%ED%81%B4%EB%A6%AC%EC%BB%A4/2782/": {
+      "name": "[두산베어스] 망그러진곰 콜라보 피규어 클리커",
+      "price": 19500,
+      "stock": {
+        "재고": 685
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": 3,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202609/c5929ef64a4a8efd9afb874f8f4401d2.png",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%98%88%EC%95%BD%ED%95%9C%EC%A0%95%ED%8C%90%EB%A7%A412%EC%9B%94%EB%A7%90%EB%B0%B0%EC%86%A1-%EB%95%A1%ED%81%90%EC%9E%A0%EC%8B%A4-%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C-%EC%8A%A4%ED%83%80%EB%94%94%EC%9B%80/2779/": {
+      "name": "[두산베어스] (예약한정판매/12월말배송) 땡큐잠실 그라운드 스타디움",
+      "price": 49000,
+      "stock": {
+        "재고": 0
+      },
+      "option_info": {
+        "재고": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202610/a80104e4760368ce72da3c04e48567f3.png",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%98%88%EC%95%BD%ED%95%9C%EC%A0%95%ED%8C%90%EB%A7%A412%EC%9B%94%EB%A7%90%EB%B0%B0%EC%86%A1-%EB%95%A1%ED%81%90%EC%9E%A0%EC%8B%A4-%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C-%EC%9C%A0%EB%A6%AC%EB%B3%91/2778/": {
+      "name": "[두산베어스] (예약한정판매/12월말배송) 땡큐잠실 그라운드 유리병",
+      "price": 20000,
+      "stock": {
+        "재고": 0
+      },
+      "option_info": {
+        "재고": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202610/e564d44c45ac1bce5204afae03314cb8.jpg",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%AA%A8%EC%9E%90/1619/": {
+      "name": "[두산베어스] 오리지널 모자",
+      "price": 30000,
+      "stock": {
+        "XS (54cm)": -2,
+        "S (56cm)": -2,
+        "M (58cm)": -2,
+        "L (60cm)": -2
+      },
+      "option_info": {
+        "XS (54cm)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "S (56cm)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "M (58cm)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "L (60cm)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/20250424/e27122680604ca12dce29b2c9be9689a.jpg",
+      "diagnostic": "XS (54cm): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | S (56cm): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | M (58cm): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | L (60cm): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%EC%A7%9D%EC%A7%9D%EC%9D%B4%EC%84%9C%EC%9A%B8/1626/": {
+      "name": "[두산베어스] 유니폼 짝짝이(서울)",
+      "price": 6000,
+      "stock": {
+        "재고": 318
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/20250424/60ee8d2f6a324ed322f77d6268fa0ff8.jpg",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%EC%A7%9D%EC%A7%9D%EC%9D%B4%ED%99%88/1625/": {
+      "name": "[두산베어스] 유니폼 짝짝이(홈)",
+      "price": 6000,
+      "stock": {
+        "재고": 256
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/20250424/fc8dab4a13f15360742af392c3feefa0.jpg",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%BC%EB%B0%98%ED%98%95-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%84%9C%EC%9A%B8/1613/": {
+      "name": "[두산베어스] 일반형 유니폼(서울)",
+      "price": 72000,
+      "stock": {
+        "85": 0,
+        "90": -2,
+        "95": 0,
+        "100": 0,
+        "105": 0,
+        "110": 0,
+        "120": 0
+      },
+      "option_info": {
+        "85": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "90": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "95": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "100": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "105": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "110": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "120": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/0ade101b6179189c9b0958934a79cc95.jpg",
+      "diagnostic": "90: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%BC%EB%B0%98%ED%98%95-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%9B%90%EC%A0%95/1612/": {
+      "name": "[두산베어스] 일반형 유니폼(원정)",
+      "price": 72000,
+      "stock": {
+        "85": -2,
+        "90": -2,
+        "95": -2,
+        "100": -2,
+        "105": -2,
+        "110": -2,
+        "120": -2
+      },
+      "option_info": {
+        "85": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "90": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "95": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "100": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "105": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "110": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "120": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/016184f8e7a901d56f8ca133387a8227.jpg",
+      "diagnostic": "85: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 90: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 95: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 100: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 105: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 110: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 120: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%BC%EB%B0%98%ED%98%95-%EC%9C%A0%EB%8B%88%ED%8F%BC%ED%99%88/1611/": {
+      "name": "[두산베어스] 일반형 유니폼(홈)",
+      "price": 72000,
+      "stock": {
+        "85": -2,
+        "90": -2,
+        "95": -2,
+        "100": 0,
+        "105": 0,
+        "110": 0,
+        "120": -2
+      },
+      "option_info": {
+        "85": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "90": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "95": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "100": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "105": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "110": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "120": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/d0144f87db6534345eab8633d577a6ce.jpg",
+      "diagnostic": "85: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 90: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 95: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 120: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%84%9C%EC%9A%B8/1616/": {
+      "name": "[두산베어스] 키즈 유니폼(서울)",
+      "price": 72000,
+      "stock": {
+        "키즈 110": -2,
+        "키즈 130": -2,
+        "키즈 150": 0
+      },
+      "option_info": {
+        "키즈 110": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "키즈 130": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "키즈 150": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/0a97d3587e51505ab050fdcfde8933dc.jpg",
+      "diagnostic": "키즈 110: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 키즈 130: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%9B%90%EC%A0%95/1615/": {
+      "name": "[두산베어스] 키즈 유니폼(원정)",
+      "price": 72000,
+      "stock": {
+        "키즈 110": -2,
+        "키즈 130": -2,
+        "키즈 150": -2
+      },
+      "option_info": {
+        "키즈 110": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "키즈 130": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "키즈 150": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/169a208c388e26d63acb3fdd32f59d8f.jpg",
+      "diagnostic": "키즈 110: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 키즈 130: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 키즈 150: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC%ED%99%88/1614/": {
+      "name": "[두산베어스] 키즈 유니폼(홈)",
+      "price": 72000,
+      "stock": {
+        "키즈 110": 0,
+        "키즈 130": 0,
+        "키즈 150": 0
+      },
+      "option_info": {
+        "키즈 110": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "키즈 130": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "키즈 150": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/495f5be66e0e10813f9e03fb351787a0.jpg",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%EC%B5%9C%EA%B0%95%ED%83%80%EC%9B%94/2325/": {
+      "name": "[두산베어스] 플레이어 최강타월",
+      "price": 10000,
+      "stock": {
+        "오명진(6)": -2,
+        "박찬호(7)": 0,
+        "양의지(25)": 0,
+        "이병헌(29)": -2,
+        "정수빈(31)": 0,
+        "곽빈(47)": -2,
+        "양석환(53)": -2,
+        "김택연(63)": -2,
+        "김민석(2)": 0,
+        "박준순(52)": -2
+      },
+      "option_info": {
+        "오명진(6)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "박찬호(7)": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "양의지(25)": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "이병헌(29)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "정수빈(31)": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "곽빈(47)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "양석환(53)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "김택연(63)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "김민석(2)": {
+          "kind": "soldout",
+          "availability": "soldout",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "dom",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true
+        },
+        "박준순(52)": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202604/98a32a4cfd90d9f4a27b2f0ee2e28362.png",
+      "diagnostic": "오명진(6): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 이병헌(29): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 곽빈(47): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 양석환(53): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 김택연(63): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 박준순(52): request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A0%88%EC%9D%B8%EB%B6%80%EC%B8%A0/1903/": {
+      "name": "[두산베어스] 헌터 X 베어스 레인부츠",
+      "price": 169000,
+      "stock": {
+        "220": -2,
+        "230": -2,
+        "240": -2,
+        "250": -2,
+        "260": -2
+      },
+      "option_info": {
+        "220": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "230": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "240": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "250": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "260": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202507/61110fb961bbabb2e7341d6269771077.jpg",
+      "diagnostic": "220: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 230: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 240: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 250: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 260: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9A%B0%EC%82%B0%EB%84%A4%EC%9D%B4%EB%B9%84/1905/": {
+      "name": "[두산베어스] 헌터 X 베어스 우산(네이비)",
+      "price": 49000,
+      "stock": {
+        "재고": 26
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/b0161fdb8cff03d33e297d30c6b6f1c8.jpg",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9A%B0%EC%82%B0%EB%B8%94%EB%9E%99/1906/": {
+      "name": "[두산베어스] 헌터 X 베어스 우산(블랙)",
+      "price": 49000,
+      "stock": {
+        "재고": 51
+      },
+      "option_info": {
+        "재고": {
+          "kind": "server_stock",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "page",
+          "stock_managed": true,
+          "selling": null,
+          "displayed": null
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/d40c1cf9af6f7115b0dd8d94458520ff.jpg",
+      "diagnostic": null,
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9A%B0%EC%9D%98/1904/": {
+      "name": "[두산베어스] 헌터 X 베어스 우의",
+      "price": 169000,
+      "stock": {
+        "S": -2,
+        "M": -2
+      },
+      "option_info": {
+        "S": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "M": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/fcd1fb876418c5508f910fdbc781c906.jpg",
+      "diagnostic": "S: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | M: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%82%A4%EB%A7%81-%ED%8C%8C%EC%9A%B0%EC%B9%98/1902/": {
+      "name": "[두산베어스] 헌터 X 베어스 키링 파우치",
+      "price": 38000,
+      "stock": {
+        "아이보리": -2,
+        "네이비": -2
+      },
+      "option_info": {
+        "아이보리": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "네이비": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/2c90b72b8e5c4b479081cb0230e86261.jpg",
+      "diagnostic": "아이보리: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 네이비: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    },
+    "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%8F%B0%ED%8C%8C%EC%9A%B0%EC%B9%98/1901/": {
+      "name": "[두산베어스] 헌터 X 베어스 폰파우치",
+      "price": 49000,
+      "stock": {
+        "네이비": -2,
+        "블랙": -2
+      },
+      "option_info": {
+        "네이비": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        },
+        "블랙": {
+          "kind": "quantity_unknown",
+          "availability": "selectable",
+          "availability_source": "dom",
+          "purchase_limit": null,
+          "source": "selection",
+          "stock_managed": true,
+          "selling": true,
+          "displayed": true,
+          "diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "error": "network_failure",
+          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
+          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+          "lookup_path": [
+            "page",
+            "calculator",
+            "request_fallback",
+            "browser_xhr"
+          ]
+        }
+      },
+      "inventory_schema": 2,
+      "image_url": "https://nolmdshop.com/web/product/big/202510/541a0b270d2ff97ca36b3536f5c4132b.jpg",
+      "diagnostic": "네이비: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown | 블랙: request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com | browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
+      "stale": false,
+      "uncertain": false,
+      "checked_at": "2026-10-14 16:24 KST",
+      "last_attempt": "2026-10-14 16:24 KST"
+    }
+  }
+}
