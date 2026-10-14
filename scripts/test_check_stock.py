@@ -1,3 +1,5 @@
+import base64
+import gzip
 import inspect
 import json
 import shutil
@@ -169,6 +171,94 @@ class BrowserCatalogFallbackTests(unittest.TestCase):
             check_stock.scrape_nol_load_more(page, set())
         page.locator.assert_not_called()
         self.assertIn("window.$M.displayMore", page.wait_for_function.call_args.args[0])
+
+
+class CompressedBrowserEvidenceTests(unittest.TestCase):
+    NOW = datetime(2026, 10, 14, 7, tzinfo=timezone.utc)
+    CATEGORY = BrowserCatalogFallbackTests.CATEGORY
+
+    @staticmethod
+    def envelope(payload):
+        raw = payload if isinstance(payload, bytes) else json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        return json.dumps({"schema": 1, "encoding": "gzip+base64",
+                           "data": base64.b64encode(gzip.compress(raw)).decode("ascii")})
+
+    def evidence(self):
+        url = "https://nolmdshop.com/exec/front/shop/CalculatorProduct?product_no=1785&product%5BA%5D=9999"
+        return {"schema": 1, "captures": [{"product_no": "1785", "item_code": "A",
+            "captured_at": (self.NOW - timedelta(seconds=30)).isoformat(),
+            "request_url": url, "response_url": url, "content_type": "application/json; charset=utf-8",
+            "api_payload": {"sItemCode": "A", "product_no": "1785", "stock_number": 14},
+            "response_body": ' {"native":"두산\\n", "stock_number":14} ',
+            "native_extra": {"values": [False, None, 0, "원본"]}}],
+            "catalogs": [BrowserCatalogFallbackTests().catalog()]}
+
+    def results(self, raw, now=None):
+        with patch.object(check_stock.os, "environ", {"BROWSER_STOCK_EVIDENCE_JSON": raw}), patch.object(check_stock, "BROWSER_EVIDENCE_REFERENCE_TIME", self.NOW), patch.object(check_stock, "CATEGORY_URLS", [(self.CATEGORY, True)]):
+            return (check_stock.get_explicit_stock_via_browser_evidence("https://nolmdshop.com", "1785", "A", now=now),
+                    check_stock.get_browser_catalog_fallback(self.CATEGORY, now=now))
+
+    def test_lossless_roundtrip_and_legacy_compatibility(self):
+        original = self.evidence()
+        raw = json.dumps(original, ensure_ascii=False)
+        compressed = self.envelope(original)
+        self.assertEqual(gzip.decompress(base64.b64decode(json.loads(compressed)["data"])), raw.encode("utf-8"))
+        self.assertEqual(check_stock._decode_browser_stock_evidence(raw), original)
+        self.assertEqual(check_stock._decode_browser_stock_evidence(compressed), original)
+        self.assertEqual(self.results(compressed), self.results(raw))
+        self.assertEqual(self.results(compressed)[0][0], 14)
+
+    def test_compressed_catalog_and_timestamps_are_unchanged(self):
+        original = self.evidence()
+        stock, catalog = self.results(self.envelope(original))
+        self.assertEqual(stock[1]["captured_at"], original["captures"][0]["captured_at"])
+        self.assertEqual(stock[1]["quantity_checked_at"], "2026-10-14 15:59:30 KST")
+        self.assertEqual(catalog, (["https://nolmdshop.com/product/3/", "https://nolmdshop.com/product/first/1/"], self.NOW.isoformat()))
+        self.assertEqual(self.results(self.envelope(original), now=self.NOW + timedelta(hours=1)), ((None, None), (None, None)))
+
+    def test_invalid_encoding_base64_and_gzip_rejected_by_both_consumers(self):
+        good = json.loads(self.envelope(self.evidence()))
+        corrupt = bytearray(base64.b64decode(good["data"]))
+        corrupt[-8] ^= 1  # Corrupt CRC, rather than changing any captured field.
+        bad = [dict(good, encoding="gzip"), dict(good, schema=True), dict(good, schema=2),
+               dict(good, data=None), dict(good, data="!invalid!"),
+               dict(good, data=good["data"] + "\n"),
+               dict(good, data=base64.b64encode(b"not gzip").decode("ascii")),
+               dict(good, data=base64.b64encode(bytes(corrupt)).decode("ascii")),
+               dict(good, data=base64.b64encode(base64.b64decode(good["data"])[:-4]).decode("ascii"))]
+        for value in bad:
+            with self.subTest(value=value):
+                self.assertEqual(self.results(json.dumps(value)), ((None, None), (None, None)))
+
+    def test_decompression_bomb_and_exact_byte_limit(self):
+        raw = json.dumps(self.evidence(), ensure_ascii=False).encode("utf-8")
+        limit = check_stock.BROWSER_EVIDENCE_MAX_BYTES
+        bounded = raw + b" " * (limit - len(raw))
+        self.assertEqual(check_stock._decode_browser_stock_evidence(self.envelope(bounded)), self.evidence())
+        self.assertEqual(self.results(self.envelope(bounded + b" ")), ((None, None), (None, None)))
+        self.assertEqual(self.results(self.envelope(b" " * (limit * 10))), ((None, None), (None, None)))
+        self.assertEqual(self.results(" " * (limit + 1)), ((None, None), (None, None)))
+
+    def test_nested_nonobject_and_invalid_decoded_schema_rejected(self):
+        bad = [json.loads(self.envelope(self.evidence())), [], None, 1, "text",
+               dict(self.evidence(), schema=True), dict(self.evidence(), schema=2),
+               {key: value for key, value in self.evidence().items() if key != "schema"}]
+        for value in bad:
+            with self.subTest(value=value):
+                self.assertEqual(self.results(self.envelope(value)), ((None, None), (None, None)))
+        for raw in (b"not json", b"\xff"):
+            self.assertEqual(self.results(self.envelope(raw)), ((None, None), (None, None)))
+
+    def test_compressed_evidence_keeps_origin_and_freshness_validation(self):
+        for field, value in [("response_url", "https://other.example/exec/front/shop/CalculatorProduct"),
+                             ("captured_at", (self.NOW - timedelta(seconds=601)).isoformat()),
+                             ("captured_at", (self.NOW + timedelta(seconds=1)).isoformat())]:
+            evidence = self.evidence()
+            evidence["captures"][0][field] = value
+            self.assertEqual(self.results(self.envelope(evidence))[0], (None, None))
+        evidence = self.evidence()
+        evidence["catalogs"][0]["source"] = "unverified"
+        self.assertEqual(self.results(self.envelope(evidence))[1], (None, None))
 
 
 class EvidenceReferenceTimeTests(unittest.TestCase):
@@ -396,7 +486,7 @@ class ExplicitStockTests(unittest.TestCase):
                 self.assertEqual(lookup({**capture, **overrides}), (None, None))
         self.assertEqual(lookup(capture, schema=True), (None, None))
         for raw in ("", "not json", json.dumps({"schema": 1, "captures": [capture] * 1001}), "x" * 1_000_001):
-            with patch.dict(check_stock.os.environ, {"BROWSER_STOCK_EVIDENCE_JSON": raw}):
+            with patch.object(check_stock.os, "environ", {"BROWSER_STOCK_EVIDENCE_JSON": raw}):
                 self.assertEqual(check_stock.get_explicit_stock_via_browser_evidence("https://shop.example", "1785", "A", now), (None, None))
 
     def test_browser_evidence_is_last_tier_and_zero_is_not_soldout(self):

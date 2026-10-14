@@ -1,5 +1,8 @@
+import base64
 import copy
+import gzip
 import html
+import io
 import json
 import os
 import re
@@ -7,6 +10,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+import zlib
 from datetime import datetime, timezone, timedelta
 
 from sheets_sync import (
@@ -162,6 +166,33 @@ def _catalog_category_key(url):
     return (parsed.scheme, parsed.hostname, parsed.port or 443, decoded_path)
 
 
+BROWSER_EVIDENCE_MAX_BYTES = 1_000_000
+
+
+def _decode_browser_stock_evidence(raw):
+    """Decode one envelope without rewriting fields; bound input and gzip expansion."""
+    try:
+        if not raw or len(raw.encode("utf-8")) > BROWSER_EVIDENCE_MAX_BYTES:
+            return None
+        evidence = json.loads(raw)
+        if isinstance(evidence, dict) and "encoding" in evidence:
+            if (type(evidence.get("schema")) is not int or evidence["schema"] != 1
+                    or evidence["encoding"] != "gzip+base64"
+                    or not isinstance(evidence.get("data"), str)):
+                return None
+            compressed = base64.b64decode(evidence["data"], validate=True)
+            with gzip.GzipFile(fileobj=io.BytesIO(compressed), mode="rb") as stream:
+                expanded = stream.read(BROWSER_EVIDENCE_MAX_BYTES + 1)
+            if len(expanded) > BROWSER_EVIDENCE_MAX_BYTES:
+                return None
+            evidence = json.loads(expanded.decode("utf-8"))
+            if isinstance(evidence, dict) and "encoding" in evidence:
+                return None  # Compressed envelopes cannot be nested.
+        return evidence
+    except (ValueError, TypeError, OSError, EOFError, zlib.error):
+        return None
+
+
 def get_browser_catalog_fallback(category_url, apply_keywords=True, now=None):
     """Use only a fresh, complete user-browser DOM catalog for this authorized NOL category."""
     try:
@@ -170,10 +201,7 @@ def get_browser_catalog_fallback(category_url, apply_keywords=True, now=None):
                         if urllib.parse.urlparse(url).hostname in {"nolmdshop.com", "www.nolmdshop.com"}}
         if requested_key not in allowed_keys:
             return None, None
-        raw = os.environ.get("BROWSER_STOCK_EVIDENCE_JSON", "")
-        if not raw or len(raw.encode("utf-8")) > 1_000_000:
-            return None, None
-        evidence = json.loads(raw)
+        evidence = _decode_browser_stock_evidence(os.environ.get("BROWSER_STOCK_EVIDENCE_JSON", ""))
         if (not isinstance(evidence, dict) or type(evidence.get("schema")) is not int
                 or evidence["schema"] != 1 or not isinstance(evidence.get("catalogs"), list)
                 or len(evidence["catalogs"]) > 20):
@@ -638,11 +666,10 @@ async (args) => {
 
 def get_explicit_stock_via_browser_evidence(domain, product_no, item_code, now=None):
     """Last-tier same-origin capture, fresh within 10 minutes at process start."""
-    raw = os.environ.get("BROWSER_STOCK_EVIDENCE_JSON", "")
-    if not raw or len(raw.encode("utf-8")) > 1_000_000 or item_code == "__single":
+    if item_code == "__single":
         return None, None
     try:
-        evidence = json.loads(raw)
+        evidence = _decode_browser_stock_evidence(os.environ.get("BROWSER_STOCK_EVIDENCE_JSON", ""))
         if not isinstance(evidence, dict) or type(evidence.get("schema")) is not int or evidence["schema"] != 1:
             return None, None
         captures = evidence.get("captures")
