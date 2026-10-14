@@ -207,6 +207,50 @@ class SheetRowTests(unittest.TestCase):
         self.assertEqual(summary["omitted"], 13)
 
 
+class NamedTeamSheetTests(unittest.TestCase):
+    @staticmethod
+    def metadata():
+        return {"sheets": [{"properties": {"sheetId": index, "title": team,
+                  "gridProperties": {"rowCount": 100, "columnCount": 13}}}
+                for index, team in enumerate(["LG트윈스", "두산베어스", "키움히어로즈"])]}
+
+    def test_named_team_tab_is_selected_not_first_sheet(self):
+        for team, expected_id in [("LG트윈스", 0), ("두산베어스", 1), ("키움히어로즈", 2)]:
+            calls = []
+            def fake_request(method, url, token, payload=None, timeout=30):
+                calls.append((method, url, payload))
+                return self.metadata() if method == "GET" else {}
+            with patch.object(sheets_sync, "get_access_token", return_value="token"), patch.object(sheets_sync, "_request_json", side_effect=fake_request):
+                result = sheets_sync.sync_to_sheet("sheet-id", "{}", [sheets_sync.HEADERS], sheet_title=team)
+            self.assertEqual(result["sheet_id"], expected_id)
+            write = next(payload for _, url, payload in calls if "values:batchUpdate" in url)
+            self.assertTrue(write["data"][0]["range"].startswith(f"'{team}'!"))
+            for _, url, payload in calls:
+                if url.endswith(":batchUpdate"):
+                    self.assertTrue(all(team_id == expected_id for team_id in self._sheet_ids(payload)))
+
+    @staticmethod
+    def _sheet_ids(value):
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key == "sheetId":
+                    yield item
+                else:
+                    yield from NamedTeamSheetTests._sheet_ids(item)
+        elif isinstance(value, list):
+            for item in value:
+                yield from NamedTeamSheetTests._sheet_ids(item)
+
+    def test_missing_named_team_never_falls_back_or_writes(self):
+        metadata = self.metadata()
+        metadata["sheets"] = metadata["sheets"][:1]
+        with patch.object(sheets_sync, "get_access_token", return_value="token"), patch.object(sheets_sync, "_request_json", return_value=metadata) as request:
+            with self.assertRaises(sheets_sync.SheetSyncError):
+                sheets_sync.sync_to_sheet("sheet-id", "{}", [sheets_sync.HEADERS], sheet_title="두산베어스")
+        request.assert_called_once()
+        self.assertEqual(request.call_args.args[0], "GET")
+
+
 class SheetApiOrderingTests(unittest.TestCase):
     def test_grid_grows_before_large_write_without_prewrite_clear(self):
         calls = []
@@ -218,7 +262,7 @@ class SheetApiOrderingTests(unittest.TestCase):
                     "sheets": [{
                         "properties": {
                             "sheetId": 7,
-                            "title": "Stock",
+                            "title": "LG트윈스",
                             "gridProperties": {"rowCount": 2, "columnCount": 5},
                         },
                         "conditionalFormats": [],
@@ -257,7 +301,7 @@ class SheetApiOrderingTests(unittest.TestCase):
                     "sheets": [{
                         "properties": {
                             "sheetId": 7,
-                            "title": "Stock",
+                            "title": "LG트윈스",
                             "gridProperties": {"rowCount": 100},
                         },
                         "conditionalFormats": [],
@@ -286,7 +330,7 @@ class SheetApiOrderingTests(unittest.TestCase):
                     "sheets": [{
                         "properties": {
                             "sheetId": 7,
-                            "title": "Stock",
+                            "title": "LG트윈스",
                             "gridProperties": {"rowCount": 100},
                         },
                         "conditionalFormats": [{"booleanRule": {}}],

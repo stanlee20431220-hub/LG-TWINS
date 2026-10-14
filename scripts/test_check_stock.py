@@ -10,6 +10,37 @@ from unittest.mock import Mock, patch
 import check_stock
 
 
+class TeamConfigurationTests(unittest.TestCase):
+    def test_original_lg_sources_are_preserved(self):
+        categories = check_stock.team_config("LG트윈스")["categories"]
+        self.assertEqual(len(categories), 5)
+        self.assertEqual(sum("twinscorestore.co.kr" in url for url, _ in categories), 4)
+        self.assertIn(("https://nolmdshop.com/category/LG%ED%8A%B8%EC%9C%88%EC%8A%A4/31/", True), categories)
+
+    def test_new_clubs_have_verified_separate_categories_and_histories(self):
+        histories = set()
+        for team, category_id in [("LG트윈스", "31"), ("두산베어스", "30"), ("키움히어로즈", "29")]:
+            config = check_stock.team_config(team)
+            self.assertTrue(any(url.endswith(f"/{category_id}/") and "nolmdshop.com" in url for url, _ in config["categories"]))
+            histories.add(config["history"])
+        self.assertEqual(len(histories), 3)
+        with self.assertRaises(ValueError):
+            check_stock.team_config("not-a-team")
+
+    def test_root_level_legacy_history_is_only_used_for_lg(self):
+        with patch.object(check_stock.os.path, "exists", side_effect=lambda filename: filename == "stock_history.json"):
+            self.assertEqual(check_stock.history_path("LG트윈스"), "stock_history.json")
+            self.assertEqual(check_stock.history_path("두산베어스"), "data/stock_history_doosan.json")
+            self.assertEqual(check_stock.history_path("키움히어로즈"), "data/stock_history_kiwoom.json")
+
+    def test_export_passes_exact_team_tab_name(self):
+        source = inspect.getsource(check_stock.main)
+        self.assertIn("sheet_title=STOCK_TEAM", source)
+        self.assertIn("if sheet_error:\n        raise SystemExit(1)", source)
+        self.assertLess(source.index("save_history(now, current_products)"), source.index("raise SystemExit(1)"))
+        self.assertLess(source.index("send_telegram_chunked(token, chat_id, telegram_message)"), source.index("raise SystemExit(1)"))
+
+
 class HelperTests(unittest.TestCase):
     def test_parse_and_image_helpers(self):
         parsed, diagnostic = check_stock.parse_option_stock({"A": {"option_value": "M", "stock_number": 3}})

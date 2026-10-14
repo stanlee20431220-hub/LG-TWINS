@@ -21,26 +21,51 @@ from sheets_sync import (
 # 법인구매(75)는 재고 모니터링 대상이 아니라 제외
 # === nolmdshop.com (NOL MD shop - LG트윈스 공식 상품 판매처, 별도 사이트) ===
 # LG트윈스 전체(31)
-CATEGORY_URLS = [
-    ("https://twinscorestore.co.kr/category/%EC%9C%A0%EB%8B%88%ED%8F%BC/42/", True),
-    ("https://twinscorestore.co.kr/category/%EC%9D%98%EB%A5%98/43/", True),
-    ("https://twinscorestore.co.kr/category/%EC%9A%A9%ED%92%88-%C2%B7-%EC%9E%A1%ED%99%94/60/", True),
-    ("https://twinscorestore.co.kr/category/%ED%8A%B8%EC%9C%88%EC%8A%A4-x-%ED%98%B8%EB%B9%B5%EB%A7%A8/104/", False),
-    ("https://nolmdshop.com/category/LG%ED%8A%B8%EC%9C%88%EC%8A%A4/31/", True),
-]
+TEAM_CONFIGS = {
+    "LG트윈스": {
+        "categories": [
+            ("https://twinscorestore.co.kr/category/%EC%9C%A0%EB%8B%88%ED%8F%BC/42/", True),
+            ("https://twinscorestore.co.kr/category/%EC%9D%98%EB%A5%98/43/", True),
+            ("https://twinscorestore.co.kr/category/%EC%9A%A9%ED%92%88-%C2%B7-%EC%9E%A1%ED%99%94/60/", True),
+            ("https://twinscorestore.co.kr/category/%ED%8A%B8%EC%9C%88%EC%8A%A4-x-%ED%98%B8%EB%B9%B5%EB%A7%A8/104/", False),
+            ("https://nolmdshop.com/category/LG%ED%8A%B8%EC%9C%88%EC%8A%A4/31/", True),
+        ],
+        "history": "data/stock_history.json",
+    },
+    "두산베어스": {
+        "categories": [("https://nolmdshop.com/category/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4/30/", True)],
+        "history": "data/stock_history_doosan.json",
+    },
+    "키움히어로즈": {
+        "categories": [("https://nolmdshop.com/category/%ED%82%A4%EC%9B%80%ED%9E%88%EC%96%B4%EB%A1%9C%EC%A6%88/29/", True)],
+        "history": "data/stock_history_kiwoom.json",
+    },
+}
 
-_DEFAULT_HISTORY = "data/stock_history.json"
-HISTORY_FILE = os.environ.get("STOCK_HISTORY_FILE") or (
-    _DEFAULT_HISTORY
-    if os.path.exists(_DEFAULT_HISTORY) or not os.path.exists("stock_history.json")
-    else "stock_history.json"
-)
+
+def team_config(team):
+    if team not in TEAM_CONFIGS:
+        raise ValueError(f"지원하지 않는 STOCK_TEAM: {team!r}")
+    return TEAM_CONFIGS[team]
+
+
+def history_path(team):
+    default_path = team_config(team)["history"]
+    # Preserve the old root-level LG history only for LG, never for another club.
+    if team == "LG트윈스" and not os.path.exists(default_path) and os.path.exists("stock_history.json"):
+        return "stock_history.json"
+    return default_path
+
+
+STOCK_TEAM = os.environ.get("STOCK_TEAM", "LG트윈스")
+CATEGORY_URLS = team_config(STOCK_TEAM)["categories"]
+HISTORY_FILE = os.environ.get("STOCK_HISTORY_FILE") or history_path(STOCK_TEAM)
 LOW_STOCK_THRESHOLD = 50
 COMPACT_ITEM_LIMIT = 12
 PRODUCT_URL_RE = re.compile(r"/product/([^/]+/\d+)/")
 EXCLUDE_KEYWORDS = ["마킹키트"]
 UNCERTAIN_MARKER = "[불확실]"
-SCRIPT_VERSION = "v16-stock-schema2-browser-xhr"
+SCRIPT_VERSION = "v17-multi-team-schema2-browser-xhr"
 
 REMOVE_OVERLAYS_JS = """
 () => {
@@ -886,7 +911,7 @@ def _compact_telegram(now, products, previous_products, sheet_result):
     )
     stale_count = sum(1 for entry in products.values() if entry.get("stale"))
     lines = [
-        f"[재고 모니터] {now} ({SCRIPT_VERSION})",
+        f"[{STOCK_TEAM} 재고 모니터] {now} ({SCRIPT_VERSION})",
         f"신규 품절 옵션 {summary['newly_soldout']} | 재입고 옵션 {summary['restocked']} | 저재고 옵션 {summary['low_stock']}",
         f"상품 {len(products)}개 · 이전 데이터 유지 {stale_count}개",
     ]
@@ -1057,7 +1082,7 @@ def main():
         browser.close()
 
     header = (
-        f"[전상품 재고 확인] {now} ({SCRIPT_VERSION})\n"
+        f"[{STOCK_TEAM} 전상품 재고 확인] {now} ({SCRIPT_VERSION})\n"
         f"확인 대상 상품: {len(current_products)}개"
     )
     messages = [header]
@@ -1094,7 +1119,7 @@ def main():
                 default_checked_time=now,
                 low_threshold=LOW_STOCK_THRESHOLD,
             )
-            sheet_result = sync_to_sheet(spreadsheet_id, service_account_json, rows)
+            sheet_result = sync_to_sheet(spreadsheet_id, service_account_json, rows, sheet_title=STOCK_TEAM)
             print(f"Google Sheets export complete: {sheet_result['row_count']} option rows")
         except Exception as exc:
             sheet_error = _safe_sheet_error(exc)
@@ -1134,6 +1159,11 @@ def main():
             print(f"Telegram send failed after history save: {type(exc).__name__}: {exc}", file=sys.stderr)
     else:
         print("Telegram credentials not set; skipping notification", file=sys.stderr)
+
+    # A configured export failure must not make the workflow appear successful.
+    # Keep saved history and the fallback notification before marking the run red.
+    if sheet_error:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

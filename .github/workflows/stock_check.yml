@@ -1,4 +1,4 @@
-name: Twinscorestore Stock Check
+name: Baseball Stock Monitoring
 
 on:
   schedule:
@@ -21,7 +21,7 @@ concurrency:
 jobs:
   check-stock:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -44,12 +44,18 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
           BROWSER_STOCK_EVIDENCE_JSON: ${{ inputs.browser_stock_evidence || '' }}
-        run: python scripts/check_stock.py
+        run: |
+          failed=0
+          for team in LG트윈스 두산베어스 키움히어로즈; do
+            echo "=== ${team} 재고 조회 ==="
+            STOCK_TEAM="$team" python scripts/check_stock.py || failed=1
+          done
+          exit "$failed"
       - name: Commit updated history
         if: always()
         run: |
           git config user.name "stock-monitor-bot"
           git config user.email "actions@github.com"
-          git add data/stock_history.json
+          git add data/stock_history*.json
           git diff --quiet --cached || git commit -m "재고 기록 업데이트 [skip ci]"
           git push

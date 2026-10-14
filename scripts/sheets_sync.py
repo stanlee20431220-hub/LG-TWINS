@@ -1,4 +1,4 @@
-"""Google Sheets export helpers for the LG Twins stock monitor.
+"""Google Sheets export helpers for the multi-team stock monitor.
 
 Uses google-auth only for service-account OAuth and urllib for the Sheets API.
 """
@@ -369,7 +369,7 @@ def _format_requests(sheet_id, row_count, conditional_rule_count=0):
     return requests
 
 
-def sync_to_sheet(spreadsheet_id, service_account_json, rows):
+def sync_to_sheet(spreadsheet_id, service_account_json, rows, sheet_title="LG트윈스"):
     """Atomically write the new table first, then clear only the stale tail and format it."""
     if not spreadsheet_id or not str(spreadsheet_id).strip():
         raise SheetSyncError("GOOGLE_SHEET_ID가 설정되지 않았습니다")
@@ -385,7 +385,10 @@ def sync_to_sheet(spreadsheet_id, service_account_json, rows):
     if not sheets:
         raise SheetSyncError("스프레드시트에서 시트를 찾지 못했습니다")
 
-    sheet = sheets[0]
+    sheet = next((item for item in sheets
+                  if (item.get("properties") or {}).get("title") == sheet_title), None)
+    if sheet is None:
+        raise SheetSyncError(f"대상 시트를 찾지 못했습니다: {sheet_title}")
     properties = sheet.get("properties") or {}
     sheet_id = properties.get("sheetId")
     title = properties.get("title")
