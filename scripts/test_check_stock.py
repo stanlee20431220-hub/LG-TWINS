@@ -34,14 +34,14 @@ class NolLoadMoreTests(unittest.TestCase):
         self.assertEqual(page.locator.call_args.args, (check_stock.NOL_MORE_SELECTOR,))
         self.assertEqual(page.locator.return_value.first.dispatch_event.call_count, 2)
         page.locator.return_value.first.dispatch_event.assert_called_with("click")
-        self.assertEqual(page.wait_for_function.call_count, 2)
+        self.assertEqual(page.wait_for_function.call_count, 3)
         self.assertEqual(page.wait_for_function.call_args.kwargs["arg"]["current"], 2)
         self.assertIn("count > previous.link_count", page.wait_for_function.call_args.args[0])
         page.mouse.wheel.assert_not_called()
 
     def test_timeout_is_failure_not_partial_success(self):
         page = self.page([self.state()], [[]])
-        page.wait_for_function.side_effect = TimeoutError()
+        page.wait_for_function.side_effect = [None, TimeoutError()]
         with self.assertRaisesRegex(RuntimeError, "failed to advance from 1/3"):
             check_stock.scrape_nol_load_more(page, set())
 
@@ -91,6 +91,84 @@ class NolLoadMoreTests(unittest.TestCase):
                         check_stock.collect_product_links(Mock())
                     scrape.assert_not_called()
                     ordinary.assert_not_called()
+
+
+class BrowserCatalogFallbackTests(unittest.TestCase):
+    CATEGORY = "https://nolmdshop.com/category/LG%ED%8A%B8%EC%9C%88%EC%8A%A4/31/"
+    NOW = datetime(2026, 10, 14, 7, tzinfo=timezone.utc)
+
+    def catalog(self, **changes):
+        value = {"category_url": self.CATEGORY, "captured_at": self.NOW.isoformat(),
+                 "source": "user_browser_dom", "current_page": 4, "total_pages": 4,
+                 "product_urls": ["https://nolmdshop.com/product/first/1/category/31/display/1/?ref=dom",
+                                  "https://nolmdshop.com/product/first/1/",
+                                  "https://nolmdshop.com/product/마킹키트/2/",
+                                  "https://nolmdshop.com/product/3/"]}
+        value.update(changes)
+        return value
+
+    def fallback(self, catalog, **kwargs):
+        payload = json.dumps({"schema": 1, "captures": [], "catalogs": [catalog]})
+        with patch.object(check_stock, "CATEGORY_URLS", [(self.CATEGORY, True)]), patch.object(check_stock, "BROWSER_EVIDENCE_REFERENCE_TIME", self.NOW), patch.dict(check_stock.os.environ, {"BROWSER_STOCK_EVIDENCE_JSON": payload}):
+            return check_stock.get_browser_catalog_fallback(self.CATEGORY, **kwargs)
+
+    def test_complete_fresh_catalog_is_canonical_deduplicated_and_filtered(self):
+        urls, captured = self.fallback(self.catalog())
+        self.assertEqual(urls, ["https://nolmdshop.com/product/3/", "https://nolmdshop.com/product/first/1/"])
+        self.assertEqual(captured, self.NOW.isoformat())
+        self.assertEqual(len(self.fallback(self.catalog(), apply_keywords=False)[0]), 3)
+
+    def test_catalog_identity_completeness_and_time_rejections(self):
+        bad = [self.catalog(category_url="https://nolmdshop.com/category/두산베어스/30/"),
+               self.catalog(category_url="https://other.example/category/LG트윈스/31/"),
+               self.catalog(category_url=self.CATEGORY + "#bad"),
+               self.catalog(category_url=self.CATEGORY + "?bad=1"),
+               self.catalog(source="unverified"), self.catalog(current_page=3),
+               self.catalog(current_page=True, total_pages=True),
+               self.catalog(current_page=31, total_pages=31), self.catalog(product_urls=[]),
+               self.catalog(captured_at=(self.NOW - timedelta(seconds=601)).isoformat()),
+               self.catalog(captured_at=(self.NOW + timedelta(seconds=1)).isoformat()),
+               self.catalog(captured_at="2026-10-14T07:00:00")]
+        for catalog in bad:
+            with self.subTest(catalog=catalog):
+                self.assertEqual(self.fallback(catalog), (None, None))
+
+    def test_any_unsafe_product_row_rejects_whole_catalog(self):
+        rows = ["https://other.example/product/first/1/", "http://nolmdshop.com/product/first/1/",
+                "https://name:pw@nolmdshop.com/product/first/1/", "https://nolmdshop.com:444/product/first/1/",
+                "https://nolmdshop.com/product/first/1/#fragment", "javascript:alert(1)",
+                "https://nolmdshop.com/other/product/first/1/", "https://nolmdshop.com/product/first/1/unsafe/",
+                "https://nolmdshop.com/product/%2E%2E/1/", None]
+        for row in rows:
+            with self.subTest(row=row):
+                self.assertEqual(self.fallback(self.catalog(product_urls=["https://nolmdshop.com/product/safe/9/", row])), (None, None))
+
+    def test_fallback_used_only_after_primary_error_and_replaces_partial_category(self):
+        def fail_primary(page, links, apply_keywords):
+            links.add("https://nolmdshop.com/product/partial/88/")
+            raise RuntimeError("stalled")
+        with patch.object(check_stock, "CATEGORY_URLS", [(self.CATEGORY, True)]), patch.object(check_stock, "scrape_nol_load_more", side_effect=fail_primary), patch.object(check_stock, "get_browser_catalog_fallback", return_value=(["https://nolmdshop.com/product/full/9/"], self.NOW.isoformat())) as fallback:
+            self.assertEqual(check_stock.collect_product_links(Mock()), ["https://nolmdshop.com/product/full/9/"])
+            fallback.assert_called_once_with(self.CATEGORY, True)
+        with patch.object(check_stock, "CATEGORY_URLS", [(self.CATEGORY, True)]), patch.object(check_stock, "scrape_nol_load_more", return_value=True), patch.object(check_stock, "get_browser_catalog_fallback") as fallback:
+            check_stock.collect_product_links(Mock())
+            fallback.assert_not_called()
+
+    def test_missing_valid_catalog_and_non_nol_error_remain_fail_closed(self):
+        for category in [self.CATEGORY, "https://other.example/category/1/"]:
+            with patch.object(check_stock, "CATEGORY_URLS", [(category, True)]), patch.object(check_stock, "scrape_nol_load_more", side_effect=RuntimeError("primary-fail")), patch.object(check_stock, "scrape_links_on_current_page", side_effect=RuntimeError("primary-fail")), patch.dict(check_stock.os.environ, {"BROWSER_STOCK_EVIDENCE_JSON": ""}):
+                with self.assertRaisesRegex(RuntimeError, "primary-fail"):
+                    check_stock.collect_product_links(Mock())
+
+    def test_readiness_failure_prevents_dispatch(self):
+        page = Mock()
+        page.evaluate.return_value = {"current": 1, "total": 4, "link_count": 20, "button": True}
+        page.eval_on_selector_all.return_value = []
+        page.wait_for_function.side_effect = TimeoutError()
+        with self.assertRaisesRegex(RuntimeError, "controls not ready"):
+            check_stock.scrape_nol_load_more(page, set())
+        page.locator.assert_not_called()
+        self.assertIn("window.$M.displayMore", page.wait_for_function.call_args.args[0])
 
 
 class EvidenceReferenceTimeTests(unittest.TestCase):

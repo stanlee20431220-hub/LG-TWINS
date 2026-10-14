@@ -148,6 +148,88 @@ def _nol_more_state(page):
     return state
 
 
+def _catalog_category_key(url):
+    if not isinstance(url, str):
+        raise ValueError("category URL must be text")
+    parsed = urllib.parse.urlparse(url)
+    if (parsed.scheme != "https" or parsed.hostname not in {"nolmdshop.com", "www.nolmdshop.com"}
+            or parsed.username or parsed.password or parsed.fragment or parsed.query or parsed.params
+            or parsed.port not in {None, 443}):
+        raise ValueError("unsafe category URL")
+    decoded_path = urllib.parse.unquote(parsed.path)
+    if not re.fullmatch(r"/category/[^/]+/\d+/", decoded_path):
+        raise ValueError("invalid category path")
+    return (parsed.scheme, parsed.hostname, parsed.port or 443, decoded_path)
+
+
+def get_browser_catalog_fallback(category_url, apply_keywords=True, now=None):
+    """Use only a fresh, complete user-browser DOM catalog for this authorized NOL category."""
+    try:
+        requested_key = _catalog_category_key(category_url)
+        allowed_keys = {_catalog_category_key(url) for url, _ in CATEGORY_URLS
+                        if urllib.parse.urlparse(url).hostname in {"nolmdshop.com", "www.nolmdshop.com"}}
+        if requested_key not in allowed_keys:
+            return None, None
+        raw = os.environ.get("BROWSER_STOCK_EVIDENCE_JSON", "")
+        if not raw or len(raw.encode("utf-8")) > 1_000_000:
+            return None, None
+        evidence = json.loads(raw)
+        if (not isinstance(evidence, dict) or type(evidence.get("schema")) is not int
+                or evidence["schema"] != 1 or not isinstance(evidence.get("catalogs"), list)
+                or len(evidence["catalogs"]) > 20):
+            return None, None
+        current = now if now is not None else BROWSER_EVIDENCE_REFERENCE_TIME
+        if current.tzinfo is None:
+            return None, None
+        valid = []
+        for catalog in evidence["catalogs"]:
+            try:
+                if (not isinstance(catalog, dict) or catalog.get("source") != "user_browser_dom"
+                        or _catalog_category_key(catalog.get("category_url")) != requested_key):
+                    continue
+                captured = datetime.fromisoformat(catalog["captured_at"].replace("Z", "+00:00"))
+                if captured.tzinfo is None or not 0 <= (current - captured).total_seconds() <= 600:
+                    continue
+                last_page, total_pages = catalog.get("current_page"), catalog.get("total_pages")
+                if (type(last_page) is not int or type(total_pages) is not int
+                        or not 1 <= last_page == total_pages <= MAX_PAGES_PER_CATEGORY):
+                    continue
+                urls = catalog.get("product_urls")
+                if not isinstance(urls, list) or not 1 <= len(urls) <= 5000:
+                    continue
+                canonical_urls = set()
+                for url in urls:
+                    if not isinstance(url, str):
+                        raise ValueError("product URL must be text")
+                    parsed = urllib.parse.urlparse(url)
+                    if (parsed.scheme != requested_key[0] or parsed.hostname != requested_key[1]
+                            or (parsed.port or 443) != requested_key[2] or parsed.username or parsed.password
+                            or parsed.fragment or parsed.params):
+                        raise ValueError("unsafe product origin")
+                    # Actual storefront links may include category/display suffixes and tracking queries.
+                    if not re.fullmatch(r"/product/(?:[^/]+/)?\d+/(?:category/\d+/)?(?:display/\d+/)?", parsed.path):
+                        raise ValueError("invalid product path")
+                    if any(part in {".", ".."} for part in urllib.parse.unquote(parsed.path).split("/")):
+                        raise ValueError("unsafe product path")
+                    canonical = canonicalize_product_url(url)
+                    if canonical is None:
+                        single = re.fullmatch(r"/product/(\d+)/", parsed.path)
+                        if not single:
+                            raise ValueError("invalid product canonical URL")
+                        canonical = f"{parsed.scheme}://{parsed.netloc}/product/{single.group(1)}/"
+                    if not is_excluded(canonical, apply_keywords):
+                        canonical_urls.add(canonical)
+                valid.append((captured, sorted(canonical_urls)))
+            except (ValueError, TypeError, KeyError, AttributeError):
+                continue
+        if valid:
+            captured, urls = max(valid, key=lambda candidate: candidate[0])
+            return urls, captured.isoformat()
+    except (ValueError, TypeError, AttributeError):
+        pass
+    return None, None
+
+
 def scrape_nol_load_more(page, links, apply_keywords=True):
     """Return False without controls; never return a partial NOL category as complete."""
     state = _nol_more_state(page)
@@ -156,6 +238,14 @@ def scrape_nol_load_more(page, links, apply_keywords=True):
     if state["total"] > MAX_PAGES_PER_CATEGORY:
         raise RuntimeError("NOL load-more: total exceeds category page safety limit")
     _collect_visible_product_links(page, links, apply_keywords)
+    if state["current"] < state["total"]:
+        try:
+            page.wait_for_function(
+                "() => typeof window.$M !== 'undefined' && typeof window.$M.displayMore === 'function'",
+                timeout=NOL_MORE_TIMEOUT_MS,
+            )
+        except Exception as exc:
+            raise RuntimeError(f"NOL load-more: controls not ready ({type(exc).__name__})") from exc
     while state["current"] < state["total"]:
         previous = state
         try:
@@ -256,28 +346,38 @@ def collect_product_links(page):
     links = set()
     page.mouse.move(700, 450)
     for base_url, apply_keywords in CATEGORY_URLS:
+        category_links = set()
         current_url = base_url
         visited = set()
-        for _ in range(MAX_PAGES_PER_CATEGORY):
-            if current_url in visited:
-                break
-            visited.add(current_url)
-            page.goto(current_url, wait_until="domcontentloaded", timeout=60000)
-            page.wait_for_timeout(1200)
-            dismiss_overlays(page)
-
-            before_count = len(links)
-            if urllib.parse.urlparse(current_url).hostname in {"nolmdshop.com", "www.nolmdshop.com"}:
-                if scrape_nol_load_more(page, links, apply_keywords):
-                    print(f"  - {current_url}: 누적 {len(links)}개 (NOL load-more 완료)")
+        try:
+            for _ in range(MAX_PAGES_PER_CATEGORY):
+                if current_url in visited:
                     break
-            scrape_links_on_current_page(page, links, apply_keywords)
-            after_count = len(links)
-            print(f"  - {current_url}: 누적 {after_count}개")
-            next_url = find_next_page_url(page)
-            if not next_url or (after_count == before_count and next_url in visited):
-                break
-            current_url = next_url
+                visited.add(current_url)
+                page.goto(current_url, wait_until="domcontentloaded", timeout=60000)
+                page.wait_for_timeout(1200)
+                dismiss_overlays(page)
+                before_count = len(category_links)
+                if urllib.parse.urlparse(current_url).hostname in {"nolmdshop.com", "www.nolmdshop.com"}:
+                    if scrape_nol_load_more(page, category_links, apply_keywords):
+                        print(f"  - {current_url}: {len(category_links)}개 (NOL load-more 완료)")
+                        break
+                scrape_links_on_current_page(page, category_links, apply_keywords)
+                after_count = len(category_links)
+                print(f"  - {current_url}: {after_count}개")
+                next_url = find_next_page_url(page)
+                if not next_url or (after_count == before_count and next_url in visited):
+                    break
+                current_url = next_url
+        except Exception as exc:
+            fallback_urls, captured_at = get_browser_catalog_fallback(base_url, apply_keywords)
+            if fallback_urls is None:
+                raise
+            # Never mix an incomplete primary category with the verified complete DOM catalog.
+            category_links = set(fallback_urls)
+            print(f"  - {base_url}: 검증된 사용자 브라우저 전체 목록 보완 "
+                  f"{len(category_links)}개 · 확인 {captured_at} · 기본 조회 실패({type(exc).__name__})")
+        links.update(category_links)
     return sorted(links)
 
 
