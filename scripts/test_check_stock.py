@@ -10,6 +10,111 @@ from unittest.mock import Mock, patch
 import check_stock
 
 
+class NolLoadMoreTests(unittest.TestCase):
+    @staticmethod
+    def state(current=1, total=3, count=20, button=True):
+        return {"current": current, "total": total, "link_count": count, "button": button}
+
+    def page(self, states, batches=()):
+        page = Mock()
+        page.evaluate.side_effect = states
+        page.eval_on_selector_all.side_effect = batches
+        return page
+
+    def test_hidden_control_advances_and_collects_every_batch(self):
+        page = self.page([self.state(), self.state(2, 3, 40), self.state(3, 3, 60)], [
+            ["https://nolmdshop.com/product/first/1/?x=1"],
+            ["https://nolmdshop.com/product/second/2/"],
+            ["https://nolmdshop.com/product/third/3/"],
+        ])
+        links = set()
+        self.assertTrue(check_stock.scrape_nol_load_more(page, links))
+        self.assertEqual(len(links), 3)
+        self.assertIn("https://nolmdshop.com/product/first/1/", links)
+        self.assertEqual(page.locator.call_args.args, (check_stock.NOL_MORE_SELECTOR,))
+        self.assertEqual(page.locator.return_value.first.dispatch_event.call_count, 2)
+        page.locator.return_value.first.dispatch_event.assert_called_with("click")
+        self.assertEqual(page.wait_for_function.call_count, 2)
+        self.assertEqual(page.wait_for_function.call_args.kwargs["arg"]["current"], 2)
+        self.assertIn("count > previous.link_count", page.wait_for_function.call_args.args[0])
+        page.mouse.wheel.assert_not_called()
+
+    def test_timeout_is_failure_not_partial_success(self):
+        page = self.page([self.state()], [[]])
+        page.wait_for_function.side_effect = TimeoutError()
+        with self.assertRaisesRegex(RuntimeError, "failed to advance from 1/3"):
+            check_stock.scrape_nol_load_more(page, set())
+
+    def test_no_advance_missing_controls_and_no_link_growth_fail(self):
+        for after in (self.state(), self.state(2, 3, 20), self.state(2, 4, 40), None):
+            with self.subTest(after=after):
+                with self.assertRaisesRegex(RuntimeError, "no valid advancement"):
+                    check_stock.scrape_nol_load_more(self.page([self.state(), after], [[]]), set())
+
+    def test_invalid_initial_counters_and_safety_limit_fail(self):
+        for state in (self.state(None), self.state(0), self.state(4, 3),
+                      self.state(button=False), self.state(total=31)):
+            with self.subTest(state=state):
+                with self.assertRaisesRegex(RuntimeError, "NOL load-more"):
+                    check_stock.scrape_nol_load_more(self.page([state]), set())
+
+    def test_completed_single_page_needs_no_dispatch_and_filters_keywords(self):
+        page = self.page([self.state(1, 1, 20, False)], [[
+            "https://nolmdshop.com/product/마킹키트/2/", "https://nolmdshop.com/product/first/1/",
+        ]])
+        links = set()
+        self.assertTrue(check_stock.scrape_nol_load_more(page, links))
+        self.assertEqual(links, {"https://nolmdshop.com/product/first/1/"})
+        page.locator.assert_not_called()
+        page.wait_for_function.assert_not_called()
+
+    def test_no_controls_returns_false_for_ordinary_pagination(self):
+        page = self.page([None])
+        self.assertFalse(check_stock.scrape_nol_load_more(page, set()))
+        page.eval_on_selector_all.assert_not_called()
+
+    def test_collector_keeps_ordinary_pagination_for_other_sites(self):
+        with patch.object(check_stock, "CATEGORY_URLS", [("https://other.example/category/1/", True)]), patch.object(check_stock, "scrape_links_on_current_page") as scrape, patch.object(check_stock, "scrape_nol_load_more") as more, patch.object(check_stock, "find_next_page_url", side_effect=["https://other.example/category/1/?page=2", None]):
+            check_stock.collect_product_links(Mock())
+        self.assertEqual(scrape.call_count, 2)
+        more.assert_not_called()
+
+    def test_nol_collector_uses_load_more_and_propagates_failure(self):
+        for outcome in (True, RuntimeError("NOL load-more: stalled")):
+            with self.subTest(outcome=outcome):
+                kwargs = {"side_effect": outcome} if isinstance(outcome, Exception) else {"return_value": outcome}
+                with patch.object(check_stock, "CATEGORY_URLS", [("https://nolmdshop.com/category/club/30/", True)]), patch.object(check_stock, "scrape_nol_load_more", **kwargs), patch.object(check_stock, "scrape_links_on_current_page") as scrape, patch.object(check_stock, "find_next_page_url") as ordinary:
+                    if isinstance(outcome, Exception):
+                        with self.assertRaisesRegex(RuntimeError, "stalled"):
+                            check_stock.collect_product_links(Mock())
+                    else:
+                        check_stock.collect_product_links(Mock())
+                    scrape.assert_not_called()
+                    ordinary.assert_not_called()
+
+
+class EvidenceReferenceTimeTests(unittest.TestCase):
+    def test_anchor_freshness_preserves_original_timestamp_and_explicit_now(self):
+        anchor = datetime(2026, 10, 8, 12, tzinfo=timezone.utc)
+        captured = anchor - timedelta(seconds=30)
+        url = "https://shop.example/exec/front/shop/CalculatorProduct?product_no=1785&product%5BA%5D=9999"
+        capture = {"product_no": "1785", "item_code": "A", "captured_at": captured.isoformat(), "request_url": url, "response_url": url, "content_type": "application/json", "api_payload": {"sItemCode": "A", "product_no": "1785", "stock_number": 14}}
+        with patch.object(check_stock, "BROWSER_EVIDENCE_REFERENCE_TIME", anchor), patch.dict(check_stock.os.environ, {"BROWSER_STOCK_EVIDENCE_JSON": json.dumps({"schema": 1, "captures": [capture]})}):
+            with patch.object(check_stock, "datetime") as clock:
+                clock.fromisoformat.side_effect = datetime.fromisoformat
+                clock.now.return_value = anchor + timedelta(hours=1)
+                qty, info = check_stock.get_explicit_stock_via_browser_evidence("https://shop.example", "1785", "A")
+                clock.now.assert_not_called()
+            self.assertEqual(qty, 14)
+            self.assertEqual(info["captured_at"], captured.isoformat())
+            self.assertEqual(info["quantity_checked_at"], "2026-10-08 20:59:30 KST")
+            self.assertEqual(check_stock.get_explicit_stock_via_browser_evidence("https://shop.example", "1785", "A", now=anchor + timedelta(hours=1)), (None, None))
+        for timestamp in (anchor - timedelta(seconds=601), anchor + timedelta(seconds=1)):
+            capture["captured_at"] = timestamp.isoformat()
+            with patch.object(check_stock, "BROWSER_EVIDENCE_REFERENCE_TIME", anchor), patch.dict(check_stock.os.environ, {"BROWSER_STOCK_EVIDENCE_JSON": json.dumps({"schema": 1, "captures": [capture]})}):
+                self.assertEqual(check_stock.get_explicit_stock_via_browser_evidence("https://shop.example", "1785", "A"), (None, None))
+
+
 class TeamConfigurationTests(unittest.TestCase):
     def test_original_lg_sources_are_preserved(self):
         categories = check_stock.team_config("LG트윈스")["categories"]
@@ -219,7 +324,7 @@ class ExplicitStockTests(unittest.TestCase):
     def test_browser_evidence_is_last_tier_and_zero_is_not_soldout(self):
         from copy import deepcopy
         url = "https://shop.example/exec/front/shop/CalculatorProduct?product_no=1785&product%5BA%5D=9999"
-        capture = {"product_no": "1785", "item_code": "A", "captured_at": datetime.now(timezone.utc).isoformat(),
+        capture = {"product_no": "1785", "item_code": "A", "captured_at": check_stock.BROWSER_EVIDENCE_REFERENCE_TIME.isoformat(),
                    "request_url": url, "response_url": url, "content_type": "application/json",
                    "api_payload": {"sItemCode": "A", "product_no": "1785", "stock_number": 14}}
         base = {"data": {"M": -2}, "option_info": {"M": {"kind": "quantity_unknown", "availability": "selectable", "stock_managed": True}}}

@@ -57,6 +57,8 @@ def history_path(team):
     return default_path
 
 
+BROWSER_EVIDENCE_REFERENCE_TIME = datetime.now(timezone.utc)
+
 STOCK_TEAM = os.environ.get("STOCK_TEAM", "LG트윈스")
 CATEGORY_URLS = team_config(STOCK_TEAM)["categories"]
 HISTORY_FILE = os.environ.get("STOCK_HISTORY_FILE") or history_path(STOCK_TEAM)
@@ -108,18 +110,89 @@ def dismiss_overlays(page):
 MAX_PAGES_PER_CATEGORY = 30
 
 
+NOL_MORE_SELECTOR = ".xans-product-listmore .btnMore"
+NOL_MORE_TIMEOUT_MS = 15000
+
+
+def _collect_visible_product_links(page, links, apply_keywords):
+    hrefs = page.eval_on_selector_all(
+        'a[href*="/product/"]', "els => els.map(e => e.href)"
+    )
+    for href in hrefs:
+        canonical = canonicalize_product_url(href)
+        if canonical and not is_excluded(canonical, apply_keywords):
+            links.add(canonical)
+
+
+def _nol_more_state(page):
+    state = page.evaluate(
+        r"""() => {
+            const button = document.querySelector('.xans-product-listmore .btnMore');
+            const current = document.querySelector('#more_current_page');
+            const total = document.querySelector('#more_total_page');
+            if (!button && !current && !total) return null;
+            const number = el => el && /^\d+$/.test(el.textContent.trim())
+                ? Number(el.textContent.trim()) : null;
+            return {button: !!button, current: number(current), total: number(total),
+                link_count: new Set(Array.from(document.querySelectorAll('a[href*="/product/"]'),
+                    a => a.href)).size};
+        }"""
+    )
+    if state is not None and (
+        not isinstance(state.get("current"), int)
+        or not isinstance(state.get("total"), int)
+        or not 1 <= state["current"] <= state["total"]
+        or (state["current"] < state["total"] and not state.get("button"))
+    ):
+        raise RuntimeError("NOL load-more: invalid or missing page controls")
+    return state
+
+
+def scrape_nol_load_more(page, links, apply_keywords=True):
+    """Return False without controls; never return a partial NOL category as complete."""
+    state = _nol_more_state(page)
+    if state is None:
+        return False
+    if state["total"] > MAX_PAGES_PER_CATEGORY:
+        raise RuntimeError("NOL load-more: total exceeds category page safety limit")
+    _collect_visible_product_links(page, links, apply_keywords)
+    while state["current"] < state["total"]:
+        previous = state
+        try:
+            # NOL hides this control; regular click waits for visibility forever.
+            page.locator(NOL_MORE_SELECTOR).first.dispatch_event("click")
+            page.wait_for_function(
+                """previous => {
+                    const current = document.querySelector('#more_current_page');
+                    const count = new Set(Array.from(document.querySelectorAll('a[href*="/product/"]'),
+                        a => a.href)).size;
+                    return current && Number(current.textContent.trim()) > previous.current
+                        && count > previous.link_count;
+                }""",
+                arg=previous, timeout=NOL_MORE_TIMEOUT_MS,
+            )
+            state = _nol_more_state(page)
+        except Exception as exc:
+            raise RuntimeError(
+                f"NOL load-more: failed to advance from {previous['current']}/{previous['total']} "
+                f"({type(exc).__name__})"
+            ) from exc
+        if (state is None or state["current"] <= previous["current"]
+                or state["total"] != previous["total"]
+                or state["link_count"] <= previous["link_count"]):
+            raise RuntimeError(
+                f"NOL load-more: no valid advancement from {previous['current']}/{previous['total']}"
+            )
+        _collect_visible_product_links(page, links, apply_keywords)
+    return True
+
+
 def scrape_links_on_current_page(page, links, apply_keywords=True):
     """Collect product links, including links exposed by ordinary lazy scrolling."""
     last_count = -1
     rounds_without_growth = 0
     for _ in range(60):
-        hrefs = page.eval_on_selector_all(
-            'a[href*="/product/"]', "els => els.map(e => e.href)"
-        )
-        for href in hrefs:
-            canonical = canonicalize_product_url(href)
-            if canonical and not is_excluded(canonical, apply_keywords):
-                links.add(canonical)
+        _collect_visible_product_links(page, links, apply_keywords)
 
         current_count = len(links)
         if current_count > last_count:
@@ -194,6 +267,10 @@ def collect_product_links(page):
             dismiss_overlays(page)
 
             before_count = len(links)
+            if urllib.parse.urlparse(current_url).hostname in {"nolmdshop.com", "www.nolmdshop.com"}:
+                if scrape_nol_load_more(page, links, apply_keywords):
+                    print(f"  - {current_url}: 누적 {len(links)}개 (NOL load-more 완료)")
+                    break
             scrape_links_on_current_page(page, links, apply_keywords)
             after_count = len(links)
             print(f"  - {current_url}: 누적 {after_count}개")
@@ -460,7 +537,7 @@ async (args) => {
 
 
 def get_explicit_stock_via_browser_evidence(domain, product_no, item_code, now=None):
-    """Optional last-tier evidence from a recent, same-origin browser API capture."""
+    """Last-tier same-origin capture, fresh within 10 minutes at process start."""
     raw = os.environ.get("BROWSER_STOCK_EVIDENCE_JSON", "")
     if not raw or len(raw.encode("utf-8")) > 1_000_000 or item_code == "__single":
         return None, None
@@ -478,7 +555,7 @@ def get_explicit_stock_via_browser_evidence(domain, product_no, item_code, now=N
             ) and not url.username and not url.password
         if origin.scheme not in {"http", "https"} or not origin.hostname or origin.username or origin.password:
             return None, None
-        current = now if now is not None else datetime.now(timezone.utc)
+        current = now if now is not None else BROWSER_EVIDENCE_REFERENCE_TIME
         if current.tzinfo is None:
             return None, None
         valid = []

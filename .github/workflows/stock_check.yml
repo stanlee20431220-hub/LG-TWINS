@@ -5,6 +5,16 @@ on:
     - cron: "15 0 * * *"  # 매일 한국 시간 09:15 (GitHub 예약 실행은 지연될 수 있음)
   workflow_dispatch:
     inputs:
+      stock_team:
+        description: "재고 조회 구단 (예약 실행은 전체 구단)"
+        required: true
+        default: "전체"
+        type: choice
+        options:
+          - "전체"
+          - "LG트윈스"
+          - "두산베어스"
+          - "키움히어로즈"
       browser_stock_evidence:
         description: "Optional fresh verified browser API evidence JSON (10-minute validity)"
         required: false
@@ -44,9 +54,15 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
           BROWSER_STOCK_EVIDENCE_JSON: ${{ inputs.browser_stock_evidence || '' }}
+          INPUT_STOCK_TEAM: ${{ inputs.stock_team || '전체' }}
         run: |
           failed=0
-          for team in LG트윈스 두산베어스 키움히어로즈; do
+          case "$INPUT_STOCK_TEAM" in
+            전체) teams=(LG트윈스 두산베어스 키움히어로즈) ;;
+            LG트윈스|두산베어스|키움히어로즈) teams=("$INPUT_STOCK_TEAM") ;;
+            *) echo "Invalid stock_team" >&2; exit 1 ;;
+          esac
+          for team in "${teams[@]}"; do
             echo "=== ${team} 재고 조회 ==="
             STOCK_TEAM="$team" python scripts/check_stock.py || failed=1
           done
