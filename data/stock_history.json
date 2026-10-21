@@ -1,5 +1,5 @@
 {
-  "last_checked": "2026-10-20 13:54 KST",
+  "last_checked": "2026-10-21 09:22 KST",
   "inventory_schema": 2,
   "products": {
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EB%9F%AD%ED%82%A4-%EC%8B%9C%ED%8C%85%EC%9D%B8%ED%98%95/1888/": {
@@ -25,8 +25,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%8A%A4%ED%83%80-%EC%8B%9C%ED%8C%85%EC%9D%B8%ED%98%95/1889/": {
       "name": "[LG트윈스] 네로 스타 시팅인형",
@@ -51,8 +51,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%96%BC%EA%B5%B4%EC%BF%A0%EC%85%98/103/": {
       "name": "[LG트윈스] 네로 얼굴쿠션",
@@ -77,8 +77,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EB%8B%88%ED%8A%B8-%EB%A8%B8%ED%94%8C%EB%9F%AC/1786/": {
       "name": "[LG트윈스] 네로 에디션 니트 머플러",
@@ -103,15 +103,15 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0%EB%B8%94%EB%9E%99/1782/": {
       "name": "[LG트윈스] 네로 에디션 반팔티셔츠(블랙)",
       "price": 39000,
       "stock": {
         "M": 1,
-        "L": 1,
+        "L": 0,
         "XL": 0,
         "XXL": 0
       },
@@ -127,7 +127,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:47:55 KST",
+          "quantity_checked_at": "2026-10-21 09:19:37 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -137,24 +137,14 @@
           ]
         },
         "L": {
-          "kind": "server_stock",
-          "availability": "selectable",
+          "kind": "soldout",
+          "availability": "soldout",
           "availability_source": "dom",
           "purchase_limit": null,
-          "source": "verified_browser",
+          "source": "dom",
           "stock_managed": true,
           "selling": true,
-          "displayed": true,
-          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
-          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:47:55 KST",
-          "lookup_path": [
-            "page",
-            "calculator",
-            "request_fallback",
-            "browser_xhr",
-            "verified_browser"
-          ]
+          "displayed": true
         },
         "XL": {
           "kind": "soldout",
@@ -182,8 +172,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0%ED%81%AC%EB%A6%BC/1783/": {
       "name": "[LG트윈스] 네로 에디션 반팔티셔츠(크림)",
@@ -191,7 +181,7 @@
       "stock": {
         "M": 2,
         "L": 1,
-        "XL": 1,
+        "XL": 0,
         "XXL": 3
       },
       "option_info": {
@@ -206,7 +196,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:47:58 KST",
+          "quantity_checked_at": "2026-10-21 09:19:41 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -226,7 +216,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:47:59 KST",
+          "quantity_checked_at": "2026-10-21 09:19:41 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -236,24 +226,14 @@
           ]
         },
         "XL": {
-          "kind": "server_stock",
-          "availability": "selectable",
+          "kind": "soldout",
+          "availability": "soldout",
           "availability_source": "dom",
           "purchase_limit": null,
-          "source": "verified_browser",
+          "source": "dom",
           "stock_managed": true,
           "selling": true,
-          "displayed": true,
-          "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
-          "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:47:59 KST",
-          "lookup_path": [
-            "page",
-            "calculator",
-            "request_fallback",
-            "browser_xhr",
-            "verified_browser"
-          ]
+          "displayed": true
         },
         "XXL": {
           "kind": "server_stock",
@@ -266,7 +246,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:47:59 KST",
+          "quantity_checked_at": "2026-10-21 09:19:42 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -281,8 +261,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0%ED%99%94%EC%9D%B4%ED%8A%B8/1781/": {
       "name": "[LG트윈스] 네로 에디션 반팔티셔츠(화이트)",
@@ -315,7 +295,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:02 KST",
+          "quantity_checked_at": "2026-10-21 09:19:45 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -350,8 +330,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EC%8A%A4%ED%8B%B0%EC%BB%A4%ED%8C%A9/1789/": {
       "name": "[LG트윈스] 네로 에디션 스티커팩",
@@ -376,8 +356,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%EC%9C%A0%EB%8B%88%ED%8F%BC/1785/": {
       "name": "[LG트윈스] 네로 에디션 유니폼",
@@ -403,7 +383,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:07 KST",
+          "quantity_checked_at": "2026-10-21 09:19:49 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -478,8 +458,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC/1784/": {
       "name": "[LG트윈스] 네로 에디션 키즈 유니폼",
@@ -501,7 +481,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:10 KST",
+          "quantity_checked_at": "2026-10-21 09:19:52 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -521,7 +501,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:10 KST",
+          "quantity_checked_at": "2026-10-21 09:19:53 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -541,7 +521,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:10 KST",
+          "quantity_checked_at": "2026-10-21 09:19:53 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -556,8 +536,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%97%90%EB%94%94%EC%85%98-%ED%95%80%EB%B1%83%EC%A7%80set/1788/": {
       "name": "[LG트윈스] 네로 에디션 핀뱃지SET",
@@ -582,8 +562,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%84%A4%EB%A1%9C-%EC%A7%9D%EC%A7%9D%EC%9D%B4/2561/": {
       "name": "[LG트윈스] 네로 짝짝이",
@@ -608,8 +588,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%92%B9%EA%B5%B4%EB%84%A4%EB%A1%9C-%ED%94%BC%EA%B7%9C%EC%96%B4/951/": {
       "name": "[LG트윈스] 뒹굴네로 피규어",
@@ -634,8 +614,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%9F%AD%ED%82%A4%EC%8A%A4%ED%83%80-%EB%A8%B8%EB%A6%AC%EB%9D%A0/209/": {
       "name": "[LG트윈스] 럭키스타 머리띠",
@@ -660,8 +640,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%9F%AD%ED%82%A4%EC%8A%A4%ED%83%80-%EC%A7%9D%EC%A7%9D%EC%9D%B4/1736/": {
       "name": "[LG트윈스] 럭키스타 짝짝이",
@@ -686,8 +666,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%A0%88%ED%8A%B8%EB%A1%9C-%EC%95%88%EC%A0%84-%ED%97%AC%EB%A9%A7/1151/": {
       "name": "[LG트윈스] 레트로 안전 헬멧",
@@ -712,8 +692,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%A1%9C%EA%B3%A0%EB%B3%BC-%EB%8C%80/116/": {
       "name": "[LG트윈스] 로고볼 (대)",
@@ -738,8 +718,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%A1%9C%EA%B3%A0%EB%B3%BC-%EC%86%8C/115/": {
       "name": "[LG트윈스] 로고볼 (소)",
@@ -764,8 +744,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%A1%9C%EC%A7%80%ED%85%8D-%EB%B8%94%EB%A3%A8%ED%88%AC%EC%8A%A4%EB%A7%88%EC%9A%B0%EC%8A%A4-pop/2622/": {
       "name": "[LG트윈스] 로지텍 블루투스마우스 POP",
@@ -786,7 +766,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:33 KST",
+          "quantity_checked_at": "2026-10-21 09:19:59 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -806,7 +786,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:33 KST",
+          "quantity_checked_at": "2026-10-21 09:19:59 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -821,8 +801,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%A6%AC%EC%9C%A0%EC%A0%80%EB%B8%94%EB%B0%B1-%EB%8C%80/2449/": {
       "name": "[LG트윈스] 리유저블백 (대)",
@@ -847,8 +827,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%A6%AC%EC%9C%A0%EC%A0%80%EB%B8%94%EB%B0%B1-%EC%A4%91/2450/": {
       "name": "[LG트윈스] 리유저블백 (중)",
@@ -873,8 +853,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EB%B9%BC%EA%BC%BC%EB%84%A4%EB%A1%9C-%EB%AA%A8%EB%8B%88%ED%84%B0%ED%94%BC%EA%B7%9C%EC%96%B4/958/": {
       "name": "[LG트윈스] 빼꼼네로 모니터피규어",
@@ -899,8 +879,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%84%9C%EC%9A%B8%EC%9D%98%EB%B0%A4-%EB%AA%A8%EC%9E%90/1636/": {
       "name": "[LG트윈스] 서울의밤 모자",
@@ -924,7 +904,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:46 KST",
+          "quantity_checked_at": "2026-10-21 09:20:03 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -964,7 +944,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:48:46 KST",
+          "quantity_checked_at": "2026-10-21 09:20:03 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -989,8 +969,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%95%84%EC%9D%B4%EC%8A%A4%EC%9C%99/483/": {
       "name": "[LG트윈스] 아이스윙",
@@ -1015,8 +995,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%95%84%ED%81%AC%EB%A6%B4-%EC%8A%A4%ED%83%A0%EB%93%9C-%ED%82%A4%EB%A7%81%EB%B2%9A%EA%BD%83/1657/": {
       "name": "[LG트윈스] 아크릴 스탠드 키링(벚꽃)",
@@ -1041,8 +1021,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%95%84%ED%81%AC%EB%A6%B4-%EC%8A%A4%ED%83%A0%EB%93%9C-%ED%82%A4%EB%A7%81%EC%9D%B8%ED%98%95%EB%BD%91%EA%B8%B0/1656/": {
       "name": "[LG트윈스] 아크릴 스탠드 키링(인형뽑기)",
@@ -1067,8 +1047,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%95%BC%EA%B5%AC%EA%B3%B5-%EC%BC%80%EC%9D%B4%EC%8A%A4-%EA%B3%A0%EA%B8%89%ED%98%95/117/": {
       "name": "[LG트윈스] 야구공 케이스 (고급형)",
@@ -1093,14 +1073,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%90%EB%A1%9C%EC%9A%B0-%EB%AC%B4%EC%A0%81%ED%83%80%EC%9B%94/2476/": {
       "name": "[LG트윈스] 옐로우 무적타월",
       "price": 8000,
       "stock": {
-        "재고": 437
+        "재고": 436
       },
       "option_info": {
         "재고": {
@@ -1119,8 +1099,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%A0%88%ED%8A%B8%EB%A1%9C-%EB%AA%A8%EC%9E%90/2284/": {
       "name": "[LG트윈스] 오리지널 레트로 모자",
@@ -1189,8 +1169,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%AA%A8%EC%9E%90/436/": {
       "name": "[LG트윈스] 오리지널 모자",
@@ -1259,8 +1239,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9D%91%EC%9B%90%EB%B0%B0%ED%8A%B8/570/": {
       "name": "[LG트윈스] 응원배트",
@@ -1285,8 +1265,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9D%91%EC%9B%90%EB%B4%89/1837/": {
       "name": "[LG트윈스] 응원봉",
@@ -1311,8 +1291,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EB%84%A4%EB%A1%9C-%ED%82%A4%EB%A7%81/2555/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 네로 키링",
@@ -1337,8 +1317,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EB%93%9C%EB%A1%9C%EC%9A%B0%EC%83%89-stripe/2558/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 드로우색 STRIPE",
@@ -1363,8 +1343,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC%EB%B8%8C%EB%A0%88%EC%9D%B4%ED%81%AC-black/2556/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 슈퍼브레이크 BLACK",
@@ -1389,8 +1369,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC%EB%B8%8C%EB%A0%88%EC%9D%B4%ED%81%AC-stripe/2557/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 슈퍼브레이크 STRIPE",
@@ -1415,8 +1395,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%9E%94%EC%8A%A4%ED%8F%AC%EC%B8%A0-x-lg-twins-%EC%8A%88%ED%8D%BC-%EC%8A%A4%ED%83%9C%EC%89%AC-black/2560/": {
       "name": "[LG트윈스] 잔스포츠 X LG TWINS 슈퍼 스태쉬 BLACK",
@@ -1441,8 +1421,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%B0%A8%EB%A0%B7%EB%84%A4%EB%A1%9C-%ED%94%BC%EA%B7%9C%EC%96%B4/959/": {
       "name": "[LG트윈스] 차렷네로 피규어",
@@ -1467,8 +1447,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%BA%A0%ED%95%91-%EC%97%90%EB%94%94%EC%85%98-%ED%8F%B4%EB%94%A9-%ED%85%8C%EC%9D%B4%EB%B8%94/815/": {
       "name": "[LG트윈스] 캠핑 에디션 폴딩 테이블",
@@ -1493,8 +1473,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%81%B4%EB%9E%98%EC%8B%9D-%EC%97%A0%EB%B8%94%EB%9F%BC-%EB%A7%A5%EC%84%B8%EC%9D%B4%ED%94%84-%EC%95%84%ED%81%AC%EB%A6%B4%ED%86%A1/2563/": {
       "name": "[LG트윈스] 클래식 엠블럼 맥세이프 아크릴톡",
@@ -1519,8 +1499,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%81%B4%EB%9E%98%EC%8B%9D-%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%8C%A8%EC%B9%98/2562/": {
       "name": "[LG트윈스] 클래식 트윈스 패치",
@@ -1545,8 +1525,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%8B%B0%EC%BC%93-%ED%8C%8C%EC%9A%B0%EC%B9%98/1711/": {
       "name": "[LG트윈스] 티켓 파우치",
@@ -1571,8 +1551,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%EC%9D%91%EC%9B%90%ED%83%80%EC%9B%94/1277/": {
       "name": "[LG트윈스] 플레이어 응원타월",
@@ -1597,7 +1577,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:49:57 KST",
+          "quantity_checked_at": "2026-10-21 09:20:06 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1617,7 +1597,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:49:57 KST",
+          "quantity_checked_at": "2026-10-21 09:20:07 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1672,8 +1652,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BC%EA%B7%9C%EC%96%B4-v4%EC%B6%98%EC%8B%9D%EC%9D%B4/1317/": {
       "name": "[LG트윈스] 피규어 V4_춘식이",
@@ -1698,8 +1678,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EB%8B%88%ED%8A%B8-%EB%A8%B8%ED%94%8C%EB%9F%AC/2308/": {
       "name": "[LG트윈스] 픽셀네로 니트 머플러",
@@ -1724,8 +1704,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EB%8B%B4%EC%9A%94/2292/": {
       "name": "[LG트윈스] 픽셀네로 담요",
@@ -1750,8 +1730,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0/2291/": {
       "name": "[LG트윈스] 픽셀네로 반팔티셔츠",
@@ -1774,7 +1754,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:19 KST",
+          "quantity_checked_at": "2026-10-21 09:20:10 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1794,7 +1774,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:19 KST",
+          "quantity_checked_at": "2026-10-21 09:20:10 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1814,7 +1794,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:19 KST",
+          "quantity_checked_at": "2026-10-21 09:20:11 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1834,7 +1814,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:19 KST",
+          "quantity_checked_at": "2026-10-21 09:20:11 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1849,8 +1829,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EB%B3%BC%EC%BA%A1%EA%B7%B8%EB%A6%B0/2288/": {
       "name": "[LG트윈스] 픽셀네로 볼캡(그린)",
@@ -1875,8 +1855,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EB%B3%BC%EC%BA%A1%EB%B8%94%EB%9E%99/2289/": {
       "name": "[LG트윈스] 픽셀네로 볼캡(블랙)",
@@ -1901,8 +1881,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%98%A4%ED%94%88%ED%98%95/2306/": {
       "name": "[LG트윈스] 픽셀네로 유니폼(오픈형)",
@@ -1993,8 +1973,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EC%9C%A0%EB%8B%88%ED%8F%BC%ED%8B%B0%EC%85%94%EC%B8%A0%ED%98%95/2307/": {
       "name": "[LG트윈스] 픽셀네로 유니폼(티셔츠형)",
@@ -2050,7 +2030,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:32 KST",
+          "quantity_checked_at": "2026-10-21 09:20:15 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2070,7 +2050,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:32 KST",
+          "quantity_checked_at": "2026-10-21 09:20:16 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2090,7 +2070,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:33 KST",
+          "quantity_checked_at": "2026-10-21 09:20:16 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2115,8 +2095,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EC%A3%BC%EC%B0%A8%EB%B2%88%ED%98%B8%ED%8C%90/2414/": {
       "name": "[LG트윈스] 픽셀네로 주차번호판",
@@ -2141,8 +2121,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EC%A7%90%EC%83%89/2287/": {
       "name": "[LG트윈스] 픽셀네로 짐색",
@@ -2167,8 +2147,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%EC%BB%A4%EC%8A%A4%ED%85%80%ED%8C%A8%EC%B9%98/2286/": {
       "name": "[LG트윈스] 픽셀네로 커스텀패치",
@@ -2203,7 +2183,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:39 KST",
+          "quantity_checked_at": "2026-10-21 09:20:24 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2233,7 +2213,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:39 KST",
+          "quantity_checked_at": "2026-10-21 09:20:25 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2263,7 +2243,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:39 KST",
+          "quantity_checked_at": "2026-10-21 09:20:25 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2278,8 +2258,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%98%A4%ED%94%88%ED%98%95/2304/": {
       "name": "[LG트윈스] 픽셀네로 키즈 유니폼(오픈형)",
@@ -2301,7 +2281,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:41 KST",
+          "quantity_checked_at": "2026-10-21 09:20:29 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2321,7 +2301,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:42 KST",
+          "quantity_checked_at": "2026-10-21 09:20:29 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2346,8 +2326,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC%ED%8B%B0%EC%85%94%EC%B8%A0%ED%98%95/2305/": {
       "name": "[LG트윈스] 픽셀네로 키즈 유니폼(티셔츠형)",
@@ -2369,7 +2349,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:44 KST",
+          "quantity_checked_at": "2026-10-21 09:20:34 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2389,7 +2369,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:44 KST",
+          "quantity_checked_at": "2026-10-21 09:20:34 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2409,7 +2389,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:44 KST",
+          "quantity_checked_at": "2026-10-21 09:20:35 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2424,8 +2404,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%94%BD%EC%85%80%EB%84%A4%EB%A1%9C-%ED%9B%84%EB%93%9C%ED%8B%B0%EC%85%94%EC%B8%A0/2290/": {
       "name": "[LG트윈스] 픽셀네로 후드티셔츠",
@@ -2433,7 +2413,7 @@
       "stock": {
         "S": 16,
         "M": 30,
-        "L": 36,
+        "L": 35,
         "XL": 24
       },
       "option_info": {
@@ -2448,7 +2428,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:46 KST",
+          "quantity_checked_at": "2026-10-21 09:20:39 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2468,7 +2448,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:47 KST",
+          "quantity_checked_at": "2026-10-21 09:20:39 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2488,7 +2468,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:47 KST",
+          "quantity_checked_at": "2026-10-21 09:20:39 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2508,7 +2488,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:47 KST",
+          "quantity_checked_at": "2026-10-21 09:20:39 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2523,8 +2503,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2023%EB%85%84-%EC%A0%95%EA%B7%9C%EB%A6%AC%EA%B7%B8-%EC%9A%B0%EC%8A%B9-%EB%AA%A8%EB%82%98%EB%AF%B8-%EC%97%90%EB%94%94%EC%85%98/1039/": {
       "name": "[LG트윈스] 2023년 정규리그 우승 모나미 에디션",
@@ -2549,8 +2529,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2023-%ED%86%B5%ED%95%A9%EC%9A%B0%EC%8A%B9-%EA%B8%B0%EB%85%90-%EC%95%A1%EC%9E%90/1001/": {
       "name": "[LG트윈스] 2023 통합우승 기념 액자",
@@ -2575,8 +2555,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2023-%ED%86%B5%ED%95%A9%EC%9A%B0%EC%8A%B9-%EC%8A%A4%EB%85%B8%EC%9A%B0%EB%B3%BCchampions/1019/": {
       "name": "[LG트윈스] 2023 통합우승 스노우볼(CHAMPIONS)",
@@ -2601,8 +2581,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2023-%ED%86%B5%ED%95%A9%EC%9A%B0%EC%8A%B9-%EC%8A%A4%EB%85%B8%EC%9A%B0%EB%B3%BCv3/1020/": {
       "name": "[LG트윈스] 2023 통합우승 스노우볼(V3)",
@@ -2627,8 +2607,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2023-%ED%86%B5%ED%95%A9%EC%9A%B0%EC%8A%B9-%ED%9B%84%EB%93%9C%ED%8B%B0/1037/": {
       "name": "[LG트윈스] 2023 통합우승 후드티",
@@ -2652,7 +2632,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-20 13:50:56 KST",
+          "quantity_checked_at": "2026-10-21 09:20:43 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2707,8 +2687,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2024-%ED%8C%AC%EB%B6%81/1086/": {
       "name": "[LG트윈스] 2024 팬북",
@@ -2733,8 +2713,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2025-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%A0%88%ED%8A%B8%EB%A1%9C-%EB%AA%A8%EC%9E%90/444/": {
       "name": "[LG트윈스] 2025 오리지널 레트로 모자",
@@ -2803,8 +2783,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2025-%EC%9A%B0%EC%8A%B9%EA%B8%B0%EB%85%90-%ED%99%94%EB%B3%B4%EC%A7%91/2216/": {
       "name": "[LG트윈스] 2025 우승기념 화보집",
@@ -2829,8 +2809,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2026-%ED%8F%AC%EC%8A%A4%ED%8A%B8%EC%8B%9C%EC%A6%8C-%EB%A7%A5%EC%84%B8%EC%9D%B4%ED%94%84-%EC%95%84%ED%81%AC%EB%A6%B4%ED%86%A1/2805/": {
       "name": "[LG트윈스] 2026 포스트시즌 맥세이프 아크릴톡",
@@ -2855,14 +2835,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://nolmdshop.com/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-2026-%ED%8F%AC%EC%8A%A4%ED%8A%B8%EC%8B%9C%EC%A6%8C-%ED%8C%A8%EC%B9%98/2806/": {
       "name": "[LG트윈스] 2026 포스트시즌 패치",
       "price": 15000,
       "stock": {
-        "재고": 35
+        "재고": 32
       },
       "option_info": {
         "재고": {
@@ -2881,8 +2861,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EB%9E%9C%EB%8D%A4-%EC%95%84%ED%81%AC%EB%A6%B4-%ED%82%A4%EB%A7%81multi/170/": {
       "name": "마루는강쥐 랜덤 아크릴 키링(MULTI)",
@@ -2907,8 +2887,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EA%B0%95%EC%A5%90%EB%A7%88%EB%A3%A8-%EB%B1%83%EC%A7%80multi/163/": {
       "name": "마루는강쥐 콜라보 강쥐마루 뱃지(MULTI)",
@@ -2933,14 +2913,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EA%B0%95%EC%A5%90%EB%A7%88%EB%A3%A8-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81multi/159/": {
       "name": "마루는강쥐 콜라보 강쥐마루 인형 키링(MULTI)",
       "price": 18000,
       "stock": {
-        "재고": 97
+        "재고": 96
       },
       "option_info": {
         "재고": {
@@ -2959,8 +2939,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A6%AC%EB%AA%A8%EC%BD%98%EB%A7%88%EB%A3%A8-%EB%A7%88%EA%B7%B8%EB%84%A4%ED%8B%B1-%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%86%A1multi/168/": {
       "name": "마루는강쥐 콜라보 리모콘마루 마그네틱 스마트톡(MULTI)",
@@ -2985,8 +2965,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A7%88%EB%A3%A8-%ED%8E%98%EC%9D%B4%EC%8A%A4-%EB%B1%83%EC%A7%80multi/164/": {
       "name": "마루는강쥐 콜라보 마루 페이스 뱃지(MULTI)",
@@ -3011,8 +2991,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%B3%BC%EC%BA%A1yellow/147/": {
       "name": "마루는강쥐 콜라보 볼캡(YELLOW)",
@@ -3037,8 +3017,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%B4%89%EC%A0%9C-%EC%9D%B8%ED%98%95multi/157/": {
       "name": "마루는강쥐 콜라보 봉제 인형(MULTI)",
@@ -3063,8 +3043,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%B8%8C%EC%9D%B4%EB%A7%88%EB%A3%A8-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81multi/158/": {
       "name": "마루는강쥐 콜라보 브이마루 인형 키링(MULTI)",
@@ -3089,8 +3069,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9C%A0%EB%8B%88%ED%8F%BCyellow/142/": {
       "name": "마루는강쥐 콜라보 유니폼(YELLOW)",
@@ -3181,8 +3161,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%91%EC%9B%90%EB%A7%88%EB%A3%A8-%EB%B1%83%EC%A7%80multi/162/": {
       "name": "마루는강쥐 콜라보 응원마루 뱃지(MULTI)",
@@ -3207,8 +3187,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98-%EC%8A%A4%ED%8B%B0%EC%BB%A4%ED%8C%A9%EC%A7%81%EA%B4%80/166/": {
       "name": "마루는강쥐 콜라보 이모티콘 스티커팩(직관)",
@@ -3233,8 +3213,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98-%EC%8A%A4%ED%8B%B0%EC%BB%A4%ED%8C%A9%EC%A7%91%EA%B4%80/165/": {
       "name": "마루는강쥐 콜라보 이모티콘 스티커팩(집관)",
@@ -3259,8 +3239,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%B8%ED%98%95-%EB%A8%B8%EB%A6%AC%EB%9D%A0brown/151/": {
       "name": "마루는강쥐 콜라보 인형 머리띠(BROWN)",
@@ -3285,8 +3265,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%B8%ED%98%95-%EC%8A%A4%ED%81%AC%EB%9F%B0%EC%B9%98red/156/": {
       "name": "마루는강쥐 콜라보 인형 스크런치(RED)",
@@ -3311,8 +3291,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%B8%ED%98%95-%EC%8A%A4%ED%81%AC%EB%9F%B0%EC%B9%98yellow/155/": {
       "name": "마루는강쥐 콜라보 인형 스크런치(YELLOW)",
@@ -3337,14 +3317,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%A0%84%EC%82%AC%EB%A8%B8%ED%94%8C%EB%9F%ACmulti/150/": {
       "name": "마루는강쥐 콜라보 전사머플러(MULTI)",
       "price": 20000,
       "stock": {
-        "재고": 513
+        "재고": 512
       },
       "option_info": {
         "재고": {
@@ -3363,8 +3343,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BCyellow/143/": {
       "name": "마루는강쥐 콜라보 키즈  유니폼(YELLOW)",
@@ -3411,8 +3391,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%8C%A8%ED%84%B4-%EB%B0%98%EB%8B%A4%EB%82%98yellow/154/": {
       "name": "마루는강쥐 콜라보 패턴 반다나(YELLOW)",
@@ -3437,8 +3417,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%ED%8E%98%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%8A%A4%EB%B3%BCyellow/175/": {
       "name": "마루는강쥐 페이스 스트레스볼(YELLOW)",
@@ -3463,8 +3443,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A7%88%EB%A3%A8%EB%8A%94%EA%B0%95%EC%A5%90-%ED%8E%98%EC%9D%B4%EC%8A%A4-%ED%81%AC%EB%A1%9C%EC%8A%A4%EB%B0%B1red/174/": {
       "name": "마루는강쥐 페이스 크로스백(RED)",
@@ -3489,14 +3469,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%97%A0%EB%B8%94%EB%9F%BC-%ED%88%AC%EB%AA%85-%ED%8C%8C%EC%9A%B0%EC%B9%98pink/240/": {
       "name": "먼작귀 콜라보 엠블럼 투명 파우치(PINK)",
       "price": 8000,
       "stock": {
-        "재고": 24
+        "재고": 22
       },
       "option_info": {
         "재고": {
@@ -3515,16 +3495,16 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%91%EC%9B%90%EB%B0%B0%ED%8A%B8-%EC%95%84%ED%81%AC%EB%A6%B4%ED%82%A4%EB%A7%81-3%EC%A2%85/249/": {
       "name": "먼작귀 콜라보 응원배트 아크릴키링 (3종)",
       "price": 12000,
       "stock": {
-        "치이카와": 105,
-        "가르마": 101,
-        "토끼": 129
+        "치이카와": 104,
+        "가르마": 99,
+        "토끼": 124
       },
       "option_info": {
         "치이카와": {
@@ -3563,16 +3543,16 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%91%EC%9B%90%EB%B0%B0%ED%8A%B8-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98-3%EC%A2%85/250/": {
       "name": "먼작귀 콜라보 응원배트 열접착패치 (3종)",
       "price": 8000,
       "stock": {
-        "치이카와": 16,
-        "가르마": 16,
-        "토끼": 8
+        "치이카와": 14,
+        "가르마": 15,
+        "토끼": 7
       },
       "option_info": {
         "치이카와": {
@@ -3611,14 +3591,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%8B%A4%EA%BE%B8-%EC%8A%A4%ED%8B%B0%EC%BB%A4multi/238/": {
       "name": "먼작귀 콜라보 캐릭터 다꾸 스티커(MULTI)",
       "price": 4000,
       "stock": {
-        "재고": 20
+        "재고": 18
       },
       "option_info": {
         "재고": {
@@ -3637,14 +3617,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%A9%94%EA%B0%80-%EC%9D%91%EC%9B%90%EB%B0%B0%ED%8A%B8white/245/": {
       "name": "먼작귀 콜라보 캐릭터 메가 응원배트(WHITE)",
       "price": 15000,
       "stock": {
-        "재고": 242
+        "재고": 241
       },
       "option_info": {
         "재고": {
@@ -3663,14 +3643,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%82%AC%EA%B0%81%EC%BF%A0%EC%85%98whitepink/251/": {
       "name": "먼작귀 콜라보 캐릭터 사각쿠션(WHITE/PINK)",
       "price": 30000,
       "stock": {
-        "재고": 49
+        "재고": 48
       },
       "option_info": {
         "재고": {
@@ -3689,15 +3669,15 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%95%84%ED%81%AC%EB%A6%B4%ED%82%A4%EB%A7%81-3%EC%A2%85/223/": {
       "name": "먼작귀 콜라보 캐릭터 아크릴키링 (3종)",
       "price": 12000,
       "stock": {
         "치이카와": 0,
-        "가르마": 81,
+        "가르마": 80,
         "토끼": 0
       },
       "option_info": {
@@ -3737,8 +3717,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%9C%A0%EB%8B%88%ED%8F%BCwhite/207/": {
       "name": "먼작귀 콜라보 캐릭터 유니폼(WHITE)",
@@ -3829,15 +3809,15 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%9C%A0%EB%8B%88%ED%8F%BCwhitepink/242/": {
       "name": "먼작귀 콜라보 캐릭터 유니폼(WHITE/PINK)",
       "price": 105000,
       "stock": {
         "85(XS)": 0,
-        "90(S)": 53,
+        "90(S)": 52,
         "95(M)": 24,
         "100(L)": 51,
         "105(XL)": 19,
@@ -3921,14 +3901,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%9D%91%EC%9B%90%EA%B9%83%EB%B0%9Cwhite/219/": {
       "name": "먼작귀 콜라보 캐릭터 응원깃발(WHITE)",
       "price": 8000,
       "stock": {
-        "재고": 44
+        "재고": 42
       },
       "option_info": {
         "재고": {
@@ -3947,14 +3927,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%A0%90%EC%B0%A9-%EB%A9%94%EB%AA%A8%EC%A7%80multi/241/": {
       "name": "먼작귀 콜라보 캐릭터 점착 메모지(MULTI)",
       "price": 5000,
       "stock": {
-        "재고": 219
+        "재고": 217
       },
       "option_info": {
         "재고": {
@@ -3973,8 +3953,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%A1%B0%EB%A6%AC%EA%B0%9C-%ED%8C%8C%EC%9A%B0%EC%B9%98multi/239/": {
       "name": "먼작귀 콜라보 캐릭터 조리개 파우치(MULTI)",
@@ -3999,8 +3979,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%A7%90%EC%8C%95black/228/": {
       "name": "먼작귀 콜라보 캐릭터 짐쌕(BLACK)",
@@ -4025,16 +4005,16 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%BF%A8%ED%83%80%EC%98%AC-3%EC%A2%85/247/": {
       "name": "먼작귀 콜라보 캐릭터 쿨타올 (3종)",
       "price": 8000,
       "stock": {
-        "치이카와": 51,
-        "가르마": 68,
-        "토끼": 44
+        "치이카와": 50,
+        "가르마": 67,
+        "토끼": 42
       },
       "option_info": {
         "치이카와": {
@@ -4073,8 +4053,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%8B%B0%EC%85%94%EC%B8%A0black/244/": {
       "name": "먼작귀 콜라보 캐릭터 티셔츠(BLACK)",
@@ -4154,8 +4134,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%8B%B0%EC%85%94%EC%B8%A0white/213/": {
       "name": "먼작귀 콜라보 캐릭터 티셔츠(WHITE)",
@@ -4235,14 +4215,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%8E%98%EC%9D%B4%EC%8A%A4%ED%83%80%EC%98%ACyellow/229/": {
       "name": "먼작귀 콜라보 캐릭터 페이스타올(YELLOW)",
       "price": 15000,
       "stock": {
-        "재고": 11
+        "재고": 10
       },
       "option_info": {
         "재고": {
@@ -4261,8 +4241,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%ED%82%A4%EB%A7%81-3%EC%A2%85/248/": {
       "name": "먼작귀 콜라보 캐릭터 포토카드키링 (3종)",
@@ -4309,14 +4289,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EB%A8%BC%EC%9E%91%EA%B7%80-%EC%BD%9C%EB%9D%BC%EB%B3%B4-diy-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%A8%B8%EB%A6%AC%EB%9D%A0multi/231/": {
       "name": "먼작귀 콜라보 DIY 캐릭터 머리띠(MULTI)",
       "price": 23000,
       "stock": {
-        "재고": 155
+        "재고": 154
       },
       "option_info": {
         "재고": {
@@ -4335,8 +4315,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%98%88%EC%95%BD%ED%8C%90%EB%A7%A4-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-thank-you-%EC%9E%A0%EC%8B%A4%EC%95%BC%EA%B5%AC%EC%9E%A5-%EB%8B%88%ED%8A%B8%EB%A8%B8%ED%94%8C%EB%9F%ACpink/397/": {
       "name": "[예약판매] 헬로키티 콜라보 THANK YOU 잠실야구장 니트머플러(PINK)",
@@ -4361,8 +4341,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%98%88%EC%95%BD%ED%8C%90%EB%A7%A4-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-thank-you-%EC%9E%A0%EC%8B%A4%EC%95%BC%EA%B5%AC%EC%9E%A5-%EC%95%84%ED%81%AC%EB%A6%B4-%EC%A4%84%EC%A4%84%EC%9D%B4-%ED%82%A4%EB%A7%81multi/396/": {
       "name": "[예약판매] 헬로키티 콜라보 THANK YOU 잠실야구장 아크릴 줄줄이 키링(MULTI)",
@@ -4387,8 +4367,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%98%88%EC%95%BD%ED%8C%90%EB%A7%A4-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-thank-you-%EC%9E%A0%EC%8B%A4%EC%95%BC%EA%B5%AC%EC%9E%A5-%EC%95%BC%EA%B5%AC-%EC%A0%90%ED%8D%BCcharcoal/394/": {
       "name": "[예약판매] 헬로키티 콜라보 THANK YOU 잠실야구장 야구 점퍼(CHARCOAL)",
@@ -4457,8 +4437,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%98%88%EC%95%BD%ED%8C%90%EB%A7%A4-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-thank-you-%EC%9E%A0%EC%8B%A4%EC%95%BC%EA%B5%AC%EC%9E%A5-%ED%9B%84%EB%93%9C%ED%8B%B0gray/395/": {
       "name": "[예약판매] 헬로키티 콜라보 THANK YOU 잠실야구장 후드티(GRAY)",
@@ -4538,8 +4518,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EA%B7%B8%EB%9E%98%ED%94%BD-%EB%B0%98%ED%8C%94-%ED%8B%B0%EC%85%94%EC%B8%A0black/259/": {
       "name": "위시캣 콜라보 그래픽 반팔 티셔츠(BLACK)",
@@ -4586,8 +4566,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EA%B7%B8%EB%9E%98%ED%94%BD-%EB%B0%98%ED%8C%94-%ED%8B%B0%EC%85%94%EC%B8%A0white/260/": {
       "name": "위시캣 콜라보 그래픽 반팔 티셔츠(WHITE)",
@@ -4634,8 +4614,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%8F%99%EC%A0%84-%ED%8C%8C%EC%9A%B0%EC%B9%98white/272/": {
       "name": "위시캣 콜라보 동전 파우치(WHITE)",
@@ -4660,8 +4640,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%94%94%EC%98%A4%EB%9D%BC%EB%A7%88%EC%8A%A4%ED%8A%B8%EB%9D%BC%EC%9D%B4%ED%94%84/265/": {
       "name": "위시캣 콜라보 디오라마(스트라이프)",
@@ -4686,8 +4666,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%9E%9C%EB%8D%A4-%EC%95%84%ED%81%AC%EB%A6%B4-%ED%82%A4%EB%A7%81multi/264/": {
       "name": "위시캣 콜라보 랜덤 아크릴 키링(MULTI)",
@@ -4712,8 +4692,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A6%AC%EB%B3%B8-%EB%B3%BC%EC%BA%A1charcoal/277/": {
       "name": "위시캣 콜라보 리본 볼캡(CHARCOAL)",
@@ -4738,8 +4718,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%AF%B8%EB%8B%88-%EC%8A%A4%ED%8B%B0%EC%BB%A4multi/266/": {
       "name": "위시캣 콜라보 미니 스티커(MULTI)",
@@ -4764,8 +4744,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%AF%B8%EB%8B%88-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98-%EC%84%B8%ED%8A%B8multi/262/": {
       "name": "위시캣 콜라보 미니 열접착패치 세트(MULTI)",
@@ -4790,8 +4770,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%AF%B8%EB%8B%88-%ED%81%AC%EB%A1%9C%EC%8A%A4%EB%B0%B1white/271/": {
       "name": "위시캣 콜라보 미니 크로스백(WHITE)",
@@ -4816,8 +4796,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%AF%B8%EB%8B%88-%ED%88%AC%EB%AA%85-%ED%8C%8C%EC%9A%B0%EC%B9%98multi/268/": {
       "name": "위시캣 콜라보 미니 투명 파우치(MULTI)",
@@ -4842,8 +4822,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98multi/261/": {
       "name": "위시캣 콜라보 열접착패치(MULTI)",
@@ -4868,8 +4848,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9C%A0%EB%8B%88%ED%8F%BCcharcoal/256/": {
       "name": "위시캣 콜라보 유니폼(CHARCOAL)",
@@ -4960,8 +4940,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%A1%B0%EB%A6%AC%EA%B0%9C-%ED%8C%8C%EC%9A%B0%EC%B9%98white/270/": {
       "name": "위시캣 콜라보 조리개 파우치(WHITE)",
@@ -4986,8 +4966,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BF%A8%ED%83%80%EC%98%ACmulti/263/": {
       "name": "위시캣 콜라보 쿨타올(MULTI)",
@@ -5012,8 +4992,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%83%80%ED%8F%AC%EB%A6%B0-%EB%B0%B1multi/269/": {
       "name": "위시캣 콜라보 타포린 백(MULTI)",
@@ -5038,8 +5018,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%9C%84%EC%8B%9C%EC%BA%A3-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%88%AC%EB%AA%85-%EC%8A%A4%ED%8B%B0%EC%BB%A4multi/267/": {
       "name": "위시캣 콜라보 투명 스티커(MULTI)",
@@ -5064,8 +5044,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%B0%98%ED%8C%94%ED%8B%B0%EC%85%94%EC%B8%A0%EC%8A%B9%EB%A6%ACeasy/35/": {
       "name": "최고심 콜라보 반팔티셔츠(승리EASY)",
@@ -5123,8 +5103,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%86%8C%ED%94%84%ED%8A%B8%EB%B3%BCgreen/42/": {
       "name": "최고심 콜라보 소프트볼(GREEN)",
@@ -5149,8 +5129,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%86%8C%ED%94%84%ED%8A%B8%EB%B3%BCpink/41/": {
       "name": "최고심 콜라보 소프트볼(PINK)",
@@ -5175,8 +5155,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%B8%ED%98%95-%EB%A8%B8%EB%A6%AC%EB%9D%A0purple/45/": {
       "name": "최고심 콜라보 인형 머리띠(PURPLE)",
@@ -5201,8 +5181,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%B3%BC%EC%BA%A1green/39/": {
       "name": "최고심 콜라보 캐릭터 볼캡(GREEN)",
@@ -5227,8 +5207,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%B3%BC%EC%BA%A1pink/37/": {
       "name": "최고심 콜라보 캐릭터 볼캡(PINK)",
@@ -5253,8 +5233,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%9C%A0%EB%8B%88%ED%8F%BCgreen/33/": {
       "name": "최고심 콜라보 캐릭터 유니폼(GREEN)",
@@ -5345,8 +5325,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%9C%A0%EB%8B%88%ED%8F%BCpink/31/": {
       "name": "최고심 콜라보 캐릭터 유니폼(PINK)",
@@ -5437,8 +5417,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%82%A4%EC%A6%88-%EB%B3%BC%EC%BA%A1green/40/": {
       "name": "최고심 콜라보 캐릭터 키즈 볼캡(GREEN)",
@@ -5463,8 +5443,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%82%A4%EC%A6%88-%EB%B3%BC%EC%BA%A1pink/38/": {
       "name": "최고심 콜라보 캐릭터 키즈 볼캡(PINK)",
@@ -5489,8 +5469,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BCgreen/34/": {
       "name": "최고심 콜라보 캐릭터 키즈 유니폼(GREEN)",
@@ -5537,8 +5517,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%EC%B5%9C%EA%B3%A0%EC%8B%AC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%ED%82%A4%EB%A7%81/68/": {
       "name": "최고심 콜라보 플레이어 키링",
@@ -5662,14 +5642,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EB%9E%9C%EB%8D%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%ED%82%A4%EB%A7%81pink/317/": {
       "name": "태닝 헬로키티 랜덤 유니폼 키링(PINK)",
       "price": 6000,
       "stock": {
-        "재고": 46
+        "재고": 44
       },
       "option_info": {
         "재고": {
@@ -5688,8 +5668,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EB%B9%88%ED%8B%B0%EC%A7%80-%ED%8C%A8%EC%B9%98-%ED%8B%B0%EC%85%94%EC%B8%A0brown/348/": {
       "name": "태닝 헬로키티 빈티지 패치 티셔츠(BROWN)",
@@ -5736,8 +5716,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%9D%B8%ED%98%95-%EB%A8%B8%EB%A6%AC%EB%9D%A0multi/306/": {
       "name": "태닝 헬로키티 인형 머리띠(MULTI)",
@@ -5762,8 +5742,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%A1%B0%EB%A6%AC%EA%B0%9C-%ED%8C%8C%EC%9A%B0%EC%B9%98brown/311/": {
       "name": "태닝 헬로키티 조리개 파우치(BROWN)",
@@ -5788,15 +5768,15 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EA%B7%B8%EB%9E%98%ED%94%BD-%ED%8B%B0%EC%85%94%EC%B8%A0white/347/": {
       "name": "태닝 헬로키티 콜라보 그래픽 티셔츠(WHITE)",
       "price": 36000,
       "stock": {
         "95(M)": 14,
-        "100(L)": 59,
+        "100(L)": 58,
         "105(XL)": 38
       },
       "option_info": {
@@ -5836,8 +5816,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%8F%84%ED%8A%B8-%EB%A7%88%EC%BC%93%EB%B0%B1pink/351/": {
       "name": "태닝 헬로키티 콜라보 도트 마켓백(PINK)",
@@ -5862,15 +5842,15 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%8F%84%ED%8A%B8-%EC%B9%B4%EB%9D%BC-%EC%A0%B8%EC%A7%80pink/357/": {
       "name": "태닝 헬로키티 콜라보 도트 카라 져지(PINK)",
       "price": 85000,
       "stock": {
         "90(S)": 148,
-        "95(M)": 53,
+        "95(M)": 52,
         "100(L)": 75
       },
       "option_info": {
@@ -5910,8 +5890,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%9E%9C%EB%8D%A4-%ED%94%BC%EA%B7%9C%EC%96%B4-%ED%82%A4%EB%A7%81multi/352/": {
       "name": "태닝 헬로키티 콜라보 랜덤 피규어 키링(MULTI)",
@@ -5936,8 +5916,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A7%88%EA%B7%B8%EB%84%A4%ED%8B%B1-%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%86%A13%EC%A2%85/314/": {
       "name": "태닝 헬로키티 콜라보 마그네틱 스마트톡(3종)",
@@ -5984,22 +5964,22 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A7%88%EA%B7%B8%EB%84%A4%ED%8B%B1-%EC%95%84%ED%81%AC%EB%A6%B4-%EC%B9%B4%EB%93%9C%ED%99%80%EB%8D%94%EB%8F%84%ED%8A%B8/315/": {
       "name": "태닝 헬로키티 콜라보 마그네틱 아크릴 카드홀더(도트)",
       "price": 18000,
       "stock": {
-        "재고": 1
+        "재고": 0
       },
       "option_info": {
         "재고": {
-          "kind": "server_stock",
-          "availability": "selectable",
+          "kind": "soldout",
+          "availability": "soldout",
           "availability_source": "dom",
           "purchase_limit": 3,
-          "source": "page",
+          "source": "dom",
           "stock_managed": true,
           "selling": null,
           "displayed": null
@@ -6010,8 +5990,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A7%88%EA%B7%B8%EB%84%A4%ED%8B%B1-%EC%95%84%ED%81%AC%EB%A6%B4-%EC%B9%B4%EB%93%9C%ED%99%80%EB%8D%94%ED%8C%A8%ED%84%B4/316/": {
       "name": "태닝 헬로키티 콜라보 마그네틱 아크릴 카드홀더(패턴)",
@@ -6036,14 +6016,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A7%88%EA%B7%B8%EB%84%B7-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81-%EC%84%B8%ED%8A%B8multi/309/": {
       "name": "태닝 헬로키티 콜라보 마그넷 인형 키링 세트(MULTI)",
       "price": 30000,
       "stock": {
-        "재고": 60
+        "재고": 58
       },
       "option_info": {
         "재고": {
@@ -6062,8 +6042,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%AF%B8%EB%8B%88-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98-%EC%84%B8%ED%8A%B8%EC%95%84%EC%9D%B4%EC%BD%98/305/": {
       "name": "태닝 헬로키티 콜라보 미니 열접착패치 세트(아이콘)",
@@ -6088,22 +6068,22 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%AF%B8%EB%8B%88-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98-%EC%84%B8%ED%8A%B8%EC%BA%90%EB%A6%AD%ED%84%B0/304/": {
       "name": "태닝 헬로키티 콜라보 미니 열접착패치 세트(캐릭터)",
       "price": 10000,
       "stock": {
-        "재고": 2
+        "재고": 0
       },
       "option_info": {
         "재고": {
-          "kind": "server_stock",
-          "availability": "selectable",
+          "kind": "soldout",
+          "availability": "soldout",
           "availability_source": "dom",
           "purchase_limit": null,
-          "source": "page",
+          "source": "dom",
           "stock_managed": true,
           "selling": null,
           "displayed": null
@@ -6114,8 +6094,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%B2%A0%EC%9D%B4%EB%B9%84-%EB%B0%94%EB%94%94%EC%88%98%ED%8A%B8whitebrown/349/": {
       "name": "태닝 헬로키티 콜라보 베이비 바디수트(WHITE/BROWN)",
@@ -6151,8 +6131,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%B9%BC%EA%BC%BC-%ED%94%BC%EA%B7%9C%EC%96%B4multi/353/": {
       "name": "태닝 헬로키티 콜라보 빼꼼 피규어(MULTI)",
@@ -6177,8 +6157,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%8A%A4%ED%8A%B8%EB%9D%BC%EC%9D%B4%ED%94%84-%EC%B9%B4%EB%9D%BC-%EC%A0%B8%EC%A7%80pinkblack/297/": {
       "name": "태닝 헬로키티 콜라보 스트라이프 카라 져지(PINK/BLACK)",
@@ -6247,8 +6227,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B3%90-%EC%8A%A4%EB%83%85%EB%B0%B1blackpink/301/": {
       "name": "태닝 헬로키티 콜라보 시그니쳐 스냅백(BLACK/PINK)",
@@ -6284,8 +6264,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%8B%A4%EB%A6%AC%EC%BD%98-%EC%86%90%EA%B1%B0%EC%9A%B8multi/354/": {
       "name": "태닝 헬로키티 콜라보 실리콘 손거울(MULTI)",
@@ -6310,15 +6290,15 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%8D%B8%EB%A8%B8-%EC%9C%A0%EB%8B%88%ED%8F%BCsky-blue/342/": {
       "name": "태닝 헬로키티 콜라보 썸머 유니폼(SKY BLUE)",
       "price": 105000,
       "stock": {
         "85(XS)": 26,
-        "90(S)": 99,
+        "90(S)": 98,
         "95(M)": 276,
         "100(L)": 199,
         "105(XL)": 99,
@@ -6402,8 +6382,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%95%BC%EA%B5%AC%EA%B3%B5pink/302/": {
       "name": "태닝 헬로키티 콜라보 야구공(PINK)",
@@ -6428,22 +6408,22 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%96%91%EC%9A%B0%EC%82%B0brown/355/": {
       "name": "태닝 헬로키티 콜라보 양우산(BROWN)",
       "price": 30000,
       "stock": {
-        "재고": 1
+        "재고": 0
       },
       "option_info": {
         "재고": {
-          "kind": "server_stock",
-          "availability": "selectable",
+          "kind": "soldout",
+          "availability": "soldout",
           "availability_source": "dom",
           "purchase_limit": 3,
-          "source": "page",
+          "source": "dom",
           "stock_managed": true,
           "selling": null,
           "displayed": null
@@ -6454,8 +6434,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9B%90%ED%94%BC%EC%8A%A4-%ED%95%91%ED%81%AC-%ED%8C%9D-%EC%9C%A0%EB%8B%88%ED%8F%BCpink/295/": {
       "name": "태닝 헬로키티 콜라보 원피스 핑크 팝 유니폼(PINK)",
@@ -6480,14 +6460,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81multi/310/": {
       "name": "태닝 헬로키티 콜라보 인형 키링(MULTI)",
       "price": 18000,
       "stock": {
-        "재고": 185
+        "재고": 180
       },
       "option_info": {
         "재고": {
@@ -6506,8 +6486,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%A0%88%ED%84%B0%EB%A7%81-%EB%B3%BC%EC%BA%A1black/344/": {
       "name": "태닝 헬로키티 콜라보 캐릭터 레터링 볼캡(BLACK)",
@@ -6532,8 +6512,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%82%A4%EC%A6%88-%ED%95%91%ED%81%AC-%ED%8C%9D-%EC%9C%A0%EB%8B%88%ED%8F%BCpink/293/": {
       "name": "태닝 헬로키티 콜라보 키즈 핑크 팝 유니폼(PINK)",
@@ -6580,8 +6560,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%EC%A0%B8%EC%A7%80beigeblack/346/": {
       "name": "태닝 헬로키티 콜라보 플레이어 져지(BEIGE/BLACK)",
@@ -6892,8 +6872,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%94%BC%ED%81%AC%EB%8B%89-%ED%83%80%EC%98%ACpink/356/": {
       "name": "태닝 헬로키티 콜라보 피크닉 타올(PINK)",
@@ -6918,22 +6898,22 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%95%91%ED%81%AC-%ED%8C%9D-%EB%B3%BC%EC%BA%A1pink/299/": {
       "name": "태닝 헬로키티 콜라보 핑크 팝 볼캡(PINK)",
       "price": 36000,
       "stock": {
-        "재고": 1
+        "재고": 0
       },
       "option_info": {
         "재고": {
-          "kind": "server_stock",
-          "availability": "selectable",
+          "kind": "soldout",
+          "availability": "soldout",
           "availability_source": "dom",
           "purchase_limit": null,
-          "source": "page",
+          "source": "dom",
           "stock_managed": true,
           "selling": null,
           "displayed": null
@@ -6944,8 +6924,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%95%91%ED%81%AC-%ED%8C%9D-%EC%9C%A0%EB%8B%88%ED%8F%BCpink/292/": {
       "name": "태닝 헬로키티 콜라보 핑크 팝 유니폼(PINK)",
@@ -6953,8 +6933,8 @@
       "stock": {
         "85(XS)": 15,
         "90(S)": 25,
-        "95(M)": 44,
-        "100(L)": 77,
+        "95(M)": 43,
+        "100(L)": 76,
         "105(XL)": 49,
         "110(2XL)": 10,
         "120(4XL)": 10
@@ -7036,8 +7016,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%95%91%ED%81%AC-%ED%8C%9D-%ED%8E%AB-%EC%9C%A0%EB%8B%88%ED%8F%BCpink/296/": {
       "name": "태닝 헬로키티 콜라보 핑크 팝 펫 유니폼(PINK)",
@@ -7084,8 +7064,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%83%9C%EB%8B%9D-%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%ED%92%8D%EC%84%A0-%EB%A8%B8%EB%A6%AC%ED%95%80multi/307/": {
       "name": "태닝 헬로키티 풍선 머리핀(MULTI)",
@@ -7110,8 +7090,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A1%9C%EA%B3%A0-%EC%9E%90%EC%BC%93multi/82/": {
       "name": "헬로키티 콜라보 로고 자켓(MULTI)",
@@ -7191,8 +7171,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%A4%91%ED%98%95%EC%9D%B8%ED%98%95-%ED%8C%A8%ED%82%A4%EC%A7%80%EB%8D%B0%EC%9D%BC%EB%A6%AC/101/": {
       "name": "헬로키티 콜라보 중형인형 패키지(데일리)",
@@ -7217,8 +7197,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%A4%91%ED%98%95%EC%9D%B8%ED%98%95-%ED%8C%A8%ED%82%A4%EC%A7%80%EC%9C%A0%EB%8B%88%ED%8F%BC/100/": {
       "name": "헬로키티 콜라보 중형인형 패키지(유니폼)",
@@ -7243,8 +7223,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%B2%B4%ED%81%AC%EB%AC%B4%EB%8A%AC-%EB%B0%98%EB%8B%A4%EB%82%98pink/117/": {
       "name": "헬로키티 콜라보 체크무늬 반다나(PINK)",
@@ -7269,14 +7249,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%A0%84%EC%82%AC%EB%A8%B8%ED%94%8C%EB%9F%ACwhiteblack/98/": {
       "name": "헬로키티 콜라보 캐릭터 전사머플러(WHITE/BLACK)",
       "price": 20000,
       "stock": {
-        "재고": 82
+        "재고": 81
       },
       "option_info": {
         "재고": {
@@ -7295,8 +7275,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%97%AC%EB%A1%9C%ED%82%A4%ED%8B%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%9C%B4%EB%8C%80%EC%9A%A9-%EC%84%A0%ED%92%8D%EA%B8%B0/113/": {
       "name": "헬로키티 콜라보 휴대용 선풍기",
@@ -7321,8 +7301,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%B3%BC%EC%BA%A1multi/365/": {
       "name": "호빵맨 콜라보 볼캡(MULTI)",
@@ -7347,15 +7327,15 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%84%B8%EA%B7%A0%EB%A7%A8-%EB%A0%88%EC%9D%B4%EC%96%B4%EB%93%9C-%ED%8B%B0%EC%85%94%EC%B8%A0navy/371/": {
       "name": "호빵맨 콜라보 세균맨 레이어드 티셔츠(NAVY)",
       "price": 42000,
       "stock": {
         "85(XS)": 55,
-        "95(M)": 37,
+        "95(M)": 36,
         "105(XL)": 37,
         "115(3XL)": 4
       },
@@ -7406,8 +7386,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%95%84%ED%81%AC%EB%A6%B4-%ED%82%A4%EB%A7%81%EC%84%B8%EA%B7%A0%EB%A7%A8/380/": {
       "name": "호빵맨 콜라보 아크릴 키링(세균맨)",
@@ -7432,8 +7412,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%95%84%ED%81%AC%EB%A6%B4-%ED%82%A4%EB%A7%81%EC%A7%A4%EB%9E%91%EC%9D%B4/381/": {
       "name": "호빵맨 콜라보 아크릴 키링(짤랑이)",
@@ -7458,14 +7438,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%95%84%ED%81%AC%EB%A6%B4-%ED%82%A4%EB%A7%81%ED%98%B8%EB%B9%B5%EB%A7%A8/379/": {
       "name": "호빵맨 콜라보 아크릴 키링(호빵맨)",
       "price": 8000,
       "stock": {
-        "재고": 29
+        "재고": 28
       },
       "option_info": {
         "재고": {
@@ -7484,8 +7464,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%95%BC%EA%B5%AC%EA%B3%B5red/366/": {
       "name": "호빵맨 콜라보 야구공(RED)",
@@ -7510,8 +7490,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%97%A0%EB%B8%94%EB%9F%BC-%EB%B1%83%EC%A7%80multi/375/": {
       "name": "호빵맨 콜라보 엠블럼 뱃지(MULTI)",
@@ -7536,8 +7516,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98-%EC%84%B8%EA%B7%A0%EB%A7%A8%EC%A7%A4%EB%9E%91%EC%9D%B4multi/373/": {
       "name": "호빵맨 콜라보 열접착패치 세균맨&짤랑이(MULTI)",
@@ -7562,8 +7542,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98-%ED%98%B8%EB%B9%B5%EB%A7%A8multi/372/": {
       "name": "호빵맨 콜라보 열접착패치 호빵맨(MULTI)",
@@ -7588,8 +7568,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9C%A0%EB%8B%88%ED%8F%BCivory/361/": {
       "name": "호빵맨 콜라보 유니폼(IVORY)",
@@ -7680,8 +7660,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%91%EC%9B%90%EB%A8%B8%ED%94%8C%EB%9F%ACsky-blue/367/": {
       "name": "호빵맨 콜라보 응원머플러(SKY BLUE)",
@@ -7706,8 +7686,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9E%90%EC%B9%B4%EB%93%9C-%EB%B0%B0%EC%83%89-%EC%A7%91%EC%97%85ivory/369/": {
       "name": "호빵맨 콜라보 자카드 배색 집업(IVORY)",
@@ -7776,8 +7756,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%A1%B0%EB%A6%AC%EA%B0%9C-%ED%8C%8C%EC%9A%B0%EC%B9%98%EC%84%B8%EA%B7%A0%EB%A7%A8/383/": {
       "name": "호빵맨 콜라보 조리개 파우치(세균맨)",
@@ -7802,8 +7782,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%A1%B0%EB%A6%AC%EA%B0%9C-%ED%8C%8C%EC%9A%B0%EC%B9%98%ED%98%B8%EB%B9%B5%EB%A7%A8/382/": {
       "name": "호빵맨 콜라보 조리개 파우치(호빵맨)",
@@ -7828,8 +7808,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%A0%88%EC%9D%B4%EC%96%B4%EB%93%9C-%ED%8B%B0%EC%85%94%EC%B8%A0ivory/370/": {
       "name": "호빵맨 콜라보 캐릭터 레이어드 티셔츠(IVORY)",
@@ -7887,8 +7867,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%B1%83%EC%A7%80%EC%84%B8%EA%B7%A0%EB%A7%A8/377/": {
       "name": "호빵맨 콜라보 캐릭터 뱃지(세균맨)",
@@ -7913,8 +7893,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%B1%83%EC%A7%80%EC%A7%A4%EB%9E%91%EC%9D%B4/378/": {
       "name": "호빵맨 콜라보 캐릭터 뱃지(짤랑이)",
@@ -7939,8 +7919,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EB%B1%83%EC%A7%80%ED%98%B8%EB%B9%B5%EB%A7%A8/376/": {
       "name": "호빵맨 콜라보 캐릭터 뱃지(호빵맨)",
@@ -7965,8 +7945,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%97%B4%EC%A0%91%EC%B0%A9%ED%8C%A8%EC%B9%98-%EC%84%B8%ED%8A%B8multi/374/": {
       "name": "호빵맨 콜라보 캐릭터 열접착패치 세트(MULTI)",
@@ -7991,8 +7971,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BF%A8%ED%83%80%EC%98%ACyellow/368/": {
       "name": "호빵맨 콜라보 쿨타올(YELLOW)",
@@ -8017,8 +7997,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BCivory/362/": {
       "name": "호빵맨 콜라보 키즈 유니폼(IVORY)",
@@ -8065,8 +8045,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/%ED%98%B8%EB%B9%B5%EB%A7%A8-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%8E%AB%EC%9C%A0%EB%8B%88%ED%8F%BCivory/363/": {
       "name": "호빵맨 콜라보 펫유니폼(IVORY)",
@@ -8113,8 +8093,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%EC%8A%B9%EB%A6%AC%EC%9A%94%EC%A0%95-%ED%82%A4%EB%A7%81%EC%9D%B8%ED%98%95-v5%EC%B6%98%EC%8B%9D%EC%9D%B4/274/": {
       "name": "LG트윈스 승리요정 키링인형 V5_춘식이",
@@ -8139,8 +8119,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     },
     "https://twinscorestore.co.kr/product/lg%ED%8A%B8%EC%9C%88%EC%8A%A4-%ED%83%9C%EB%8B%9D%ED%94%BC%EA%B7%9C%EC%96%B4%ED%82%A4%EB%A7%81-v5%EC%B6%98%EC%8B%9D%EC%9D%B4/275/": {
       "name": "LG트윈스 태닝피규어키링 V5_춘식이",
@@ -8165,8 +8145,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-20 13:54 KST",
-      "last_attempt": "2026-10-20 13:54 KST"
+      "checked_at": "2026-10-21 09:22 KST",
+      "last_attempt": "2026-10-21 09:22 KST"
     }
   }
 }
