@@ -1,5 +1,5 @@
 {
-  "last_checked": "2026-10-26 09:33 KST",
+  "last_checked": "2026-10-26 14:08 KST",
   "inventory_schema": 2,
   "products": {
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EA%B3%BD%EB%B9%88-%EB%8B%A4%EC%8A%B9%EC%99%95-%EA%B8%B0%EB%85%90-%EC%95%A1%EC%9E%90%EB%B1%83%EC%A7%80/1554/": {
@@ -25,22 +25,22 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EA%B9%80%ED%83%9D%EC%97%B0-%EC%8B%A0%EC%9D%B8%EC%83%81-%EA%B8%B0%EB%85%90-%EB%AA%A8%EC%9E%90%ED%8C%8C%EC%9A%B0%EC%B9%98/1549/": {
       "name": "[두산베어스] 김택연 신인상 기념 모자파우치",
       "price": 21000,
       "stock": {
-        "재고": 0
+        "재고": 3
       },
       "option_info": {
         "재고": {
-          "kind": "soldout",
-          "availability": "soldout",
+          "kind": "server_stock",
+          "availability": "selectable",
           "availability_source": "dom",
           "purchase_limit": null,
-          "source": "dom",
+          "source": "page",
           "stock_managed": true,
           "selling": null,
           "displayed": null
@@ -51,8 +51,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EA%B9%80%ED%83%9D%EC%97%B0-%EC%8B%A0%EC%9D%B8%EC%83%81-%EA%B8%B0%EB%85%90-%EC%95%A1%EC%9E%90%EB%B1%83%EC%A7%80/1555/": {
       "name": "[두산베어스] 김택연 신인상 기념 액자뱃지",
@@ -77,8 +77,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%9D%A0%EB%B6%80%EC%94%B0-%EC%95%A8%EB%B2%94-%ED%82%A4%EB%A7%81/2350/": {
       "name": "[두산베어스] 띠부씰 앨범 키링",
@@ -90,7 +90,7 @@
         "곽빈(47)": 86,
         "김택연(63)": 89,
         "김민석(2)": 92,
-        "이병헌(29)": 94,
+        "이병헌(29)": 93,
         "박준순(52)": 96
       },
       "option_info": {
@@ -105,7 +105,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:32 KST",
+          "quantity_checked_at": "2026-10-26 14:04:35 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -125,7 +125,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:32 KST",
+          "quantity_checked_at": "2026-10-26 14:04:36 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -145,7 +145,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:32 KST",
+          "quantity_checked_at": "2026-10-26 14:04:36 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -165,7 +165,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:33 KST",
+          "quantity_checked_at": "2026-10-26 14:04:36 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -185,7 +185,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:33 KST",
+          "quantity_checked_at": "2026-10-26 14:04:37 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -205,7 +205,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:33 KST",
+          "quantity_checked_at": "2026-10-26 14:04:37 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -225,7 +225,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:34 KST",
+          "quantity_checked_at": "2026-10-26 14:04:37 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -245,7 +245,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:34 KST",
+          "quantity_checked_at": "2026-10-26 14:04:37 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -260,8 +260,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A0%88%EC%8B%9C-%EB%A9%94%ED%83%88%EB%B0%B0%EC%A7%80/1173/": {
       "name": "[두산베어스] 레시 메탈배지",
@@ -286,8 +286,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A0%88%EC%8B%9C-%EC%9D%B8%ED%98%95/1174/": {
       "name": "[두산베어스] 레시 인형",
@@ -312,8 +312,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A1%9C%EA%B3%A0%EB%B3%BC-%EB%8C%80/1621/": {
       "name": "[두산베어스] 로고볼 (대)",
@@ -338,14 +338,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A1%9C%EA%B3%A0%EB%B3%BC-%EC%86%8C/1620/": {
       "name": "[두산베어스] 로고볼 (소)",
       "price": 7000,
       "stock": {
-        "재고": 306
+        "재고": 305
       },
       "option_info": {
         "재고": {
@@ -364,8 +364,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A1%9C%EA%B3%A0-%EB%A9%94%ED%83%88-%ED%82%A4%EB%A7%81/1628/": {
       "name": "[두산베어스] 로고 메탈 키링",
@@ -390,8 +390,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A1%9C%EA%B3%A0-%EC%8A%A4%ED%8B%B0%EC%BB%A4%ED%8C%A9/1634/": {
       "name": "[두산베어스] 로고 스티커팩",
@@ -416,8 +416,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A6%AC%EC%9C%A0%EC%A0%80%EB%B8%94%EB%B0%B1-%EB%8C%80/1639/": {
       "name": "[두산베어스] 리유저블백 (대)",
@@ -442,14 +442,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A6%AC%EC%9C%A0%EC%A0%80%EB%B8%94%EB%B0%B1-%EC%A4%91/1640/": {
       "name": "[두산베어스] 리유저블백 (중)",
       "price": 4000,
       "stock": {
-        "재고": 56
+        "재고": 55
       },
       "option_info": {
         "재고": {
@@ -468,8 +468,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%A7%88%EA%B7%B8%EB%84%B7-%EC%8A%A4%ED%83%A0%EB%94%A9-%EC%9D%B8%ED%98%95/2781/": {
       "name": "[두산베어스] 망그러진곰 콜라보 마그넷 스탠딩 인형",
@@ -494,8 +494,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9A%B0%EB%B8%90%EB%A7%A8%ED%88%AC%EB%A7%A8/2795/": {
       "name": "[두산베어스] 망그러진곰 콜라보 우븐맨투맨",
@@ -553,8 +553,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%9D%91%EC%9B%90%ED%83%80%EC%9B%94%EC%95%84%EA%B8%B0%EB%A7%9D%EA%B3%B0/2798/": {
       "name": "[두산베어스] 망그러진곰 콜라보 응원타월(아기망곰)",
@@ -579,8 +579,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EC%BF%A8%EB%9F%AC%ED%8C%8C%EC%9A%B0%EC%B9%98/2796/": {
       "name": "[두산베어스] 망그러진곰 콜라보 쿨러파우치",
@@ -605,8 +605,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A7%9D%EA%B7%B8%EB%9F%AC%EC%A7%84%EA%B3%B0-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%ED%94%BC%EA%B7%9C%EC%96%B4-%ED%81%B4%EB%A6%AC%EC%BB%A4/2782/": {
       "name": "[두산베어스] 망그러진곰 콜라보 피규어 클리커",
@@ -631,8 +631,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%AF%B8%EB%8B%88-%EC%A7%9D%EC%A7%9D%EC%9D%B4-%ED%82%A4%EB%A7%81%EC%84%9C%EC%9A%B8/2323/": {
       "name": "[두산베어스] 미니 짝짝이 키링(서울)",
@@ -657,8 +657,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%AF%B8%EB%8B%88-%EC%A7%9D%EC%A7%9D%EC%9D%B4-%ED%82%A4%EB%A7%81%ED%99%88/2322/": {
       "name": "[두산베어스] 미니 짝짝이 키링(홈)",
@@ -683,18 +683,18 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B0%94%EC%8B%9C%ED%8B%B0-%ED%8C%80%EC%9E%90%EC%BC%93/1618/": {
       "name": "[두산베어스] 바시티 팀자켓",
       "price": 149000,
       "stock": {
         "85": 62,
-        "90": 104,
+        "90": 102,
         "95": 5,
         "100": 24,
-        "105": 85,
+        "105": 84,
         "110": 86,
         "120": 72
       },
@@ -710,7 +710,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:37 KST",
+          "quantity_checked_at": "2026-10-26 14:04:40 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -730,7 +730,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:38 KST",
+          "quantity_checked_at": "2026-10-26 14:04:41 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -750,7 +750,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:38 KST",
+          "quantity_checked_at": "2026-10-26 14:04:41 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -770,7 +770,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:38 KST",
+          "quantity_checked_at": "2026-10-26 14:04:41 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -790,7 +790,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:38 KST",
+          "quantity_checked_at": "2026-10-26 14:04:42 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -810,7 +810,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:39 KST",
+          "quantity_checked_at": "2026-10-26 14:04:42 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -830,7 +830,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:39 KST",
+          "quantity_checked_at": "2026-10-26 14:04:42 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -845,8 +845,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B0%B1%EB%A1%9C%EA%B3%A0-%ED%8B%B0%EC%85%94%EC%B8%A0%EA%B7%B8%EB%A0%88%EC%9D%B4/1286/": {
       "name": "[두산베어스] 백로고 티셔츠(그레이)",
@@ -879,7 +879,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:42 KST",
+          "quantity_checked_at": "2026-10-26 14:04:45 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -914,8 +914,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B2%A0%EA%B3%B5%EC%9D%B4-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81/1814/": {
       "name": "[두산베어스] 베공이 인형 키링",
@@ -940,8 +940,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B2%A0%EA%B8%80%EC%9D%B4-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81/1816/": {
       "name": "[두산베어스] 베글이 인형 키링",
@@ -966,8 +966,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B2%A0%EB%A7%9D%EC%9D%B4-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81/1815/": {
       "name": "[두산베어스] 베망이 인형 키링",
@@ -992,8 +992,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EA%B2%BD%EB%9F%89-%EB%B0%B1%ED%8C%A9/2316/": {
       "name": "[두산베어스] 베어스 경량 백팩",
@@ -1016,7 +1016,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:46 KST",
+          "quantity_checked_at": "2026-10-26 14:04:48 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1036,7 +1036,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:46 KST",
+          "quantity_checked_at": "2026-10-26 14:04:48 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1056,7 +1056,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:46 KST",
+          "quantity_checked_at": "2026-10-26 14:04:49 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1076,7 +1076,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:46 KST",
+          "quantity_checked_at": "2026-10-26 14:04:49 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1091,8 +1091,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%8B%B4%EC%9A%94/2436/": {
       "name": "[두산베어스] 베어스 담요",
@@ -1117,8 +1117,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A1%9C%EA%B3%A0-%ED%9B%84%EB%93%9C%ED%8B%B0%EC%95%84%EC%9D%B4%EB%B3%B4%EB%A6%AC/1697/": {
       "name": "[두산베어스] 베어스 로고 후드티(아이보리)",
@@ -1165,8 +1165,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%95%84%EC%9D%B4%EC%8B%B1%ED%8B%B0%EA%B7%B8%EB%A0%88%EC%9D%B4/2437/": {
       "name": "[두산베어스] 베어스 아이싱티(그레이)",
@@ -1188,7 +1188,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:50 KST",
+          "quantity_checked_at": "2026-10-26 14:04:52 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1208,7 +1208,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:50 KST",
+          "quantity_checked_at": "2026-10-26 14:04:52 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1228,7 +1228,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:50 KST",
+          "quantity_checked_at": "2026-10-26 14:04:52 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1243,8 +1243,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%95%84%EC%9D%B4%EC%8B%B1%ED%8B%B0%EB%84%A4%EC%9D%B4%EB%B9%84/2438/": {
       "name": "[두산베어스] 베어스 아이싱티(네이비)",
@@ -1266,7 +1266,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:53 KST",
+          "quantity_checked_at": "2026-10-26 14:04:55 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1286,7 +1286,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:54 KST",
+          "quantity_checked_at": "2026-10-26 14:04:55 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1306,7 +1306,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:54 KST",
+          "quantity_checked_at": "2026-10-26 14:04:55 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1321,8 +1321,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%84%9C%EC%9A%B8-%EB%A1%9C%EA%B3%A0-%ED%9B%84%EB%93%9C%ED%8B%B0%EB%B8%94%EB%9E%99/1698/": {
       "name": "[두산베어스] 서울 로고 후드티(블랙)",
@@ -1344,7 +1344,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:58 KST",
+          "quantity_checked_at": "2026-10-26 14:04:58 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1364,7 +1364,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:58 KST",
+          "quantity_checked_at": "2026-10-26 14:04:59 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1384,7 +1384,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:29:58 KST",
+          "quantity_checked_at": "2026-10-26 14:04:59 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1399,8 +1399,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%97%A0%EB%B8%94%EB%9F%BC-%EB%A9%94%ED%83%88-%ED%82%A4%EB%A7%81/1629/": {
       "name": "[두산베어스] 엠블럼 메탈 키링",
@@ -1425,8 +1425,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%97%A0%EB%B8%94%EB%9F%BC-%EC%9D%91%EC%9B%90%EA%B9%83%EB%B0%9C/1622/": {
       "name": "[두산베어스] 엠블럼 응원깃발",
@@ -1451,8 +1451,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%AA%A8%EC%9E%90-%ED%8C%8C%EC%9A%B0%EC%B9%98-%ED%82%A4%EB%A7%81/1637/": {
       "name": "[두산베어스] 오리지널 모자 파우치 키링",
@@ -1477,8 +1477,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%AA%A8%EC%9E%90/1619/": {
       "name": "[두산베어스] 오리지널 모자",
@@ -1501,7 +1501,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:02 KST",
+          "quantity_checked_at": "2026-10-26 14:05:02 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1521,7 +1521,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:02 KST",
+          "quantity_checked_at": "2026-10-26 14:05:02 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1541,7 +1541,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:02 KST",
+          "quantity_checked_at": "2026-10-26 14:05:02 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1561,7 +1561,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:03 KST",
+          "quantity_checked_at": "2026-10-26 14:05:03 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1576,8 +1576,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%98%AC%EB%93%9C-%EB%8B%A8%EC%B6%94-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%9B%90%EC%A0%95/2472/": {
       "name": "[두산베어스] 올드 단추 유니폼(원정)",
@@ -1603,7 +1603,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:07 KST",
+          "quantity_checked_at": "2026-10-26 14:05:06 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1623,7 +1623,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:07 KST",
+          "quantity_checked_at": "2026-10-26 14:05:06 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1643,7 +1643,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:07 KST",
+          "quantity_checked_at": "2026-10-26 14:05:06 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1663,7 +1663,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:08 KST",
+          "quantity_checked_at": "2026-10-26 14:05:07 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1693,7 +1693,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:08 KST",
+          "quantity_checked_at": "2026-10-26 14:05:07 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1713,7 +1713,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:08 KST",
+          "quantity_checked_at": "2026-10-26 14:05:07 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1728,8 +1728,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%98%AC%EB%93%9C-%EB%8B%A8%EC%B6%94-%EC%9C%A0%EB%8B%88%ED%8F%BC%ED%99%88/1832/": {
       "name": "[두산베어스] 올드 단추 유니폼(홈)",
@@ -1755,7 +1755,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:12 KST",
+          "quantity_checked_at": "2026-10-26 14:05:10 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1775,7 +1775,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:12 KST",
+          "quantity_checked_at": "2026-10-26 14:05:11 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1840,8 +1840,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%98%AC%EB%93%9C-%EB%AA%A8%EC%9E%90/1715/": {
       "name": "[두산베어스] 올드 모자",
@@ -1864,7 +1864,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:18 KST",
+          "quantity_checked_at": "2026-10-26 14:05:20 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1884,7 +1884,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:18 KST",
+          "quantity_checked_at": "2026-10-26 14:05:20 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -1919,8 +1919,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%EC%8B%A4%EB%A6%AC%EC%BD%98-%ED%82%A4%EB%A7%81-%EC%84%9C%EC%9A%B8/1631/": {
       "name": "[두산베어스] 유니폼 실리콘 키링 (서울)",
@@ -1945,8 +1945,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%EC%8B%A4%EB%A6%AC%EC%BD%98-%ED%82%A4%EB%A7%81-%ED%99%88/1630/": {
       "name": "[두산베어스] 유니폼 실리콘 키링 (홈)",
@@ -1971,8 +1971,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%EC%A7%9D%EC%A7%9D%EC%9D%B4%EC%84%9C%EC%9A%B8/1626/": {
       "name": "[두산베어스] 유니폼 짝짝이(서울)",
@@ -1997,8 +1997,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%EC%A7%9D%EC%A7%9D%EC%9D%B4%ED%99%88/1625/": {
       "name": "[두산베어스] 유니폼 짝짝이(홈)",
@@ -2023,8 +2023,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%EC%A7%9D%EC%A7%9D%EC%9D%B4-%EB%B0%B0%EB%B2%88-%EC%8A%A4%ED%8B%B0%EC%BB%A4%EC%84%9C%EC%9A%B8/2327/": {
       "name": "[두산베어스] 유니폼 짝짝이 배번 스티커(서울)",
@@ -2049,8 +2049,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9C%A0%EB%8B%88%ED%8F%BC-%EC%A7%9D%EC%A7%9D%EC%9D%B4-%EB%B0%B0%EB%B2%88-%EC%8A%A4%ED%8B%B0%EC%BB%A4%ED%99%88/2326/": {
       "name": "[두산베어스] 유니폼 짝짝이 배번 스티커(홈)",
@@ -2075,8 +2075,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%91%EC%9B%90-%EB%8B%88%ED%8A%B8-%EB%A8%B8%ED%94%8C%EB%9F%AC%EC%84%9C%EC%9A%B8/1624/": {
       "name": "[두산베어스] 응원 니트 머플러(서울)",
@@ -2101,8 +2101,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%91%EC%9B%90-%EB%8B%88%ED%8A%B8-%EB%A8%B8%ED%94%8C%EB%9F%AC%ED%99%88/1623/": {
       "name": "[두산베어스] 응원 니트 머플러(홈)",
@@ -2127,8 +2127,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%B8%EC%8A%A4%ED%83%81%EC%8A%A4-%EB%AF%B8%EB%8B%88%EC%B9%B4%EB%A9%94%EB%9D%BC-%ED%8C%A8%ED%82%A4%EC%A7%80/1746/": {
       "name": "[두산베어스] 인스탁스 미니카메라 패키지",
@@ -2152,7 +2152,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:21 KST",
+          "quantity_checked_at": "2026-10-26 14:05:23 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2172,7 +2172,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:22 KST",
+          "quantity_checked_at": "2026-10-26 14:05:24 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2192,7 +2192,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:22 KST",
+          "quantity_checked_at": "2026-10-26 14:05:24 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2212,7 +2212,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:22 KST",
+          "quantity_checked_at": "2026-10-26 14:05:24 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2232,7 +2232,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:23 KST",
+          "quantity_checked_at": "2026-10-26 14:05:25 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2247,8 +2247,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%BC%EB%B0%98%ED%98%95-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%84%9C%EC%9A%B8/1613/": {
       "name": "[두산베어스] 일반형 유니폼(서울)",
@@ -2284,7 +2284,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:26 KST",
+          "quantity_checked_at": "2026-10-26 14:05:28 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2349,8 +2349,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%BC%EB%B0%98%ED%98%95-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%9B%90%EC%A0%95/1612/": {
       "name": "[두산베어스] 일반형 유니폼(원정)",
@@ -2376,7 +2376,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:29 KST",
+          "quantity_checked_at": "2026-10-26 14:05:31 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2396,7 +2396,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:30 KST",
+          "quantity_checked_at": "2026-10-26 14:05:31 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2416,7 +2416,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:30 KST",
+          "quantity_checked_at": "2026-10-26 14:05:31 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2436,7 +2436,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:30 KST",
+          "quantity_checked_at": "2026-10-26 14:05:32 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2456,7 +2456,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:30 KST",
+          "quantity_checked_at": "2026-10-26 14:05:32 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2476,7 +2476,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:31 KST",
+          "quantity_checked_at": "2026-10-26 14:05:32 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2496,7 +2496,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:31 KST",
+          "quantity_checked_at": "2026-10-26 14:05:33 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2511,8 +2511,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9D%BC%EB%B0%98%ED%98%95-%EC%9C%A0%EB%8B%88%ED%8F%BC%ED%99%88/1611/": {
       "name": "[두산베어스] 일반형 유니폼(홈)",
@@ -2548,7 +2548,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:35 KST",
+          "quantity_checked_at": "2026-10-26 14:05:35 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2568,7 +2568,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:36 KST",
+          "quantity_checked_at": "2026-10-26 14:05:36 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2618,7 +2618,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:38 KST",
+          "quantity_checked_at": "2026-10-26 14:05:36 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2633,14 +2633,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%A1%B0%EC%88%98%ED%96%89-%EB%8F%84%EB%A3%A8%EC%99%95-%EA%B8%B0%EB%85%90-%EB%A8%B8%ED%94%8C%EB%9F%AC/1536/": {
       "name": "[두산베어스] 조수행 도루왕 기념 머플러",
       "price": 25000,
       "stock": {
-        "재고": 8
+        "재고": 7
       },
       "option_info": {
         "재고": {
@@ -2659,14 +2659,14 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%A1%B0%EC%88%98%ED%96%89-%EB%8F%84%EB%A3%A8%EC%99%95-%EA%B8%B0%EB%85%90-%EC%95%A1%EC%9E%90%EB%B1%83%EC%A7%80/1553/": {
       "name": "[두산베어스] 조수행 도루왕 기념 액자뱃지",
       "price": 45000,
       "stock": {
-        "재고": 43
+        "재고": 42
       },
       "option_info": {
         "재고": {
@@ -2685,8 +2685,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%A7%91%EC%97%85-%EC%9C%88%EB%93%9C%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%BB%A4%EB%84%A4%EC%9D%B4%EB%B9%84/1683/": {
       "name": "[두산베어스] 집업 윈드브레이커(네이비)",
@@ -2709,7 +2709,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:41 KST",
+          "quantity_checked_at": "2026-10-26 14:05:39 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2729,7 +2729,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:41 KST",
+          "quantity_checked_at": "2026-10-26 14:05:39 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2749,7 +2749,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:42 KST",
+          "quantity_checked_at": "2026-10-26 14:05:40 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2769,7 +2769,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:42 KST",
+          "quantity_checked_at": "2026-10-26 14:05:40 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2784,8 +2784,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%A7%91%EC%97%85-%EC%9C%88%EB%93%9C%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%BB%A4%EB%B8%94%EB%9E%99/1681/": {
       "name": "[두산베어스] 집업 윈드브레이커(블랙)",
@@ -2808,7 +2808,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:45 KST",
+          "quantity_checked_at": "2026-10-26 14:05:43 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2828,7 +2828,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:45 KST",
+          "quantity_checked_at": "2026-10-26 14:05:43 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2848,7 +2848,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:46 KST",
+          "quantity_checked_at": "2026-10-26 14:05:43 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2873,8 +2873,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%A7%91%EC%97%85-%EC%9C%88%EB%93%9C%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%BB%A4%EC%95%84%EC%9D%B4%EB%B3%B4%EB%A6%AC/1682/": {
       "name": "[두산베어스] 집업 윈드브레이커(아이보리)",
@@ -2897,7 +2897,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:48 KST",
+          "quantity_checked_at": "2026-10-26 14:05:46 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2927,7 +2927,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:49 KST",
+          "quantity_checked_at": "2026-10-26 14:05:46 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2947,7 +2947,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:49 KST",
+          "quantity_checked_at": "2026-10-26 14:05:47 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -2962,8 +2962,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%B2%A0%EC%9B%85%EC%9D%B4-%EA%B7%80%EB%AA%A8%EC%96%91-%EB%A8%B8%EB%A6%AC%EB%9D%A0/2324/": {
       "name": "[두산베어스] 철웅이 귀모양 머리띠",
@@ -2988,8 +2988,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%B2%A0%EC%9B%85%EC%9D%B4-%EB%A8%B8%EB%A6%AC%EB%9D%A0/1809/": {
       "name": "[두산베어스] 철웅이 머리띠",
@@ -3014,8 +3014,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%B2%A0%EC%9B%85%EC%9D%B4-%EB%AA%A8%EB%8B%88%ED%84%B0%EA%B1%B8%EC%9D%B4-%EC%9D%B8%ED%98%95/1813/": {
       "name": "[두산베어스] 철웅이 모니터걸이 인형",
@@ -3040,8 +3040,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%B2%A0%EC%9B%85%EC%9D%B4-%EC%9D%B8%ED%98%95-%ED%82%A4%EB%A7%81/1810/": {
       "name": "[두산베어스] 철웅이 인형 키링",
@@ -3066,8 +3066,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%B2%A0%EC%9B%85%EC%9D%B4-%EC%A7%9D%EC%A7%9D%EC%9D%B4-%EC%8A%A4%ED%8B%B0%EC%BB%A4/2351/": {
       "name": "[두산베어스] 철웅이 짝짝이 스티커",
@@ -3094,7 +3094,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:52 KST",
+          "quantity_checked_at": "2026-10-26 14:05:50 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3114,7 +3114,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:52 KST",
+          "quantity_checked_at": "2026-10-26 14:05:50 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3134,7 +3134,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:53 KST",
+          "quantity_checked_at": "2026-10-26 14:05:50 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3154,7 +3154,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:53 KST",
+          "quantity_checked_at": "2026-10-26 14:05:50 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3174,7 +3174,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:53 KST",
+          "quantity_checked_at": "2026-10-26 14:05:51 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3194,7 +3194,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:53 KST",
+          "quantity_checked_at": "2026-10-26 14:05:51 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3214,7 +3214,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:54 KST",
+          "quantity_checked_at": "2026-10-26 14:05:51 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3234,7 +3234,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:54 KST",
+          "quantity_checked_at": "2026-10-26 14:05:52 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3249,8 +3249,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%B2%A0%EC%9B%85%EC%9D%B4-%EC%BA%90%EB%A6%AD%ED%84%B0%EB%B3%BC/1638/": {
       "name": "[두산베어스] 철웅이 캐릭터볼",
@@ -3275,8 +3275,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%B5%9C%EA%B0%95%EB%91%90%EC%82%B0-%ED%83%80%EC%9B%94/1567/": {
       "name": "[두산베어스] 최강두산 타월",
@@ -3301,8 +3301,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%BF%B5%EC%95%BC-%EC%BD%9C%EB%9D%BC%EB%B3%B4-%EB%AA%A8%EC%9E%90%EC%96%91%ED%8C%8C/2425/": {
       "name": "[두산베어스] 쿵야 콜라보 모자(양파)",
@@ -3327,8 +3327,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%81%B4%EB%9E%98%EC%8B%9D-%EB%AA%A8%EC%9E%90/1716/": {
       "name": "[두산베어스] 클래식 모자",
@@ -3351,7 +3351,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:57 KST",
+          "quantity_checked_at": "2026-10-26 14:05:55 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3371,7 +3371,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:57 KST",
+          "quantity_checked_at": "2026-10-26 14:05:55 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3391,7 +3391,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:58 KST",
+          "quantity_checked_at": "2026-10-26 14:05:55 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3411,7 +3411,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:30:58 KST",
+          "quantity_checked_at": "2026-10-26 14:05:56 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3426,8 +3426,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%84%9C%EC%9A%B8/1616/": {
       "name": "[두산베어스] 키즈 유니폼(서울)",
@@ -3449,7 +3449,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:06 KST",
+          "quantity_checked_at": "2026-10-26 14:06:04 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3469,7 +3469,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:07 KST",
+          "quantity_checked_at": "2026-10-26 14:06:04 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3489,7 +3489,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:07 KST",
+          "quantity_checked_at": "2026-10-26 14:06:04 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3504,8 +3504,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC%EC%9B%90%EC%A0%95/1615/": {
       "name": "[두산베어스] 키즈 유니폼(원정)",
@@ -3527,7 +3527,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:10 KST",
+          "quantity_checked_at": "2026-10-26 14:06:07 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3547,7 +3547,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:11 KST",
+          "quantity_checked_at": "2026-10-26 14:06:08 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3567,7 +3567,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:11 KST",
+          "quantity_checked_at": "2026-10-26 14:06:08 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3582,8 +3582,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%82%A4%EC%A6%88-%EC%9C%A0%EB%8B%88%ED%8F%BC%ED%99%88/1614/": {
       "name": "[두산베어스] 키즈 유니폼(홈)",
@@ -3630,8 +3630,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%83%9C%EB%8B%9D%ED%94%BC%EA%B7%9C%EC%96%B4%ED%82%A4%EB%A7%81-v%EC%B6%98%EC%8B%9D%EC%9D%B4/2440/": {
       "name": "[두산베어스] 태닝피규어키링 V_춘식이",
@@ -3656,8 +3656,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%EA%B3%B0%ED%82%A4%EB%A7%81/2328/": {
       "name": "[두산베어스] 플레이어 곰키링",
@@ -3687,7 +3687,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:15 KST",
+          "quantity_checked_at": "2026-10-26 14:06:11 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3707,7 +3707,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:15 KST",
+          "quantity_checked_at": "2026-10-26 14:06:11 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3727,7 +3727,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:16 KST",
+          "quantity_checked_at": "2026-10-26 14:06:11 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3747,7 +3747,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:16 KST",
+          "quantity_checked_at": "2026-10-26 14:06:12 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3767,7 +3767,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:16 KST",
+          "quantity_checked_at": "2026-10-26 14:06:12 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3787,7 +3787,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:17 KST",
+          "quantity_checked_at": "2026-10-26 14:06:12 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3807,7 +3807,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:17 KST",
+          "quantity_checked_at": "2026-10-26 14:06:13 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3827,7 +3827,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:17 KST",
+          "quantity_checked_at": "2026-10-26 14:06:13 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3847,7 +3847,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:18 KST",
+          "quantity_checked_at": "2026-10-26 14:06:13 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3867,7 +3867,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:18 KST",
+          "quantity_checked_at": "2026-10-26 14:06:14 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3887,7 +3887,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:18 KST",
+          "quantity_checked_at": "2026-10-26 14:06:14 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3902,8 +3902,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%EB%84%A4%EC%9E%84%ED%83%9D-%ED%82%A4%EB%A7%81/2352/": {
       "name": "[두산베어스] 플레이어 네임택 키링",
@@ -3935,7 +3935,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:21 KST",
+          "quantity_checked_at": "2026-10-26 14:06:17 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3955,7 +3955,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:21 KST",
+          "quantity_checked_at": "2026-10-26 14:06:17 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3975,7 +3975,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:22 KST",
+          "quantity_checked_at": "2026-10-26 14:06:17 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -3995,7 +3995,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:22 KST",
+          "quantity_checked_at": "2026-10-26 14:06:18 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4015,7 +4015,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:22 KST",
+          "quantity_checked_at": "2026-10-26 14:06:18 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4035,7 +4035,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:23 KST",
+          "quantity_checked_at": "2026-10-26 14:06:18 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4055,7 +4055,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:23 KST",
+          "quantity_checked_at": "2026-10-26 14:06:19 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4075,7 +4075,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:23 KST",
+          "quantity_checked_at": "2026-10-26 14:06:19 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4095,7 +4095,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:24 KST",
+          "quantity_checked_at": "2026-10-26 14:06:19 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4115,7 +4115,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:24 KST",
+          "quantity_checked_at": "2026-10-26 14:06:20 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4135,7 +4135,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:24 KST",
+          "quantity_checked_at": "2026-10-26 14:06:20 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4155,7 +4155,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:25 KST",
+          "quantity_checked_at": "2026-10-26 14:06:20 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4175,7 +4175,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:25 KST",
+          "quantity_checked_at": "2026-10-26 14:06:21 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4190,8 +4190,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%EC%99%95%EB%B6%80%EC%B1%84/2349/": {
       "name": "[두산베어스] 플레이어 왕부채",
@@ -4221,7 +4221,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:28 KST",
+          "quantity_checked_at": "2026-10-26 14:06:23 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4241,7 +4241,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:28 KST",
+          "quantity_checked_at": "2026-10-26 14:06:24 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4261,7 +4261,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:29 KST",
+          "quantity_checked_at": "2026-10-26 14:06:24 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4281,7 +4281,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:29 KST",
+          "quantity_checked_at": "2026-10-26 14:06:24 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4301,7 +4301,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:29 KST",
+          "quantity_checked_at": "2026-10-26 14:06:25 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4321,7 +4321,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:30 KST",
+          "quantity_checked_at": "2026-10-26 14:06:25 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4341,7 +4341,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:30 KST",
+          "quantity_checked_at": "2026-10-26 14:06:25 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4361,7 +4361,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:30 KST",
+          "quantity_checked_at": "2026-10-26 14:06:26 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4381,7 +4381,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:31 KST",
+          "quantity_checked_at": "2026-10-26 14:06:26 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4411,7 +4411,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:31 KST",
+          "quantity_checked_at": "2026-10-26 14:06:26 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4426,8 +4426,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4-%EC%B5%9C%EA%B0%95%ED%83%80%EC%9B%94/2325/": {
       "name": "[두산베어스] 플레이어 최강타월",
@@ -4456,7 +4456,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:34 KST",
+          "quantity_checked_at": "2026-10-26 14:06:29 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4486,7 +4486,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:34 KST",
+          "quantity_checked_at": "2026-10-26 14:06:29 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4506,7 +4506,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:34 KST",
+          "quantity_checked_at": "2026-10-26 14:06:30 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4526,7 +4526,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:35 KST",
+          "quantity_checked_at": "2026-10-26 14:06:30 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4546,7 +4546,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:35 KST",
+          "quantity_checked_at": "2026-10-26 14:06:30 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4566,7 +4566,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:35 KST",
+          "quantity_checked_at": "2026-10-26 14:06:31 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4586,7 +4586,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:36 KST",
+          "quantity_checked_at": "2026-10-26 14:06:31 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4616,7 +4616,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:36 KST",
+          "quantity_checked_at": "2026-10-26 14:06:31 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4631,8 +4631,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%94%BC%EA%B7%9C%EC%96%B4-v7%EC%B6%98%EC%8B%9D%EC%9D%B4/1318/": {
       "name": "[두산베어스] 피규어 V7_춘식이",
@@ -4657,8 +4657,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EB%A0%88%EC%9D%B8%EB%B6%80%EC%B8%A0/1903/": {
       "name": "[두산베어스] 헌터 X 베어스 레인부츠",
@@ -4682,7 +4682,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:39 KST",
+          "quantity_checked_at": "2026-10-26 14:06:34 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4702,7 +4702,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:40 KST",
+          "quantity_checked_at": "2026-10-26 14:06:34 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4722,7 +4722,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:40 KST",
+          "quantity_checked_at": "2026-10-26 14:06:35 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4742,7 +4742,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:40 KST",
+          "quantity_checked_at": "2026-10-26 14:06:35 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4762,7 +4762,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:41 KST",
+          "quantity_checked_at": "2026-10-26 14:06:35 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4777,8 +4777,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9A%B0%EC%82%B0%EB%84%A4%EC%9D%B4%EB%B9%84/1905/": {
       "name": "[두산베어스] 헌터 X 베어스 우산(네이비)",
@@ -4803,8 +4803,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9A%B0%EC%82%B0%EB%B8%94%EB%9E%99/1906/": {
       "name": "[두산베어스] 헌터 X 베어스 우산(블랙)",
@@ -4829,8 +4829,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%EC%9A%B0%EC%9D%98/1904/": {
       "name": "[두산베어스] 헌터 X 베어스 우의",
@@ -4851,7 +4851,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:44 KST",
+          "quantity_checked_at": "2026-10-26 14:06:39 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4871,7 +4871,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:45 KST",
+          "quantity_checked_at": "2026-10-26 14:06:39 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4886,8 +4886,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%82%A4%EB%A7%81-%ED%8C%8C%EC%9A%B0%EC%B9%98/1902/": {
       "name": "[두산베어스] 헌터 X 베어스 키링 파우치",
@@ -4908,7 +4908,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:48 KST",
+          "quantity_checked_at": "2026-10-26 14:06:42 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4928,7 +4928,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:48 KST",
+          "quantity_checked_at": "2026-10-26 14:06:42 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4943,8 +4943,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%97%8C%ED%84%B0-x-%EB%B2%A0%EC%96%B4%EC%8A%A4-%ED%8F%B0%ED%8C%8C%EC%9A%B0%EC%B9%98/1901/": {
       "name": "[두산베어스] 헌터 X 베어스 폰파우치",
@@ -4965,7 +4965,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:51 KST",
+          "quantity_checked_at": "2026-10-26 14:06:45 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -4985,7 +4985,7 @@
           "displayed": true,
           "primary_diagnostic": "request-fallback: unexpected_response_origin; HTTP=200; type=text/html; response-host=veritas-hub.cafe24.com; page-host=nolmdshop.com",
           "browser_xhr_diagnostic": "browser-xhr: network_failure; HTTP=0; type=unknown; response-host=unknown",
-          "quantity_checked_at": "2026-10-26 09:31:52 KST",
+          "quantity_checked_at": "2026-10-26 14:06:46 KST",
           "lookup_path": [
             "page",
             "calculator",
@@ -5000,8 +5000,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-2026-%ED%8B%B0%EC%BC%93%EC%95%A8%EB%B2%94/2317/": {
       "name": "[두산베어스] 2026 티켓앨범",
@@ -5026,8 +5026,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-2026-%ED%8B%B0%EC%BC%93-%ED%8C%8C%EC%9A%B0%EC%B9%98%EB%84%A4%EC%9D%B4%EB%B9%84/2318/": {
       "name": "[두산베어스] 2026 티켓 파우치(네이비)",
@@ -5052,8 +5052,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-2026-%ED%8B%B0%EC%BC%93-%ED%8C%8C%EC%9A%B0%EC%B9%98%ED%99%94%EC%9D%B4%ED%8A%B8/2319/": {
       "name": "[두산베어스] 2026 티켓 파우치(화이트)",
@@ -5078,8 +5078,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     },
     "https://nolmdshop.com/product/%EB%91%90%EC%82%B0%EB%B2%A0%EC%96%B4%EC%8A%A4-d%EC%8B%AC%EB%B3%BC-%EC%8A%AC%EB%A7%81%EB%B0%B1%EB%84%A4%EC%9D%B4%EB%B9%84/1679/": {
       "name": "[두산베어스] D심볼 슬링백(네이비)",
@@ -5104,8 +5104,8 @@
       "diagnostic": null,
       "stale": false,
       "uncertain": false,
-      "checked_at": "2026-10-26 09:33 KST",
-      "last_attempt": "2026-10-26 09:33 KST"
+      "checked_at": "2026-10-26 14:08 KST",
+      "last_attempt": "2026-10-26 14:08 KST"
     }
   }
 }
