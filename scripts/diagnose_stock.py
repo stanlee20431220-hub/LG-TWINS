@@ -1,5 +1,6 @@
 """Read-only stock probe. Never writes history, Sheets, carts or Telegram."""
 import json
+import re
 import urllib.parse
 from playwright.sync_api import sync_playwright
 from check_stock import get_stock_for_product, _explicit_server_stock
@@ -33,6 +34,10 @@ def emit(label, result):
     print(label + ': ' + json.dumps(result, ensure_ascii=False), flush=True)
 
 
+def redact_diagnostic(value):
+    return re.sub(r"(?i)([?&]auth=)[^&\s\"']+", r"\1[redacted]", str(value))
+
+
 
 
 with sync_playwright() as playwright:
@@ -57,7 +62,7 @@ with sync_playwright() as playwright:
                 net_events.append({'kind': 'request', 'method': req.method, 'url': req.url})
         def record_failed(req):
             if 'ApiProductNormal' in req.url or req.is_navigation_request():
-                net_events.append({'kind': 'requestfailed', 'url': req.url, 'failure': req.failure})
+                net_events.append({'kind': 'requestfailed', 'url': req.url, 'failure': redact_diagnostic(req.failure)})
         def record_response(resp):
             if 'ApiProductNormal' in resp.url:
                 net_events.append({'kind': 'response', 'status': resp.status, 'url': resp.url,
@@ -65,8 +70,8 @@ with sync_playwright() as playwright:
         probe.on('request', record_request)
         probe.on('requestfailed', record_failed)
         probe.on('response', record_response)
-        probe.on('pageerror', lambda exc: page_errors.append(str(exc)[:300]))
-        probe.on('console', lambda msg: page_errors.append('console: ' + msg.text[:300]) if msg.type == 'error' else None)
+        probe.on('pageerror', lambda exc: page_errors.append(redact_diagnostic(exc)[:300]))
+        probe.on('console', lambda msg: page_errors.append('console: ' + redact_diagnostic(msg.text)[:300]) if msg.type == 'error' else None)
         result = {'team': team_name, 'category_url': category_url, 'network_events': net_events,
                   'page_errors': page_errors, 'direct_api_pages': []}
         try:
@@ -106,7 +111,7 @@ with sync_playwright() as playwright:
                     }''', {'cate': cate_no, 'page': page_no})
                     result['direct_api_pages'].append(api_result)
                 except Exception as exc:
-                    result['direct_api_pages'].append({'page': page_no, 'error': type(exc).__name__ + ': ' + str(exc)[:200]})
+                    result['direct_api_pages'].append({'page': page_no, 'error': type(exc).__name__ + ': ' + redact_diagnostic(exc)[:200]})
             if state['more_button'] and state['current'] < state['total']:
                 before = {'current': state['current'], 'link_count': state['link_count']}
                 try:
@@ -127,7 +132,7 @@ with sync_playwright() as playwright:
             else:
                 result['ui_more'] = {'outcome': 'unavailable_or_not_needed'}
         except Exception as exc:
-            result['navigation_error'] = type(exc).__name__ + ': ' + str(exc)[:300]
+            result['navigation_error'] = type(exc).__name__ + ': ' + redact_diagnostic(exc)[:300]
         emit('CATEGORY_DIAGNOSTIC', result)
         probe.close()
     browser.close()
