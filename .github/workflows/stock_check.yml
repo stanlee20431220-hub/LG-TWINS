@@ -39,13 +39,26 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install dependencies
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Install Chromium with smoke-tested fallback
+        shell: bash
         run: |
-          pip install -r requirements.txt
-          playwright install --with-deps chromium
+          set -euo pipefail
+          echo "CHROMIUM_SETUP_START $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          python -m playwright install chromium
+          if python scripts/smoke_playwright_browser.py; then
+            echo "CHROMIUM_SETUP_PATH=no-os-dependency-install"
+          else
+            echo "Chromium launch smoke failed; installing OS dependencies as fallback."
+            python -m playwright install --with-deps chromium
+            python scripts/smoke_playwright_browser.py
+            echo "CHROMIUM_SETUP_PATH=with-deps-fallback"
+          fi
+          echo "CHROMIUM_SETUP_END $(date -u +%Y-%m-%dT%H:%M:%SZ)"
       - name: Validate code
         run: |
-          python -m py_compile scripts/check_stock.py scripts/sheets_sync.py
+          python -m py_compile scripts/check_stock.py scripts/sheets_sync.py scripts/smoke_playwright_browser.py
           python -m unittest discover -s scripts -p "test_*.py"
       - name: Run stock check
         env:
